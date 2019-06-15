@@ -16,12 +16,12 @@ if (($handle = fopen(dirname(__FILE__) . "/thanks.txt", "r")) !== FALSE) {
     $col2 = '';
     while (($data = fgets($handle)) !== FALSE) {
         $data = trim($data);
-	if ($data[0] == ';') {
-	    continue;
-	} elseif ($data == '') {
+	if ($data == '') {
 	    echo "<tr><td>$col1</td><td>$col2</td></tr>\n";
             $col1 = '';
 	    $col2 = '';
+	} elseif ($data[0] == ';') {
+	    continue;	// ignore comment lines
 	} elseif ($col1 == '') {
 	    $col1 = QRZ($data);
 	} else {
