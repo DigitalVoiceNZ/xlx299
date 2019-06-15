@@ -126,6 +126,7 @@ a.tip:hover span {
 
 .moduleusers td {
   white-space: nowrap;
+  hyphens: none;
 }
 
 /*
@@ -241,3 +242,8 @@ a.tip:hover span {
   text-align: center;
   margin-top: 10px;
 }
+
+.material-icons {
+  font-size: 12px;
+}
+
