@@ -124,6 +124,10 @@ a.tip:hover span {
   color: #000000;
 }
 
+.moduleusers td {
+  white-space: nowrap;
+}
+
 /*
  * Sidebar
  */

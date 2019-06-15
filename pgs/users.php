@@ -82,14 +82,14 @@ if ($PageOptions['UserPage']['ShowFilter']) {
 }
 ?>
          <tr class="table-center">   
-            <th class="col-md-1">#</th>
-            <th class="col-md-1">Flag</th>
-            <th class="col-md-2">Callsign</th>
-            <th class="col-md-2">Suffix</th>
-            <th class="col-md-1">DPRS</th>
-            <th class="col-md-2">Via / Peer</th>
-            <th class="col-md-2">Last heard</th>
-            <th class="col-md-1">Module</th>
+            <th>#</th>
+            <th>Flag</th>
+            <th>Callsign</th>
+            <th>Suffix</th>
+            <th>DPRS</th>
+            <th>Via / Peer</th>
+            <th>Last heard</th>
+            <th>Module</th>
          </tr>
 <?php
 
@@ -155,7 +155,7 @@ for ($i=0;$i<$Reflector->StationCount();$i++) {
       </table>
    </div>
    <div class="col-md-3">
-      <table class="table table-striped-custom table-hover">
+      <table class="table table-striped-custom table-hover moduleusers">
          <?php 
 
 $Modules = $Reflector->GetModules();
