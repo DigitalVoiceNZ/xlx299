@@ -1,0 +1,46 @@
+; lines beginning with ';' are comments and are ignored
+; other lines are in groups separated by blank lines
+;  name call
+;  reason<br>
+;  another reason
+;
+;  name call
+;  reason
+Luc LX1IQ
+<a href="https://github.com/LX3JL/xlxd">XLX Multiprotocol Reflector Server</a>
+
+Phil ZL2RO
+Initiative and hosting
+
+Ivan ZL1OTF 
+Hardware setup and  support
+
+Matt ZL1YHF
+Dashboard design and Linux support
+
+Colin ZL2ARL
+Donation
+
+Dev 9Y4DG
+<a href="http://www.pa7lim.nl/peanut/">Peanut</a> setup and  Module R support 
+
+Dr John ZL2JPM
+Donations from the <a href="https://www.ifroar.org/">ROAR</a> Community
+
+Jim AI8A (ZL2IA)
+Web-based Support with Linux
+
+Michael K5MRE 
+Hosting TGIF 31665 
+
+Andrew ZL1TAP
+Donation
+
+Adrian VK4TUX 
+Reflector Support
+
+Ted KC3OL
+Donation
+
+Jason K1DJS
+Donation

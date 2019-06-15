@@ -1,0 +1,12 @@
+# editor debris
+*~
+.#*
+._*
+.*.sw?
+# OS debris
+.DS_Store
+# ignore temp/state files
+.netrwhist
+# ignore the YSF dashboard
+ysf
+
