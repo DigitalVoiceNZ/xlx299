@@ -1,4 +1,6 @@
 <?php
+define("MOTDCOOKIE", "motdseen");
+define("MOTDFILE", dirname(__FILE__) . "/pgs/motd.txt");
 
 /*
  *  This dashboard is being developed by the DVBrazil Team as a courtesy to
@@ -72,6 +74,12 @@ if ($CallingHome['Active']) {
 } else {
     $Hash = "";
 }
+// check if we want to set the motd cookie
+$cookieset = FALSE;
+if (isset($_POST['motd'])) {
+    $cookieset = TRUE;
+    setcookie(MOTDCOOKIE, strval(filemtime(MOTDFILE)), time() + 60*60*24*30);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +112,6 @@ if ($CallingHome['Active']) {
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <?php
-
     if ($PageOptions['PageRefreshActive']) {
         echo '
    <script>
@@ -235,6 +242,21 @@ if ($CallingHome['Active']) {
                 }
             }
 
+            // if an motd file exists and user hasn't dismissed it, display
+            $motdts = filemtime(MOTDFILE);
+            if (!$cookieset
+                && ($motdts !== FALSE)
+                && (!isset($_COOKIE[MOTDCOOKIE]) || ($_COOKIE[MOTDCOOKIE] < $motdts))) {
+                if (($motd = file_get_contents(MOTDFILE)) !== FALSE) {
+                    echo '
+                <div id="motd" class="col-md-9 alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>';
+                    echo $motd;
+                    echo '</div>';
+                }
+            }
             switch ($_GET['show']) {
                 case 'users'      :
                     require_once("./pgs/users.php");
@@ -296,5 +318,30 @@ if ($CallingHome['Active']) {
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+<script>
+    $("#motd").on("close.bs.alert", function() {
+        clearTimeout(PageRefresh); // allow animation to run
+    });
+    $("#motd").on("closed.bs.alert", function() {
+        var form = document.createElement('form');
+        var element = document.createElement('input');
+        element.name = "motd";
+        element.value = "1";
+
+        form.method = 'POST';
+<?php
+        $formaction = '/index.php';
+        if (isset($_GET['show'])) {
+            $formaction .= '?show=' . $_GET['show'];
+        }
+        echo "form.action = '$formaction';";
+?>
+        form.style.display = 'hidden';
+
+        form.appendChild(element);
+        document.body.appendChild(form)
+        form.submit();
+    });
+</script>
 </body>
 </html>

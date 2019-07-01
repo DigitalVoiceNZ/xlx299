@@ -2,7 +2,7 @@
 
 define("THISXRF", "XRF299");
 define("PEANUTAPI", "http://peanut.pa7lim.nl/api/");
-define("PEANUTAPI_TIME", 366);  // minimum seconds between API fetches
+define("PEANUTAPI_TIME", 200);  // minimum seconds between API fetches
 define("PEANUT_CACHE", "/tmp/peanut.json");
 
 function inthisxrf($v) {
