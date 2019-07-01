@@ -44,3 +44,6 @@ Donation
 
 Jason K1DJS
 Donation
+
+John ZL2TWS
+Donation <a href="http://www.pa7lim.nl/peanut/">Peanut</a> Module B
