@@ -282,6 +282,9 @@ if (isset($_POST['motd'])) {
 		case 'thanks'    :
                         require_once("./pgs/thanks.php");
                          break;
+		case 'modules'    :
+                        require_once("./pgs/modules.php");
+                         break;
                 default           :
                     require_once("./pgs/users.php");
 
