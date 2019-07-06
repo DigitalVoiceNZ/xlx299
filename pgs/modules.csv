@@ -1,11 +1,13 @@
 # two columns (additional commas do not split fields)
 # if first column contains an asterisk, it is replaced with the Peanut logo
-A, CQ UK
-B*, NZ national, <a href="https://hose.brandmeister.network/group/530/">Brandmeister talkgroup 530</a>
-E, TG3131383 USA
-F, TGIF 31665 USA
-G, TGIF969 Caribbean
-J, QRM 31200 USA
-K, Kiwi chit-chat
+A*, CQ UK XLX925, <a href="https://www.cq-uk.co.uk/?fbclid=IwAR13c1AAWFSMcLk9uh6006YDf6vzEvw4zzZpYeQIHcjDZe05My9YaA3URzA">CQ-UK Wires-X</a>, Peanut room XRF925A
+B*, NZ national, <a href="https://hose.brandmeister.network/group/530/">Brandmeister talkgroup 530</a>, Peanut room XRF299B
+D, DV Dongles
+E*, TG3131383 USA, Peanut room XRF299E
+F, TGIF 31665 USA, <a href="http://tgif.network/">TGIF 31665</a>
+G*, TGIF969 Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>, Peanut Room TGF969
+J*, QRM 31200 USA, <a href="http://tgif.network/talkgroups.php">QRM TGIF Room</a>, Peanut room XRF299J
+K, Kiwi chit-chat General rag chews
 N, DV-Tech Talk
-R*, ROAR <a href="http://www.xlx299.nz/ysf">YSFRefelector</a>
+R*, ROAR <a href="http://www.xlx299.nz/ysf">YSFRefelector</a>, <a href="https://hose.brandmeister.network/group/53080/">Brandmeister talkgroup 53080</a>, Peanut room XRF299R
+T, Taupo TG53060 <a href="https://hose.brandmeister.network/group/53060/">Brandmeister talkgroup 53060</a>

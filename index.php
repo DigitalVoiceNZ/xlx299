@@ -189,6 +189,8 @@ if (isset($_POST['motd'])) {
 		<li<?php echo ($_GET['show'] == "traffic") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=traffic">Traffic</a></li>
 		<li<?php echo ($_GET['show'] == "info") ? ' class="active"' : ''; ?>><a
+                            href="./index.php?show=modules">Modules</a></li>
+		<li<?php echo ($_GET['show'] == "modules") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=info">Information</a></li>
 		<li<?php echo ($_GET['show'] == "thanks") ? ' class="active"' : ''; ?>><a
                             href="./index.php?show=thanks">Thanks</a></li>
