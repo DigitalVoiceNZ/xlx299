@@ -27,8 +27,9 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
         if ((substr($data[0], 0, 1) == '#') || (substr($data[0], 0, 1) == ';')) {
             continue;
         }
+        $modname = str_replace('*', '&nbsp;<img src="/img/peanut-32x32.png" height=20 width=20 alt="Peanut enabled">', $data[0]);
         echo "<tr>";
-        echo "  <td>" . $data[0] . "</td>";
+        echo "  <th>" . $modname . "</th>";
         echo "  <td>" . $data[1] . "</td>";
         echo "</tr>";
     }

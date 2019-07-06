@@ -36,7 +36,7 @@ $PageOptions['PeerPage']['MasqueradeCharacter']      = '*';           			// Char
 $PageOptions['LastHeardPage']['LimitTo']             = 39;                      // Number of stations to show
 
 $PageOptions['ModuleNames'] = array();                                			// Module nomination
-$PageOptions['ModuleNames']['A']                     = 'D-Star CQCQCQ';
+$PageOptions['ModuleNames']['A']                     = 'CQ UK ';
 $PageOptions['ModuleNames']['B']                     = 'MMDV Peanut';
 $PageOptions['ModuleNames']['C']                     = 'ZL TG 53050';
 $PageOptions['ModuleNames']['D']                     = 'DV-Dongles';
@@ -109,7 +109,7 @@ $CallingHome['Active']                               = true;					               
 $CallingHome['MyDashBoardURL']                       = 'http://www.xlx299.nz';			       // dashboard url
 $CallingHome['ServerURL']                            = 'http://xlxapi.rlx.lu/api.php';         // database server, do not change !!!!
 $CallingHome['PushDelay']                            = 600;  	                               // push delay in seconds
-$CallingHome['Country']                              = "New Zealand Transcoding DMR YSF D-Star and Peanut + THGIF 31665 and TG969 QRM TG31200";                         // Country
+$CallingHome['Country']                              = "New Zealand Transcoding DMR YSF D-Star and Peanut + THGIF 31665 and TG969 QRM TG31200 and CQ UK";                         // Country
 $CallingHome['Comment']                              = "Digital XLX Reflector Group NZ"; 				           // Comment. Max 100 character
 $CallingHome['HashFile']                             = "/callinghome/callinghome.php";                 // Make sure the apache user has read and write permissions in this folder.
 $CallingHome['OverrideIPAddress']                    = "";                                     // Insert your IP address here. Leave blank for autodetection. No need to enter a fake address.

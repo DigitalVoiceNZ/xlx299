@@ -1,4 +1,11 @@
 # two columns (additional commas do not split fields)
-A,
-B, NZ national Brandmeister talkgroup 530, has a Peanut connection
-
+# if first column contains an asterisk, it is replaced with the Peanut logo
+A, CQ UK
+B*, NZ national, <a href="https://hose.brandmeister.network/group/530/">Brandmeister talkgroup 530</a>
+E, TG3131383 USA
+F, TGIF 31665 USA
+G, TGIF969 Caribbean
+J, QRM 31200 USA
+K, Kiwi chit-chat
+N, DV-Tech Talk
+R*, ROAR <a href="http://www.xlx299.nz/ysf">YSFRefelector</a>
