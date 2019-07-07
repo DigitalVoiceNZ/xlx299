@@ -1,13 +1,14 @@
-# two columns (additional commas do not split fields)
-# if first column contains an asterisk, it is replaced with the Peanut logo
-A*, CQ UK XLX925, <a href="https://www.cq-uk.co.uk/?fbclid=IwAR13c1AAWFSMcLk9uh6006YDf6vzEvw4zzZpYeQIHcjDZe05My9YaA3URzA">CQ-UK Wires-X</a>, Peanut room XRF925A
-B*, NZ national, <a href="https://hose.brandmeister.network/group/530/">Brandmeister talkgroup 530</a>, Peanut room XRF299B
-D, DV Dongles
-E*, TG3131383 USA, Peanut room XRF299E
-F, TGIF 31665 USA, <a href="http://tgif.network/">TGIF 31665</a>
-G*, TGIF969 Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>, Peanut Room TGF969
-J*, QRM 31200 USA, <a href="http://tgif.network/talkgroups.php">QRM TGIF Room</a>, Peanut room XRF299J
-K, Kiwi chit-chat General rag chews
-N, DV-Tech Talk
-R*, ROAR <a href="http://www.xlx299.nz/ysf">YSFRefelector</a>, <a href="https://hose.brandmeister.network/group/53080/">Brandmeister talkgroup 53080</a>, Peanut room XRF299R
-T, Taupo TG53060 <a href="https://hose.brandmeister.network/group/53060/">Brandmeister talkgroup 53060</a>
+# four columns (additional commas do not split fields)
+# Module, Brandmeister, Peanut, description
+A,      , XRF925A, CQ UK XLX925, <a href="https://www.cq-uk.co.uk/?fbclid=IwAR13c1AAWFSMcLk9uh6006YDf6vzEvw4zzZpYeQIHcjDZe05My9YaA3URzA">CQ-UK Wires-X</a>
+B, 530   , XRF299B, NZ National
+D,       ,        , DV Dongles
+E, TG3131383, XRF299E, USA
+F, TGIF 31665,       , USA, <a href="http://tgif.network/">TGIF 31665</a>
+G, TGIF969, TGF969, Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>
+J, QRM 31200, XRF299J, USA, <a href="http://tgif.network/talkgroups.php">QRM TGIF Room</a>
+K,       ,         , Kiwi chit-chat General rag chews
+N,       ,         , DV-Tech Talk
+U,       ,         , UK D-Star
+R, 53080, XRF299R, ROAR <a href="http://www.xlx299.nz/ysf">YSFRefelector</a>
+T, 53060, , Taupo
