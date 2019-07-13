@@ -9,4 +9,6 @@
 .netrwhist
 # ignore the YSF dashboard
 ysf
+# APC
+apc.php
 

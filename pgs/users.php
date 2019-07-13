@@ -65,8 +65,6 @@ if (!$fetched || !apcu_exists('PNUTCACHEVALID')) {
             apcu_store('PNUTCACHE', $pnut, 60*60);
             apcu_store('PNUTCACHEVALID', time(), PNUTREFRESH);
         }
-    } else {
-        error_log('Peanut API locked, using old data');
     }
 }
 
