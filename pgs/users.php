@@ -4,7 +4,7 @@ define("THISXRF", "XRF299");
 define("PEANUTAPI", "http://peanut.pa7lim.nl/api/");
 // APCu PNUT CACHE
 define("PNUTLIMIT", 10);        // minimum seconds between API fetches
-define("PNUTREFRESH", 200);     // normal seconds between API fetches
+define("PNUTREFRESH", 170);     // normal seconds between API fetches
 define("PNUTBACKOFF", 15*60);   // seconds if API read error
 
 $pnutrooms = [
@@ -16,9 +16,34 @@ $pnutrooms = [
     "R" => "XRF299R",
 ];
 
-function inthisxrf($v) {
+/**
+ * array_filter predicate to filter PNUT users in our rooms
+ *
+ * @param object $v PNUT whois object.
+ *
+ * @return boolean if in our room and not a transcoder
+ */
+function inThisXRF($v) {
     global $pnutrooms;
     return in_array($v->room, $pnutrooms) && ($v->device != 'TRANSCODER');
+}
+
+/**
+ * Check PNUT cache for call $c in room $room
+ *
+ * @param string $c call.
+ * @param string $room PNUT room name.
+ *
+ * @return boolean
+ */
+function inCache($c, $room) {
+    $cache = apcu_fetch('PNUTCACHE');
+    foreach ($cache as $ce) {
+        if (($ce->Call == $c) && ($ce->room == $room)) {
+            return True;
+        }
+    }
+    return False;
 }
 
 $pnut = apcu_fetch('PNUTCACHE', $fetched);
@@ -36,15 +61,13 @@ if (!$fetched || !apcu_exists('PNUTCACHEVALID')) {
             apcu_store('PNUTAPILOCK', time(), 15*60);
             error_log("Peanut API read error");
         } else {
-            $pnut = array_filter(json_decode($json), "inthisxrf");
+            $pnut = array_filter(json_decode($json), "inThisXRF");
             apcu_store('PNUTCACHE', $pnut, 60*60);
             apcu_store('PNUTCACHEVALID', time(), PNUTREFRESH);
         }
     } else {
         error_log('Peanut API locked, using old data');
     }
-} else {
-    error_log('Cache hit ' . count($pnut));
 }
 
 if (!isset($_SESSION['FilterCallSign'])) {
@@ -142,6 +165,13 @@ if ($PageOptions['UserPage']['ShowFilter']) {
 
 $Reflector->LoadFlags();
 for ($i=0;$i<$Reflector->StationCount();$i++) {
+    // if PNUT user and more recent than cache and not cached
+    if (($Reflector->Stations[$i]->GetSuffix() == 'PNUT')
+        && (time() - $Reflector->Stations[$i]->GetLastHeardTime() < PNUTREFRESH)
+        && (!inCache($Reflector->Stations[$i]->GetCallsignOnly(), $pnutrooms[$Reflector->Stations[$i]->GetModule()]))) {
+        apcu_delete('PNUTCACHEVALID');
+        error_log("PNUT cache invalidated: " . $Reflector->Stations[$i]->GetCallsignOnly() . " on " . $Reflector->Stations[$i]->GetModule() . ' at ' . $Reflector->Stations[$i]->GetLastHeardTime());
+    }
     $ShowThisStation = true;
     if ($PageOptions['UserPage']['ShowFilter']) {
         $CS = true;
