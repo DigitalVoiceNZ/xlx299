@@ -1,14 +1,14 @@
 # four columns (additional commas do not split fields)
 # Module, Brandmeister, Peanut, description
-A,      , XRF925A, CQ UK XLX925, <a href="https://www.cq-uk.co.uk/?fbclid=IwAR13c1AAWFSMcLk9uh6006YDf6vzEvw4zzZpYeQIHcjDZe05My9YaA3URzA">CQ-UK Wires-X</a>
-B, 530   , XRF299B, NZ National
+A*,      , XRF925A, CQ UK XLX925, <a href="https://www.cq-uk.co.uk/">CQ-UK Wires-X</a>, <a href="https://www.facebook.com/YaesuFusionAus/">Aus-Repeater-Net</a>
+B*, 530   , XRF299B, NZ National
 D,       ,        , DV Dongles
-E, TG3131383, XRF299E, USA
+E*, TG3131383, XRF299E, USA
 F, TGIF 31665,       , USA, <a href="http://tgif.network/">TGIF 31665</a>
-G, TGIF969, TGF969, Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>
-J, QRM 31200, XRF299J, USA, <a href="http://tgif.network/talkgroups.php">QRM TGIF Room</a>
+G*, TGIF969, TGF969, Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>
+J*, QRM 31200, XRF299J, USA, <a href="http://tgif.network/talkgroups.php">QRM TGIF Room</a>
 K,       ,         , Kiwi chit-chat General rag chews
 N,       ,         , DV-Tech Talk
 U,       ,         , UK D-Star
-R, 53080, XRF299R, ROAR <a href="http://www.xlx299.nz/ysf">YSFRefelector</a>
+R*, 53080, XRF299R, ROAR <a href="http://www.xlx299.nz/ysf">YSFRefelector</a>
 T, 53060, , Taupo

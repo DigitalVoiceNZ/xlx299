@@ -2,31 +2,49 @@
 
 define("THISXRF", "XRF299");
 define("PEANUTAPI", "http://peanut.pa7lim.nl/api/");
-define("PEANUTAPI_TIME", 200);  // minimum seconds between API fetches
-define("PEANUT_CACHE", "/tmp/peanut.json");
+// APCu PNUT CACHE
+define("PNUTLIMIT", 10);        // minimum seconds between API fetches
+define("PNUTREFRESH", 200);     // normal seconds between API fetches
+define("PNUTBACKOFF", 15*60);   // seconds if API read error
+
+$pnutrooms = [
+    "A" => "XRF925A",
+    "B" => "XRF299B",
+    "E" => "XRF299E",
+    "G" => "TGF969",
+    "J" => "XRF299J",
+    "R" => "XRF299R",
+];
 
 function inthisxrf($v) {
-    return (substr($v->room, 0, 6) == THISXRF) && ($v->device != 'TRANSCODER');
+    global $pnutrooms;
+    return in_array($v->room, $pnutrooms) && ($v->device != 'TRANSCODER');
 }
 
-// unfortunately this server doesn't have APC or Memcached, so use a file
-$hits = file_get_contents(PEANUT_CACHE);
-if (!$hits || (filemtime(PEANUT_CACHE) < time()-PEANUTAPI_TIME)) {
-    touch(PEANUT_CACHE); // try to avoid multiple concurrent fetches
-    error_log("Peanut API hit");
-    $json = file_get_contents(PEANUTAPI . "whois.json");
-    if (!$json) {
-        // API read error, don't hit API for a while
-        $pnut = [];
-        file_put_contents(PEANUT_CACHE, serialize($pnut));
-	touch(PEANUT_CACHE, now() + 60*10);
-        error_log("Peanut API read error");
+$pnut = apcu_fetch('PNUTCACHE', $fetched);
+if (!$fetched) {
+    $pnut = [];
+    error_log('Peanut cache missing');
+}
+if (!$fetched || !apcu_exists('PNUTCACHEVALID')) {
+    if (apcu_add('PNUTAPILOCK', time(), PNUTLIMIT)) {
+        // we have the right to update the cache
+        error_log('Peanut API hit');
+        $json = file_get_contents(PEANUTAPI . "whois.json");
+        if (!$json) {
+            // API read error, don't hit API for a while
+            apcu_store('PNUTAPILOCK', time(), 15*60);
+            error_log("Peanut API read error");
+        } else {
+            $pnut = array_filter(json_decode($json), "inthisxrf");
+            apcu_store('PNUTCACHE', $pnut, 60*60);
+            apcu_store('PNUTCACHEVALID', time(), PNUTREFRESH);
+        }
     } else {
-        $pnut = array_filter(json_decode($json), "inthisxrf");
-        file_put_contents(PEANUT_CACHE, serialize($pnut));
+        error_log('Peanut API locked, using old data');
     }
 } else {
-    $pnut = unserialize($hits);
+    error_log('Cache hit ' . count($pnut));
 }
 
 if (!isset($_SESSION['FilterCallSign'])) {
@@ -235,11 +253,11 @@ for ($i=0;$i<count($Modules);$i++) {
       $UserCheckedArray[] = $Users[$j];
    }
    // add Peanut users on this module
-   $thismodule = THISXRF . $Modules[$i];
+   $thismodule = array_key_exists($Modules[$i], $pnutrooms) ? $pnutrooms[$Modules[$i]] : '---';
    foreach ($pnut as $pu) {
-      if ($pu->room == $thismodule) {
-          $call = $Displayname = $pu->Call;
-          switch (strtolower($pu->device)) {
+       if ($pu->room == $thismodule) {
+           $call = $Displayname = $pu->Call;
+           switch (strtolower($pu->device)) {
               case 'android':
                   $Displayname .= '&nbsp;<i class="material-icons">android</i>';
                   break;
