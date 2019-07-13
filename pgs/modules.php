@@ -16,13 +16,16 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
         $data = array_map('trim', $data);
         switch(count($data)) {
         case 0:
-            continue;
-        case 3:
-            $data[3] = '';
+            continue 2;
+        case 1:
+            if (strlen($data[0]) == 0) {
+                continue 2;
+            }
+            $data[1] = '';
         case 2:
             $data[2] = '';
-        case 1:
-            $data[1] = '';
+        case 3:
+            $data[3] = '';
             break;
         case 4:
             break;
