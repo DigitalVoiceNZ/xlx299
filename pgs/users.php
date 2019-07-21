@@ -166,7 +166,8 @@ for ($i=0;$i<$Reflector->StationCount();$i++) {
     // if PNUT user and more recent than cache and not cached
     if (($Reflector->Stations[$i]->GetSuffix() == 'PNUT')
         && (time() - $Reflector->Stations[$i]->GetLastHeardTime() < PNUTREFRESH)
-        && (!inCache($Reflector->Stations[$i]->GetCallsignOnly(), $pnutrooms[$Reflector->Stations[$i]->GetModule()]))) {
+        && (!inCache($Reflector->Stations[$i]->GetCallsignOnly(), $pnutrooms[$Reflector->Stations[$i]->GetModule()]))
+        && !apcu_exists('PNUTAPILOCK')) {
         apcu_delete('PNUTCACHEVALID');
         error_log("PNUT cache invalidated: " . $Reflector->Stations[$i]->GetCallsignOnly() . " on " . $Reflector->Stations[$i]->GetModule() . ' at ' . $Reflector->Stations[$i]->GetLastHeardTime());
     }
