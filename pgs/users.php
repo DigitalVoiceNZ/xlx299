@@ -8,11 +8,10 @@ define("PNUTREFRESH", 170);     // normal seconds between API fetches
 define("PNUTBACKOFF", 15*60);   // seconds if API read error
 
 $pnutrooms = [
-    "A" => "XRF925A",
     "B" => "XRF299B",
     "E" => "XRF299E",
     "G" => "TGF969",
-    "J" => "XRF299J",
+    "K" => "XRF299K",
     "R" => "XRF299R",
 ];
 
