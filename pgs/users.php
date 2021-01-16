@@ -274,10 +274,10 @@ for ($i=0;$i<count($Modules);$i++) {
    $UserCheckedArray = array();
    
    for ($j=0;$j<count($Users);$j++) {
-       $Displayname = $Reflector->GetCallsignAndSuffixByID($Users[$j]);
+       [$Displayname, $protocol] = $Reflector->GetCallsignSuffixAndProtocolByID($Users[$j]);
       echo '
             <tr>
-               <td><a href="https://aprs.fi/'.$Displayname.'" class="pl" target="_blank">'.$Displayname.'</a> </td>
+               <td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank">'.$Displayname.'</a> <sup>'.$protocol.'</sup> </td>
             </tr>';
       $UserCheckedArray[] = $Users[$j];
    }

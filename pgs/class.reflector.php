@@ -230,6 +230,21 @@ class xReflector {
       return $suffix;
    }
    
+   public function GetCallsignSuffixAndProtocolByID($RandomId) {
+      $suffix   = "";
+      $callsign = "";
+      $protocol = "";
+      $i        = 0;
+      while ($i < $this->NodeCount()) {
+         if ($this->Nodes[$i]->GetRandomID() == $RandomId) {
+		 return [$this->Nodes[$i]->GetCallSign().'-'.$this->Nodes[$i]->GetSuffix(),
+			 $this->Nodes[$i]->GetProtocol()];
+         }
+         $i++;
+      }
+      return ['N/A', ''];
+   }
+
    public function GetCallsignAndSuffixByID($RandomId) {
       $suffix   = "";
       $callsign = "";
