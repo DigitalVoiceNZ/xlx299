@@ -1,5 +1,6 @@
+<div class="container">
 <div class="row">
-  <div class="col-md-6">
+  <div class="col">
 <?php
 if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
 ?>
@@ -37,9 +38,13 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
             continue;
         }
         $modname = str_replace('*', '&nbsp;<img src="/img/peanut-32x32.png" height=20 width=20 alt="Peanut enabled">', $data[0]);
-        $tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://hose.brandmeister.network/group/$1/">$0</a>', $data[1]);
+	if (stripos($data[1], "tgif") === 0) {
+		$tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://prime.tgif.network/tgprofile.php?id=$1">$0</a>', $data[1]);
+	} else {
+		$tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://brandmeister.network/?page=lh&DestinationID=$1">$0</a>', $data[1]);
+	}
         echo "<tr>";
-        echo "  <th>" . $modname . "</th>";
+        echo '  <th style="white-space: nowrap;">' . $modname . "</th>";
         echo "  <td>" . $tg . "</td>";
         echo "  <td>" . $data[2] . "</td>";
         echo "  <td>" . $data[3] . "</td>";
@@ -51,7 +56,7 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
 ?>
   </div>
 </div>
-
+</div>
 <script>
   clearTimeout(PageRefresh);
 </script>

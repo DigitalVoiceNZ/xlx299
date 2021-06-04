@@ -17,13 +17,14 @@ $Reflectors    = $XML->GetAllElements($Reflectorlist, "reflector");
 ?>
 
 
+<div class="container">
 <table class="table table-striped-custom table-hover">
    <tr class="table-center">  
-      <th class="col-md-1">#</th>
-      <th class="col-md-3">Reflector</th>
-      <th class="col-md-3">Country</th>
-      <th class="col-md-1">Service</th>
-      <th class="col-md-4">Comment</th>
+      <th>#</th>
+      <th>Reflector</th>
+      <th>Country</th>
+      <th>Service</th>
+      <th>Comment</th>
    </tr>
 <?php
 
@@ -47,5 +48,5 @@ for ($i=0;$i<count($Reflectors);$i++) {
 
 ?>
 </table>
-   
+</div>
    

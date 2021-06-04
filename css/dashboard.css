@@ -2,35 +2,7 @@
  * Base structure
  */
 
-html {
-  height: 100%;
-}
-body {
-  min-height: 100%;
-  display: flex;
-}
-
-
-
-.table-striped-custom tr:nth-child(odd)
-{
-  background-color: rgba(245, 245,245, .7);
-}
-
-#mainbox
-{
-  height: 100%;
-  flex: 1;
-  padding-bottom: 85px;
-}
-
-.main
-{
-  padding-bottom: 50px;
-}
-
-body::after
-{
+body::after {
   content: "";
   background: url(../img/nzflagmap.png);
   background-position: center top;
@@ -46,24 +18,12 @@ body::after
   z-index: -1;   
 }
 
-img.logo
-{
+img.logo {
   width: 80px;
   margin-top:10px;
   margin-bottom:10px;
   margin-left: 10px;
   margin-right: auto;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 50px;
-  margin-bottom: 60px;
 }
 
 a.tip {
@@ -96,113 +56,33 @@ a.tip:hover span {
   top: 10px;
 }  
 
-
-/*
- * Global add-ons
- */
-
-.sub-header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-/*
- * Top navigation
- * Hide default border to remove 1px line.
- */
-
-.navbar
-{
-  background-color: #000000
-}
-.navbar-fixed-top {
-  border: 0;
-}
-
-.navbar-info {
-  padding: 0px; #15px;
-  color: #000000;
-}
-
 .moduleusers td {
   white-space: nowrap;
   hyphens: none;
 }
 
 /*
- * Sidebar
- */
-
-/* Hide for mobile, show later */
-.sidebar {
-  display: none;
-}
-@media (min-width: 768px) {
-  .sidebar {
-    position: fixed;
-    top: 51px;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    display: block;
-    padding: 20px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f5f5f5;
-    border-right: 1px solid #eee;
-  }
-}
-
-#navbar {
-  padding-left: 0px;
-}
-
-/* Sidebar navigation */
-.nav-sidebar {
-  margin-right: -21px; /* 20px padding + 1px border */
-  margin-bottom: 20px;
-  margin-left: -20px;
-}
-.nav-sidebar > li > a {
-  padding-right: 20px;
-  padding-left: 20px;
-}
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
-  color: #fff;
-  background-color: #428bca;
-}
-
-
-/*
  * Main content
  */
-
-.main {
-  padding: 20px;
-}
-@media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-}
-.main .page-header {
-  margin-top: 0;
-}
 
 .ModuleIcon {
   width: 65px;
   height: 65px;
 }
 
-#logos
-{
-.img
-{
+.img {
   height: 30px;
 }
+
+#mainbox {
+  padding-bottom: 80px;
+}
+
+.footer {
+  position: relative;
+  margin-top: -80px!important;
+  height: 80px;
+  padding-top: 20px!important;
 }
 
 /*
@@ -225,25 +105,12 @@ a.tip:hover span {
   text-align: center !important;
 }
 
-/*
- * Footer
- */
-.footer {
-  position: fixed; #absolute;
-  bottom: 0;
-  width: 100%;
-  height: 135px;
-  background-color: #f5f5f5;
-  padding-left: 20%;
-  border-top: 1px solid #eee;
-}
-
-.footer p {
-  text-align: center;
-  margin-top: 10px;
-}
-
 .material-icons {
-  font-size: 12px;
+  font-size: 24px;
+}
+
+nav.bg-dark {
+  background-color: #000!important;
+  background-image: linear-gradient(to right, #002189, #000);
 }
 

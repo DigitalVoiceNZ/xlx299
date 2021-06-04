@@ -9,10 +9,10 @@ define("PNUTBACKOFF", 15*60);   // seconds if API read error
 
 $pnutrooms = [
     "B" => "XRF299B",
-    "E" => "XRF299E",
     "G" => "TGF969",
     "K" => "XRF299K",
     "R" => "XRF299R",
+    "S" => "XRF299S",
 ];
 
 /**
@@ -48,17 +48,14 @@ function inCache($c, $room) {
 $pnut = apcu_fetch('PNUTCACHE', $fetched);
 if (!$fetched) {
     $pnut = [];
-    error_log('Peanut cache missing');
 }
 if (!$fetched || !apcu_exists('PNUTCACHEVALID')) {
     if (apcu_add('PNUTAPILOCK', time(), PNUTLIMIT)) {
         // we have the right to update the cache
-        error_log('Peanut API hit');
         $json = file_get_contents(PEANUTAPI . "whois.json");
         if (!$json) {
             // API read error, don't hit API for a while
             apcu_store('PNUTAPILOCK', time(), 15*60);
-            error_log("Peanut API read error");
         } else {
             $pnut = array_filter(json_decode($json), "inThisXRF");
             apcu_store('PNUTCACHE', $pnut, 60*60);
@@ -114,9 +111,10 @@ if (isset($_GET['do'])) {
 
 ?>
 
+<div class="container xusers">
 <div class="row">
-   <div class="col-md-9">
-      <table class="table table-striped-custom table-hover">
+   <div class="table-responsive">
+      <table class="table table-sm table-striped-custom table-hover">
 <?php
 if ($PageOptions['UserPage']['ShowFilter']) {
   echo '
@@ -148,16 +146,18 @@ if ($PageOptions['UserPage']['ShowFilter']) {
 </tr>';
 }
 ?>
-         <tr class="table-center">   
-            <th>#</th>
-            <th>Flag</th>
-            <th>Callsign</th>
-            <th>Suffix</th>
-            <th>DPRS</th>
-            <th>Via / Peer</th>
-            <th>Last heard</th>
-            <th>Module</th>
-         </tr>
+	 <thead>
+             <tr class="table-center">   
+                 <th scope="col">#</th>
+                 <th scope="col">Flag</th>
+                 <th scope="col">Callsign</th>
+                 <th scope="col">Suffix</th>
+                 <th scope="col">DPRS</th>
+                 <th scope="col">Via / Peer</th>
+                 <th scope="col">Last heard</th>
+                 <th scope="col">Module</th>
+	      </tr>
+        </thead>
 <?php
 
 $Reflector->LoadFlags();
@@ -168,7 +168,6 @@ for ($i=0;$i<$Reflector->StationCount();$i++) {
         && (!inCache($Reflector->Stations[$i]->GetCallsignOnly(), $pnutrooms[$Reflector->Stations[$i]->GetModule()]))
         && !apcu_exists('PNUTAPILOCK')) {
         apcu_delete('PNUTCACHEVALID');
-        error_log("PNUT cache invalidated: " . $Reflector->Stations[$i]->GetCallsignOnly() . " on " . $Reflector->Stations[$i]->GetModule() . ' at ' . $Reflector->Stations[$i]->GetLastHeardTime());
     }
     $ShowThisStation = true;
     if ($PageOptions['UserPage']['ShowFilter']) {
@@ -210,7 +209,7 @@ for ($i=0;$i<$Reflector->StationCount();$i++) {
         echo '</td>
    <td><a href="https://www.qrz.com/db/' . $Reflector->Stations[$i]->GetCallsignOnly() . '" class="pl" target="_blank">' . $Reflector->Stations[$i]->GetCallsignOnly() . '</a></td>
    <td>' . $Reflector->Stations[$i]->GetSuffix() . '</td>
-   <td><a href="http://www.aprs.fi/' . $Reflector->Stations[$i]->GetCallsignOnly() . '" class="pl" target="_blank"><img src="./img/sat.png" alt=""></a></td>
+   <td><a href="http://www.aprs.fi/' . $Reflector->Stations[$i]->GetCallsignOnly() . '" class="pl" target="_blank"><i class="material-icons md-48">satellite</i></a></td>
    <td>' . $Reflector->Stations[$i]->GetVia();
         if ($Reflector->Stations[$i]->GetPeer() != $Reflector->GetReflectorName()) {
             echo ' / ' . $Reflector->Stations[$i]->GetPeer();
@@ -229,8 +228,16 @@ for ($i=0;$i<$Reflector->StationCount();$i++) {
  
       </table>
    </div>
-   <div class="col-md-3">
-      <table class="table table-striped-custom table-hover moduleusers">
+</div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+    <div class="container">
+	<p>&nbsp;</p>
+    </div>
+</nav>
+<div class="row">
+   <div class="table-responsive">
+      <table class="table table-sm table-striped-custom table-hover moduleusers">
          <?php 
 
 $Modules = $Reflector->GetModules();
@@ -244,11 +251,11 @@ for ($i=0;$i<count($Modules);$i++) {
       if (isset($PageOptions['ModuleNames'][$Modules[$i]]))
         $desc = '('.$PageOptions['ModuleNames'][$Modules[$i]].')';
     
-      echo '<th>'.$Modules[$i].'<br/>'.$desc.'<br/><img class="ModuleIcon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"></th>';
+      echo '<th>'.$Modules[$i].'<br/>'.$desc.'<br/><img class="ModuleIcon" alt="icon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"></th>';
    }
    else if (isset($PageOptions['ModuleNames'][$Modules[$i]])) 
    {
-      echo '<th>'.$Modules[$i].'</br>'.$PageOptions['ModuleNames'][$Modules[$i]].'</th>';
+      echo '<th>'.$Modules[$i].'<br>'.$PageOptions['ModuleNames'][$Modules[$i]].'</th>';
        //if (trim($PageOptions['ModuleNames'][$Modules[$i]]) != "") {
        //    echo '<br />';
        //}

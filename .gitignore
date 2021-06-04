@@ -11,4 +11,6 @@
 ysf
 # APC
 apc.php
+# ACME
+.well-known
 

@@ -3,7 +3,6 @@
 $Result = @fopen($CallingHome['ServerURL']."?do=GetReflectorList", "r");
 
 $INPUT = "";
-
 if ($Result) {
 
     while (!feof ($Result)) {
@@ -18,14 +17,15 @@ if ($Result) {
 fclose($Result);
 ?>
 
+<div class="container">
 <table class="table table-striped-custom table-hover">
    <tr class="table-center">
-      <th class="col-md-1">#</th>
-      <th class="col-md-2">XLX Peer</th>
-      <th class="col-md-2">Last Heard</th>
-      <th class="col-md-2">Linked for</th>
-      <th class="col-md-2">Protocol</th>
-      <th class="col-md-1">Module</th><?php
+      <th>#</th>
+      <th>XLX Peer</th>
+      <th>Last Heard</th>
+      <th>Linked for</th>
+      <th>Protocol</th>
+      <th>Module</th><?php
 
 if ($PageOptions['PeerPage']['IPModus'] != 'HideIP') {
    echo '
@@ -36,7 +36,7 @@ if ($PageOptions['PeerPage']['IPModus'] != 'HideIP') {
  </tr>
 <?php
 
-$Reflector->LoadFlags();
+// $Reflector->LoadFlags();
 
 for ($i=0;$i<$Reflector->PeerCount();$i++) {
          
@@ -82,3 +82,4 @@ for ($i=0;$i<$Reflector->PeerCount();$i++) {
 ?> 
  
 </table>
+</div>

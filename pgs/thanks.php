@@ -6,8 +6,12 @@ function QRZ($c) {
 }
 ?>
 
+<div class="container">
 <div class="row">
-  <div class="col-md-6">
+<p>&nbsp;</p>
+</div>
+<div class="row">
+  <div class="col">
     <h2>Acknowledgements</h2>
 <?php
 if (($handle = fopen(dirname(__FILE__) . "/thanks.txt", "r")) !== FALSE) {
@@ -38,6 +42,7 @@ if (($handle = fopen(dirname(__FILE__) . "/thanks.txt", "r")) !== FALSE) {
 }
 ?>
   </div>
+</div>
 </div>
 <script>
   clearTimeout(PageRefresh);

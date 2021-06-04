@@ -17,6 +17,7 @@ function QRZ($c) {
 }
 ?>
 
+<div class="container">
 <div class="row">
   <div class="col-md-6">
 <?php
@@ -82,7 +83,7 @@ if (($handle = fopen(dirname(__FILE__) . "/hotspots-repeaters.csv", "r")) !== FA
 ?>
   </div>
 </div>
-
+</div>
 <script>
   clearTimeout(PageRefresh);
 </script>

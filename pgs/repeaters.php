@@ -1,13 +1,14 @@
+<div class="container">
 <table class="table table-striped-custom table-hover">
    <tr class="table-center">
-      <th class="col-md-1">#</th>
-      <th class="col-md-1">Flag</th>
-      <th class="col-md-2">DV Station</th>
-      <th class="col-md-1">Band</th>
-      <th class="col-md-2">Last Heard</th>
-      <th class="col-md-2">Linked for</th>
-      <th class="col-md-1">Protocol</th>
-      <th class="col-md-1">Module</th><?php
+      <th>#</th>
+      <th>Flag</th>
+      <th>DV Station</th>
+      <th>Band</th>
+      <th>Last Heard</th>
+      <th>Linked for</th>
+      <th>Protocol</th>
+      <th>Module</th><?php
 
 if ($PageOptions['RepeatersPage']['IPModus'] != 'HideIP') {
    echo '
@@ -79,3 +80,4 @@ for ($i=0;$i<$Reflector->NodeCount();$i++) {
 ?> 
  
 </table>
+</div>
