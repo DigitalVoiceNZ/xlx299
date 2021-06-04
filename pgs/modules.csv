@@ -1,14 +1,19 @@
 # FOUR columns (additional commas do not split fields)
 # Module, Brandmeister, Peanut Room, description
-A*,      , XRF925A, CQ UK XLX925, <a href="https://www.cq-uk.co.uk/">CQ-UK Wires-X</a>, <a href="https://www.facebook.com/YaesuFusionAus/">Aus-Repeater-Net</a>
-B*, 530   , XRF299B, NZ National
+A*,     , XRF899, UK <a href="http://xlx899.mywire.org">XLX899</a>
+B*, 530 , XLX299B,NZ National, <a href="http://124.197.62.162:84">XLX530</a>
+
 D,       ,        , DV Dongles
-E*, TG3131383, XRF299E, USA
-F, TGIF 31665,       , USA, <a href="http://tgif.network/">TGIF 31665</a>
+
 G*, TGIF969, TGF969, Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>
-J*, QRM 31200, XRF299J, USA, <a href="http://tgif.network/talkgroups.php">QRM TGIF Room</a>
-K,       ,         , Kiwi chit-chat General rag chews
+
+K*, 53029,         , Kiwi chit-chat, General rag chews
+
 N,       ,         , DV-Tech Talk
-R*, 53080, XRF299R, ROAR <a href="http://www.xlx299.nz/ysf">YSFRefelector</a>
+
+R*, 53080, DCS299R, ROAR YSFRefelector
+
+S*, 53085, DCS299S,  Active-Elements
 U,       ,         , UK D-Star
 
+X,       ,  DCS299X        , FreeSTAR Module X
