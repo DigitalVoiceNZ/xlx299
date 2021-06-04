@@ -440,6 +440,11 @@ class xReflector {
    }
       
    public function CallHome() {
+      // DEBUG 20210428 ZL2IA
+      syslog(LOG_NOTICE, 'Calling home');
+      file_put_contents( '/tmp/ReflectorXML.txt', $this->ReflectorXML );
+      file_put_contents( '/tmp/InterlinkXML.txt', $this->InterlinkXML );
+      // DEBUG
       $xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <query>CallingHome</query>'.$this->ReflectorXML.$this->InterlinkXML;
       $p = @stream_context_create(array('http' => array('header'  => "Content-type: application/x-www-form-urlencoded\r\n",
