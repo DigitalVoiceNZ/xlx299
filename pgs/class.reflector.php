@@ -442,8 +442,10 @@ class xReflector {
    public function CallHome() {
       // DEBUG 20210428 ZL2IA
       syslog(LOG_NOTICE, 'Calling home');
-      file_put_contents( '/tmp/ReflectorXML.txt', $this->ReflectorXML );
-      file_put_contents( '/tmp/InterlinkXML.txt', $this->InterlinkXML );
+      file_put_contents( '/tmp/ReflectorXML.txt', "\n" . date('Y-m-d H:i:s'), FILE_APPEND );
+      file_put_contents( '/tmp/ReflectorXML.txt', $this->ReflectorXML, FILE_APPEND );
+      file_put_contents( '/tmp/InterlinkXML.txt', "\n" . date('Y-m-d H:i:s'), FILE_APPEND );
+      file_put_contents( '/tmp/InterlinkXML.txt', $this->InterlinkXML, FILE_APPEND );
       // DEBUG
       $xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <query>CallingHome</query>'.$this->ReflectorXML.$this->InterlinkXML;
