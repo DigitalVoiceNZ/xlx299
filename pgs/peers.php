@@ -1,20 +1,7 @@
 <?php
 
-$Result = @fopen($CallingHome['ServerURL']."?do=GetReflectorList", "r");
-
-$INPUT = "";
-if ($Result) {
-
-    while (!feof ($Result)) {
-        $INPUT .= fgets ($Result, 1024);
-    }
-
-    $XML = new ParseXML();
-    $Reflectorlist = $XML->GetElement($INPUT, "reflectorlist");
-    $Reflectors    = $XML->GetAllElements($Reflectorlist, "reflector");
-}
-
-fclose($Result);
+require_once("reflectorlist.php");
+$Reflectors = GetReflectorList();
 ?>
 
 <div class="container">
@@ -44,15 +31,13 @@ for ($i=0;$i<$Reflector->PeerCount();$i++) {
   <tr class="table-center">
    <td>'.($i+1).'</td>';
 
-   $Name = $Reflector->Peers[$i]->GetCallSign();
-   $URL = '';
-
-    for ($j=1;$j<count($Reflectors);$j++) {
-        if ($Name === $XML->GetElement($Reflectors[$j], "name")) {
-            $URL  = $XML->GetElement($Reflectors[$j], "dashboardurl");
-        }
+    $Name = $Reflector->Peers[$i]->GetCallSign();
+    $URL = '';
+    if (isset($Reflectors[$Name])) {
+       $URL = $Reflectors[$Name]['dashboardurl'];
     }
-    if ($Result && (trim($URL) != "")) {
+
+    if (trim($URL) != "") {
         echo '<td><a href="'.$URL.'" target="_blank" class="listinglink" title="Visit the Dashboard of&nbsp;'.$Name.'" style="text-decoration:none;color:#000000;">'.$Name.'</a></td>';
     } else {
         echo '<td>'.$Name.'</td>';
