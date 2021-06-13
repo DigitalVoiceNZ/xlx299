@@ -122,6 +122,20 @@ $VNStat['Interfaces'][0]['Name']                     = 'Network';
 $VNStat['Interfaces'][0]['Address']                  = 'enp2s0';
 $VNStat['Binary']                                    = '/usr/bin/vnstat';
 
+define("PEANUTAPI", "http://peanut.pa7lim.nl/api/");
+// APCu PNUT CACHE
+define("PNUTLIMIT", 10);        // minimum seconds between API fetches
+define("PNUTREFRESH", 170);     // normal seconds between API fetches
+define("PNUTBACKOFF", 15*60);   // seconds if API read error
+
+$pnutrooms = [
+    "B" => "XRF299B",
+    "G" => "TGF969",
+    "K" => "XRF299K",
+    "R" => "XRF299R",
+    "S" => "XRF299S",
+];
+
 
 
 /*
