@@ -10,10 +10,16 @@ Luc LX1IQ
 <a href="https://github.com/LX3JL/xlxd">XLX Multiprotocol Reflector Server</a>
 
 Phil ZL2RO
-Initiative and hosting
+Initiative
 
 Ivan ZL1OTF 
-Hardware setup and  support
+Donation and Support
+
+Simon ZL1SWW
+Support
+
+Dennis ZL1UET
+Donation and Support
 
 Matt ZL1YHF
 Dashboard design and Linux support
@@ -22,16 +28,16 @@ Colin ZL2ARL
 Donation
 
 Dev 9Y4DG
-<a href="http://www.pa7lim.nl/peanut/">Peanut</a> setup and  Module R support 
+Support 
 
 Dr John ZL2JPM
 Donations from the <a href="https://www.ifroar.org/">ROAR</a> Community
 
 Jim 7J1AJH (ZL2IA)
-Web-based Support with Linux
+Web-based Support with Linux and Design Support
 
 Michael K5MRE 
-Hosting TGIF 31665 
+
 
 Andrew ZL1TAP
 Donation
