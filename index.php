@@ -257,10 +257,17 @@ if (isset($_POST['motd'])) {
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
+        <div class="row">
+            <div class="col-sm">
         <span class="text-muted">Hosted by DVNZ Group
         <a href="mailto:<?php echo $PageOptions['ContactEmail']; ?>"><?php echo $PageOptions['ContactEmail']; ?></a>
 <br/><?php echo $Reflector->GetReflectorName(); ?>&nbsp;v<?php echo $Reflector->GetVersion(); ?>&nbsp;&nbsp;&nbsp;Service Uptime: <span id="suptime"><?php echo FormatSeconds($Reflector->GetServiceUptime()); ?></span>
         </span>
+            </div>
+            <div class=col-sm">
+                <a href="https://t.me/joinchat/TC9kXb6o_JG-1_I4" target="_blank"><span class="material-icons">telegram</span>&nbsp;Join DVNZ on Telegram</a>
+            </div>
+        </div>
     </div>
 </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
