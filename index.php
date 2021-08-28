@@ -100,7 +100,7 @@ if (isset($_POST['motd'])) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/dashboard.css?v=2" rel="stylesheet">
+    <link href="css/dashboard.css?v=3" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

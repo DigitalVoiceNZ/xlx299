@@ -4,7 +4,7 @@
 
 body::after {
   content: "";
-  background: url(../img/nzflagmap.png);
+  background: url(../img/silver-fern.svg);
   background-position: center top;
   opacity: 0.30;
   background-size: contain;
