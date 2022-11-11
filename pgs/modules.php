@@ -8,7 +8,7 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
     <table class="table table-striped">
       <tr>
         <th style="white-space: nowrap; font-size: smaller">Mod</th>
-        <th style="white-space: nowrap; font-size: smaller">Brandmeister<br>Talkgroup</th>
+        <th style="white-space: nowrap; font-size: smaller">Talkgroup</th>
         <th style="white-space: nowrap; font-size: smaller">Peanut<br>Room</th>
         <th style="white-space: nowrap; font-size: smaller">Details</th>
       </tr>
@@ -40,6 +40,8 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
         $modname = str_replace('*', '&nbsp;<img src="/img/peanut-32x32.png" height=20 width=20 alt="Peanut enabled">', $data[0]);
 	if (stripos($data[1], "tgif") === 0) {
 		$tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://prime.tgif.network/tgprofile.php?id=$1">$0</a>', $data[1]);
+    } elseif (stripos($data[1], "f") === 0) {
+        $tg = '<a href="https://FreeDMR.DVNZ.nz/">' . $data[1] . '</a>';
 	} else {
 		$tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://brandmeister.network/?page=lh&DestinationID=$1">$0</a>', $data[1]);
 	}

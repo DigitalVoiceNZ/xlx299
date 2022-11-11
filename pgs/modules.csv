@@ -1,19 +1,26 @@
 # FOUR columns (additional commas do not split fields)
-# Module, Brandmeister, Peanut Room, description
-A*,     , XRF899, UK <a href="http://xlx899.mywire.org">XLX899</a>
-B*, 530 , XLX299B,NZ National, <a href="http://124.197.62.162:84">XLX530</a>
+# Module, Talkgroup, Peanut Room, description
+A*,             , XRF899 , UK <a href="http://xlx899.mywire.org">XLX899</a> World-W
+B*, BM530       , XLX299B, NZ National, <a href="http://xlx530.hopto.org/">XLX530</a>
+C*,             , XLX315 , USA
+D,              ,        , DV DRats and SSTV
+E,  FreeDMR530  ,        , ZL National FreeDMR 530
+F,  FreeDMR5302 ,        , ZL2 Regional FreeDMR 5302
+G*, TGIF969     , TGF969 , Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>
+H,              ,        , <a href="https://anzel.radio/">ANZEL</a>, Australia &amp; New Zealand EchoLink Network
+I,  FreeDMR50510,        , FreeDMR 50510
+J,              ,        , D-Star only
+K*, BM53029     ,        , Kiwi chit-chat, General rag chews
 
-D,       ,        , DV Dongles
+N,              ,         ,DV-Tech Talk
+O,              ,         ,ZL-TRBO
 
-G*, TGIF969, TGF969, Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>
-
-K*, 53029,         , Kiwi chit-chat, General rag chews
-
-N,       ,         , DV-Tech Talk
-
-R*, 53080, DCS299R, ROAR YSFRefelector
-
-S*, 53085, DCS299S,  Active-Elements
-U,       ,         , UK D-Star
-
-X,       ,  DCS299X        , FreeSTAR Module X
+Q,              ,         ,CQ UK
+R*, BM53080     , DCS299R ,ROAR YSFRefelector
+S*, BM53085     , DCS299S, Active-Elements
+T,  FreeDMR953  ,        , Oceania FreeDMR 953
+U,              ,        ,  UK D-Star
+V,  FreeDMR505  ,        , VK Calling FreeDMR 505
+W,  FreeDMR5050 ,        , VK FreeDMR 5050
+X*,             , DCS299X, FreeSTAR Module X
+Z,              ,        , YCS530-B
