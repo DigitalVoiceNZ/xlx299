@@ -216,28 +216,34 @@ for ($i=0;$i<$Reflector->StationCount();$i++) {
    </div>
 </div>
 </div>
+<?php
+	echo <<<EOD
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
     <div class="container">
 	<p>&nbsp;</p>
     </div>
 </nav>
+<div style="margin: 0 2em">
 <div class="row">
    <div class="table-responsive">
       <table class="table table-sm table-striped-custom table-hover moduleusers">
-         <?php 
+EOD;
 
 $Modules = $Reflector->GetModules();
 sort($Modules, SORT_STRING);
 echo '<tr>';
 for ($i=0;$i<count($Modules);$i++) {
    
+   if ($Modules[$i] > 'N') break;
+
    if (isset($PageOptions['ModuleIcons'][$Modules[$i]]))
    {
       $desc = "";
       if (isset($PageOptions['ModuleNames'][$Modules[$i]]))
-        $desc = '('.$PageOptions['ModuleNames'][$Modules[$i]].')';
-    
-      echo '<th>'.$Modules[$i].'<br/>'.$desc.'<br/><img class="ModuleIcon" alt="icon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"></th>';
+        $desc = $PageOptions['ModuleNames'][$Modules[$i]];
+        $iconfile = $PageOptions['ModuleIcons'][$Modules[$i]];
+        $iconclass = (strpos($iconfile, '-130') !== false) ? 'ModuleIconW' : 'ModuleIcon';
+      echo '<th>'.$Modules[$i].'<br/>'.$desc.'<br/><img class="'.$iconclass.'" alt="icon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"></th>';
    }
    else if (isset($PageOptions['ModuleNames'][$Modules[$i]])) 
    {
@@ -260,6 +266,8 @@ $GlobalPositions = array();
 
 for ($i=0;$i<count($Modules);$i++) {
     
+   if ($Modules[$i] > 'N') break;
+
    $Users = $Reflector->GetNodesInModulesByID($Modules[$i]);
    echo '<td><table class="table table-hover">';
 
@@ -267,6 +275,7 @@ for ($i=0;$i<count($Modules);$i++) {
    
    for ($j=0;$j<count($Users);$j++) {
        [$Displayname, $protocol] = $Reflector->GetCallsignSuffixAndProtocolByID($Users[$j]);
+       $protocol = str_replace('DMRMmdvm', 'MMDVM', $protocol);
       echo '
             <tr>
                <td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank">'.$Displayname.'</a> <sup>'.$protocol.'</sup> </td>
@@ -297,9 +306,104 @@ for ($i=0;$i<count($Modules);$i++) {
    echo '</table></td>';
 }
 
-echo '</tr>';
-
-?>
+echo <<<EOD
+        </tr>
       </table>
    </div>
 </div>
+</div>
+EOD;
+	echo <<<EOD
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+    <div class="container">
+	<p>&nbsp;</p>
+    </div>
+</nav>
+<div style="margin: 0 2em">
+<div class="row">
+   <div class="table-responsive">
+      <table class="table table-sm table-striped-custom table-hover moduleusers">
+EOD;
+
+$Modules = $Reflector->GetModules();
+sort($Modules, SORT_STRING);
+echo '<tr>';
+for ($i=0;$i<count($Modules);$i++) {
+   
+   if ($Modules[$i] <= 'N') continue;
+   if (isset($PageOptions['ModuleIcons'][$Modules[$i]]))
+   {
+      $desc = "";
+      if (isset($PageOptions['ModuleNames'][$Modules[$i]]))
+        $desc = $PageOptions['ModuleNames'][$Modules[$i]];
+        $iconfile = $PageOptions['ModuleIcons'][$Modules[$i]];
+        $iconclass = (strpos($iconfile, '-130') !== false) ? 'ModuleIconW' : 'ModuleIcon';
+      echo '<th>'.$Modules[$i].'<br/>'.$desc.'<br/><img class="'.$iconclass.'" alt="icon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"></th>';
+   }
+   else if (isset($PageOptions['ModuleNames'][$Modules[$i]])) 
+   {
+      echo '<th>'.$Modules[$i].'<br>'.$PageOptions['ModuleNames'][$Modules[$i]].'</th>';
+       //if (trim($PageOptions['ModuleNames'][$Modules[$i]]) != "") {
+       //    echo '<br />';
+       //}
+      //echo .'</th>';
+   }
+   else {
+   echo '
+  
+      <th>'.$Modules[$i].'</th>';
+   }
+}
+
+echo '</tr><tr>';
+
+$GlobalPositions = array();
+
+for ($i=0;$i<count($Modules);$i++) {
+    
+   if ($Modules[$i] <= 'N') continue;
+   $Users = $Reflector->GetNodesInModulesByID($Modules[$i]);
+   echo '<td><table class="table table-hover">';
+
+   $UserCheckedArray = array();
+   
+   for ($j=0;$j<count($Users);$j++) {
+       [$Displayname, $protocol] = $Reflector->GetCallsignSuffixAndProtocolByID($Users[$j]);
+       $protocol = str_replace('DMRMmdvm', 'MMDVM', $protocol);
+      echo '
+            <tr>
+               <td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank">'.$Displayname.'</a> <sup>'.$protocol.'</sup> </td>
+            </tr>';
+      $UserCheckedArray[] = $Users[$j];
+   }
+   // add Peanut users on this module
+   $thismodule = array_key_exists($Modules[$i], $pnutrooms) ? $pnutrooms[$Modules[$i]] : '---';
+   foreach ($pnut as $pu) {
+       if ($pu->room == $thismodule) {
+           $call = $Displayname = $pu->Call;
+           switch (strtolower($pu->device)) {
+              case 'android':
+                  $Displayname .= '&nbsp;<i class="material-icons">android</i>';
+                  break;
+              case 'windows':
+                  $Displayname .= '&nbsp;<i class="material-icons small">laptop_windows</i>';
+                  break;
+	      default:
+                  $Displayname .= '-P';
+          }
+          echo '
+                <tr>
+                   <td><a href="https://aprs.fi/'.$call.'" class="pl" target="_blank">'.$Displayname.'</a> </td>
+                </tr>';
+      }
+   }
+   echo '</table></td>';
+}
+
+echo <<<EOD
+        </tr>
+      </table>
+   </div>
+</div>
+</div>
+EOD;
