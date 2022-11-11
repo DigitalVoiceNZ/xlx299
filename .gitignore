@@ -13,4 +13,7 @@ ysf
 apc.php
 # ACME
 .well-known
-
+# confirmation string
+5d*.txt
+# message of the day
+motd.txt

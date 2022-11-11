@@ -88,6 +88,7 @@ Eastern Kiribati (Line Island);KI;T32
 Ecuador;EC;HC-HD
 Egypt;EG;SU
 El Salvador;SV;YS-HU
+FreeDMR;FD;FREE
 England;GB;2E-M0-M1-M2-M3-M4-M5-M6-M7-M8-M9-MB-MM-G0-G1-G2-G3-G4-G5-G6-G7-G8-G9-GB-GX
 Equatorial Guinea;GQ;3C
 Eritrea;ER;E3
@@ -109,7 +110,7 @@ Gambia;GM;C5
 Georgia;GE;4L
 Germany;DE;DA-DB-DC-DD-DE-DF-DG-DH-DI-DJ-DK-DL-DM-DN-DO-DP-DQ-DR
 Ghana;GH;9G
-Gibraltar;GI;ZB2
+Gibraltar;GI;ZB-ZG
 Greece;GR;SV-SW-SX-SY-SZ-J4
 Greenland;GL;OX
 Grenada;GD;J3
@@ -148,7 +149,7 @@ Kazakhstan;KZ;UN-UO-UP-UQ
 Kenya;KE;5Y-5Z
 Kermadec Islands;NZ;ZL8
 Korea Democratic People's Republic of;KP;P5
-Korea Republic of;KR;HL-6K-6L-6M-6N
+Korea Republic of;KR;DS-HL-6K-6L-6M-6N
 Kure Island;US;KH7K
 Kuwait;KW;9K
 Kyrgyzstan;KG;EX
