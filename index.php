@@ -206,7 +206,7 @@ if (isset($_POST['motd'])) {
             if (!$cookieset
                 && ($motdts !== FALSE)
                 && (!isset($_COOKIE[MOTDCOOKIE]) || ($_COOKIE[MOTDCOOKIE] < $motdts))) {
-                if (($motd = file_get_contents(MOTDFILE)) !== FALSE) {
+                if (($motd = file_get_contents(MOTDFILE)) !== FALSE && strlen(trim($motd)) > 0) {
                     echo '
                 <div id="motd" class="col-md-9 alert alert-info alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -264,8 +264,8 @@ if (isset($_POST['motd'])) {
 <br/><?php echo $Reflector->GetReflectorName(); ?>&nbsp;v<?php echo $Reflector->GetVersion(); ?>&nbsp;&nbsp;&nbsp;Service Uptime: <span id="suptime"><?php echo FormatSeconds($Reflector->GetServiceUptime()); ?></span>
         </span>
             </div>
-            <div class=col-sm">
-                <a href="https://t.me/joinchat/TC9kXb6o_JG-1_I4" target="_blank"><span class="material-icons">telegram</span>&nbsp;Join DVNZ on Telegram</a>
+            <div class="col-sm">
+                <a href="https://t.me/+H8KgiQPdncUyMDgz" target="_blank"><span class="material-icons">telegram</span>&nbsp;Join DVNZ on Telegram</a>
             </div>
         </div>
     </div>
