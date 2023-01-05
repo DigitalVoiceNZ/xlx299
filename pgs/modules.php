@@ -7,8 +7,9 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
     <h2>Modules</h2>
     <table class="table table-striped">
       <tr>
-        <th style="white-space: nowrap; font-size: smaller">Mod</th>
+        <th style="white-space: nowrap; font-size: smaller">Module</th>
         <th style="white-space: nowrap; font-size: smaller">Talkgroup</th>
+        <th style="white-space: nowrap; font-size: smaller">M17</th>
         <th style="white-space: nowrap; font-size: smaller">Peanut<br>Room</th>
         <th style="white-space: nowrap; font-size: smaller">Details</th>
       </tr>
@@ -29,9 +30,12 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
             $data[3] = '';
             break;
         case 4:
+            $data[4] = '';
+            break;
+        case 5:
             break;
         default:
-            $data[3] = implode(', ', array_slice($data, 3));
+            $data[4] = implode(', ', array_slice($data, 4));
             break;
         }
         if ((substr($data[0], 0, 1) == '#') || (substr($data[0], 0, 1) == ';')) {
@@ -46,10 +50,11 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
 		$tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://brandmeister.network/?page=lh&DestinationID=$1">$0</a>', $data[1]);
 	}
         echo "<tr>";
-        echo '  <th style="white-space: nowrap;">' . $modname . "</th>";
+        echo '  <th style="white-space: nowrap;">XLX299-' . $modname . "</th>";
         echo "  <td>" . $tg . "</td>";
         echo "  <td>" . $data[2] . "</td>";
         echo "  <td>" . $data[3] . "</td>";
+        echo "  <td>" . $data[4] . "</td>";
         echo "</tr>";
     }
     fclose($handle);
