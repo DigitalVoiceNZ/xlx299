@@ -1,22 +1,22 @@
 # FOUR columns (additional commas do not split fields)
 # Module, Talkgroup, Peanut Room, description
 A*,             , XRF899 , UK <a href="http://xlx899.mywire.org">XLX899</a> World-W
-B*, BM530       , XLX299B, NZ National, <a href="http://xlx530.hopto.org/">XLX530</a>
+B*, FreeDMR530  , XLX299B, NZ National, <a href="https://freedmr.dvnz.nz/">FreeDMR</a>
 C*,             , XLX315 , USA
-D,              ,        , DV DRats and SSTV
+D,  BM530       , XLX530 , DV DRats and SSTV
 E,  FreeDMR530  ,        , ZL National FreeDMR 530
 F,  FreeDMR5302 ,        , ZL2 Regional FreeDMR 5302
 G*, TGIF969     , TGF969 , Caribbean, <a href="http://wiki.tgif.network/index.php?title=DMR_Carribbean">DMR Carribbean</a>
 H,              ,        , <a href="https://anzel.radio/">ANZEL</a>, Australia &amp; New Zealand EchoLink Network
-I,  FreeDMR50510,        , FreeDMR 50510
+I,              ,        , 
 J,              ,        , D-Star only
-K*, BM53029     ,        , Kiwi chit-chat, General rag chews
+K*, ReeDMR53029 ,        , Kiwi chit-chat, General rag chews
 
 N,              ,         ,DV-Tech Talk
 O,              ,         ,ZL-TRBO
 
 Q,              ,         ,CQ UK
-R*, BM53080     , DCS299R ,ROAR YSFRefelector
+R*, FreeDMR5308 , DCS299R ,ROAR YSFRefelector
 S*, BM53085     , DCS299S, Active-Elements
 T,  FreeDMR953  ,        , Oceania FreeDMR 953
 U,              ,        ,  UK D-Star
