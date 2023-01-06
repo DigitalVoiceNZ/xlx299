@@ -143,8 +143,7 @@ if (isset($_POST['motd'])) {
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="img/xlx299logot.svg" alt="XLX299 Multiprotocol Gateway" class="d-inline-block align-top me-5" height="54" width="310"></a>
-	<button type="button" class="navbar-toggler" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
+	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-expanded="false" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
