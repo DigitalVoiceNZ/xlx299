@@ -117,19 +117,20 @@ if (isset($_POST['motd'])) {
           echo '";';
         } else {
           echo '
-         document.location.reload();';
+         $( "#mainbox" ).load( document.location.href + " #mainbox");
+         ';
         }
         echo '
       }';
 
         if (!isset($_GET['show']) || (($_GET['show'] != 'liveircddb') && ($_GET['show'] != 'reflectors') && ($_GET['show'] != 'interlinks'))) {
             echo '
-      PageRefresh = setTimeout(ReloadPage, ' . $PageOptions['PageRefreshDelay'] . ');';
+      PageRefresh = setInterval(ReloadPage, ' . $PageOptions['PageRefreshDelay'] . ');';
         }
         echo '
 
       function SuspendPageRefresh() {
-        clearTimeout(PageRefresh);
+        cancelInterval(PageRefresh);
       }
    </script>';
     }
@@ -264,7 +265,7 @@ if (isset($_POST['motd'])) {
         </div>
     </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 <script>
