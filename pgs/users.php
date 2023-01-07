@@ -179,7 +179,7 @@ if (isset($_GET['do'])) {
         <tr class="table-center">
          <td>';
           if ($i == 0 && $Reflector->Stations[$i]->GetLastHeardTime() > (time() - 60)) {
-              echo '<img src="./img/tx.gif" style="margin-top:3px;" height="20"/>';
+              echo '<img src="./img/tx.gif" alt="transmitting" style="margin-top:3px;" height="20">';
           } else {
               echo($i + 1);
           }
@@ -240,7 +240,7 @@ for ($i=0;$i<count($Modules);$i++) {
         $desc = $PageOptions['ModuleNames'][$Modules[$i]];
         $iconfile = $PageOptions['ModuleIcons'][$Modules[$i]];
         $iconclass = (strpos($iconfile, '-130') !== false) ? 'ModuleIconW' : 'ModuleIcon';
-      echo '<b>'.$Modules[$i].'</b><br/><img class="'.$iconclass.'" alt="icon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"><br/><b>'.$desc.'</b>';
+      echo '<b>'.$Modules[$i].'</b><br><img class="'.$iconclass.'" alt="icon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"><br><b>'.$desc.'</b>';
    }
    else if (isset($PageOptions['ModuleNames'][$Modules[$i]])) 
    {
@@ -289,7 +289,6 @@ for ($i=0;$i<count($Modules);$i++) {
 }
 
 echo <<<EOD
-    </div>
   </div>
 </div>
 EOD;

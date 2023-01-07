@@ -15,7 +15,7 @@ body::after {
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1;   
+  z-index: -1;
 }
 
 img.logo {
@@ -28,15 +28,15 @@ img.logo {
 
 a.tip {
   text-decoration: none;
-}  
+}
 
 a.tip:hover {
   position             : relative;
-}  
+}
 
 a.tip span {
   display              : none
-}  
+}
 
 a.tip:hover span {
   background: #000000;
@@ -51,10 +51,10 @@ a.tip:hover span {
   padding: 6px 6px 6px 6px;
   margin: 10px;
   display: block;
-  z-index: 50; 
+  z-index: 50;
   position: absolute;
   top: 10px;
-}  
+}
 
 .moduleusers td {
   white-space: nowrap;
@@ -116,5 +116,10 @@ a.tip:hover span {
 nav.bg-dark {
   background-color: #000!important;
   background-image: linear-gradient(to right, #002189, #000);
+}
+
+@media (max-width: 481px) {
+    .navbar-brand { margin-right: 0px; }
+    .navbar-brand>ig {width: 250px; height: 44px;}
 }
 

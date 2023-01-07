@@ -86,11 +86,11 @@ if (isset($_POST['motd'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="<?php echo $PageOptions['MetaDescription']; ?>"/>
-    <meta name="keywords" content="<?php echo $PageOptions['MetaKeywords']; ?>"/>
-    <meta name="author" content="<?php echo $PageOptions['MetaAuthor']; ?>"/>
-    <meta name="revisit" content="<?php echo $PageOptions['MetaRevisit']; ?>"/>
-    <meta name="robots" content="<?php echo $PageOptions['MetaAuthor']; ?>"/>
+    <meta name="description" content="<?php echo $PageOptions['MetaDescription']; ?>">
+    <meta name="keywords" content="<?php echo $PageOptions['MetaKeywords']; ?>">
+    <meta name="author" content="<?php echo $PageOptions['MetaAuthor']; ?>">
+    <meta name="revisit" content="<?php echo $PageOptions['MetaRevisit']; ?>">
+    <meta name="robots" content="<?php echo $PageOptions['MetaAuthor']; ?>">
 
     <title><?php echo $Reflector->GetReflectorName(); ?> Reflector Dashboard</title>
     <link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon">
@@ -100,7 +100,7 @@ if (isset($_POST['motd'])) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/dashboard.css?v=3" rel="stylesheet">
+    <link href="css/dashboard.css?v=4" rel="stylesheet">
     <?php
     if ($PageOptions['PageRefreshActive']) {
         echo '
@@ -256,7 +256,7 @@ if (isset($_POST['motd'])) {
             <div class="col-sm">
         <span class="text-muted">Hosted by DVNZ Group
         <a href="mailto:<?php echo $PageOptions['ContactEmail']; ?>"><?php echo $PageOptions['ContactEmail']; ?></a>
-<br/><?php echo $Reflector->GetReflectorName(); ?>&nbsp;v<?php echo $Reflector->GetVersion(); ?>&nbsp;&nbsp;&nbsp;Service Uptime: <span id="suptime"><?php echo FormatSeconds($Reflector->GetServiceUptime()); ?></span>
+<br><?php echo $Reflector->GetReflectorName(); ?>&nbsp;v<?php echo $Reflector->GetVersion(); ?>&nbsp;&nbsp;&nbsp;Service Uptime: <span id="suptime"><?php echo FormatSeconds($Reflector->GetServiceUptime()); ?></span>
         </span>
             </div>
             <div class="col-sm">
