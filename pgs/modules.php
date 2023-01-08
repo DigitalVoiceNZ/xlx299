@@ -7,11 +7,12 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
     <h2>Modules</h2>
     <table class="table table-striped">
       <tr>
-        <th style="white-space: nowrap; font-size: smaller">Module</th>
-        <th style="white-space: nowrap; font-size: smaller">Talkgroup</th>
-        <th style="white-space: nowrap; font-size: smaller">M17</th>
-        <th style="white-space: nowrap; font-size: smaller">Peanut<br>Room</th>
-        <th style="white-space: nowrap; font-size: smaller">Details</th>
+        <th style="white-space: nowrap;">Module<br><span style="font-size:smaller">D-Star, DMR, YSF</span></th>
+        <th style="white-space: nowrap;">DMR</th>
+        <th style="white-space: nowrap;">M17</th>
+        <th style="white-space: nowrap;">Peanut<br>Room</th>
+        <th style="white-space: nowrap;">Links</th>
+        <th style="white-space: nowrap;">Details</th>
       </tr>
 <?php
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -33,9 +34,12 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
             $data[4] = '';
             break;
         case 5:
+            $data[5] = '';
+            break;
+        case 6:
             break;
         default:
-            $data[4] = implode(', ', array_slice($data, 4));
+            $data[5] = implode(', ', array_slice($data, 5));
             break;
         }
         if ((substr($data[0], 0, 1) == '#') || (substr($data[0], 0, 1) == ';')) {
@@ -46,6 +50,8 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
 		$tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://prime.tgif.network/tgprofile.php?id=$1">$0</a>', $data[1]);
     } elseif (stripos($data[1], "f") === 0) {
         $tg = '<a href="https://FreeDMR.DVNZ.nz/">' . $data[1] . '</a>';
+    } elseif (stripos($data[1], "z") === 0) {
+        $tg = '<a href="http://trbo.arec.info:42420/CallWatch">' . $data[1] . '</a>';
 	} else {
 		$tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://brandmeister.network/?page=lh&DestinationID=$1">$0</a>', $data[1]);
 	}
@@ -55,6 +61,7 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
         echo "  <td>" . $data[2] . "</td>";
         echo "  <td>" . $data[3] . "</td>";
         echo "  <td>" . $data[4] . "</td>";
+        echo "  <td>" . $data[5] . "</td>";
         echo "</tr>";
     }
     fclose($handle);
