@@ -120,6 +120,6 @@ nav.bg-dark {
 
 @media (max-width: 481px) {
     .navbar-brand { margin-right: 0px; }
-    .navbar-brand>ig {width: 250px; height: 44px;}
+    .navbar-brand>img {width: 250px; height: 44px;}
 }
 
