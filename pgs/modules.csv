@@ -10,15 +10,15 @@ G*, TGIF969     ,           , TGF969 ,         , <a href="http://wiki.tgif.netwo
 H,              ,           ,        ,         , <a href="https://anzel.radio/">ANZEL</a><br>Australia &amp; New Zealand EchoLink
 I,  FD50510     ,           ,        ,         , FM RepeaterLink VK/ZL
 J,              ,           ,        ,         , D-Star only
-K*, FreeDMR53029, M17-NZD-K ,        , XLX626-K, Kiwi chit-chat, General rag chews
+K*, FreeDMR53029, M17-NZD-K , XRF299K, XLX626-K, Kiwi chit-chat, General rag chews
 N,              ,           ,        ,         , DV-Tech Talk
 O,  ZL-TRBO     ,           ,        ,         , ZL-TRBO
 Q,              ,           ,        ,         , CQ UK
-R*, FreeDMR5308 ,           , DCS299R,         , ROAR YSFRefelector
-S*, BM53085     ,           , DCS299S,         , Active-Elements
+R*, FreeDMR5308 ,           , XRF299R,         , ROAR YSFRefelector
+S*, BM53085     ,           , XRF299S,         , Active-Elements
 T,  FreeDMR953  ,           ,        ,         , Oceania
 U,              ,           ,        , XLX994-U, UK D-Star
 V,  FreeDMR505  ,           ,        ,         , VK Calling FreeDMR 505
 W,  FreeDMR5050 ,           ,        ,         , VK FreeDMR 5050
-X*,             ,           , DCS299X,         , FreeSTAR Module X
+X*,             ,           , XRF299X,         , FreeSTAR Module X
 Z,              ,           ,        , YCS530-88, YCS530 DG88
