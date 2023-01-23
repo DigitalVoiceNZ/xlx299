@@ -113,6 +113,18 @@ a.tip:hover span {
   font-size: 24px;
 }
 
+ul.act-calls {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+ul.act-calls li {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
 nav.bg-dark {
   background-color: #000!important;
   background-image: linear-gradient(to right, #002189, #000);
