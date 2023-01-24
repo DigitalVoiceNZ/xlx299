@@ -3,15 +3,23 @@ clearTimeout(PageRefresh);
 const pb = new PocketBase("https://api.xlx299.nz");
 const coll = "activity";
 const topic = "*";
-const staleSecs = 600;
+const staleSecs = 900;
 var colors = {};
 
 function removeStale() {
   let old = Date.now() - staleSecs * 1000;
+  let removed = false;
   $('li').each(function (i) {
     let ts = $(this).attr('data-ts');
     if (ts && ts < old) {
+      $ul = $(this).parent();
       $(this).remove();
+      // failsafe: if removed last li, nobody is transmitting
+      if ($ul.find('li').length == 0) {
+        let mid = $ul.parents('tr').attr('id');
+        console.log(`failsafe: ${mid}`);
+        $('#' + mid).css('background-color', colors[mid.slice(-1)]);
+      }
     }
   });
 }
