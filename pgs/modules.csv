@@ -1,8 +1,8 @@
 # FIVE columns (additional commas do not split fields)
 # Module, Talkgroup, M17    ,Peanut Room, XLX, description
-A*,             ,           , XRF899 , XLX899-A<br>XLX600-A, UK <a href="http://xlx899.mywire.org">XLX899</a> Worldwide
-B*, FreeDMR530  , M17-NZD-B , XLX299B,         , NZ National <a href="https://freedmr.dvnz.nz/">FreeDMR</a>
-C*,             ,           , XLX315 , XLX315-C, USA
+A,              ,           ,        , <a href="http://xlx600.dvscotland.net/">XLX600-A</a>, Worldwide
+B*, FreeDMR530  , M17-NZD-B , XRF299B,         , NZ National <a href="https://freedmr.dvnz.nz/">FreeDMR</a>
+C*,             ,           , XLX315 , <a href="http://arcxlx1.duckdns.org:81/">XLX315-C</a>, USA
 D,  BM530       ,           , XLX530 ,         , BrandMeister ZL National
 E,              , M17-NZD-E ,        ,         , M17 Bridge
 F,  FreeDMR5302 , M17-NZD-F ,        ,         , ZL2 Regional FreeDMR 5302
@@ -10,15 +10,15 @@ G*, TGIF969     ,           , TGF969 ,         , <a href="http://wiki.tgif.netwo
 H,              ,           ,        ,         , <a href="https://anzel.radio/">ANZEL</a><br>Australia &amp; New Zealand EchoLink
 I,  FD50510     ,           ,        ,         , FM RepeaterLink VK/ZL
 J,              ,           ,        ,         , D-Star only
-K*, FreeDMR53029, M17-NZD-K , XRF299K, XLX626-K, Kiwi chit-chat, General rag chews
+K*, FreeDMR53029, M17-NZD-K , XRF299K, <a href="https://xlx626.onjapan.net/">XLX626-K</a>, Kiwi chit-chat, General rag chews
 N,              ,           ,        ,         , DV-Tech Talk
 O,  ZL-TRBO     ,           ,        ,         , ZL-TRBO
 Q,              ,           ,        ,         , CQ UK
 R*, FreeDMR5308 ,           , XRF299R,         , ROAR YSFRefelector
 S*, BM53085     ,           , XRF299S,         , Active-Elements
 T,  FreeDMR953  ,           ,        ,         , Oceania
-U,              ,           ,        , XLX994-U, UK D-Star
+U,              ,           ,        , <a href="https://xlx994.onlineradioclub.org/">XLX994-U</a>, UK D-Star
 V,  FreeDMR505  ,           ,        ,         , VK Calling FreeDMR 505
 W,  FreeDMR5050 ,           ,        ,         , VK FreeDMR 5050
-X*,             ,           , XRF299X,         , FreeSTAR Module X
-Z,              ,           ,        , YCS530-88, YCS530 DG88
+X,              ,           ,        ,         , FreeSTAR Module X
+Z,              ,           ,        , <a href="http://ycs530.xreflector.net/ycs/">YCS530-88</a>, YCS530 DG88
