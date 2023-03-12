@@ -173,7 +173,7 @@ if (isset($_POST['motd'])) {
                             href="./index.php?show=modules">Modules</a></li>
 		<li class="nav-item">
                     <a class="nav-link<?php echo ($_GET['show'] == "info") ? ' active' : ''; ?>"
-                            href="./index.php?show=info">Information</a></li>
+                            href="./index.php?show=info">Info</a></li>
 		<li class="nav-item">
                     <a class="nav-link<?php echo ($_GET['show'] == "thanks") ? ' active' : ''; ?>"
                             href="./index.php?show=thanks">Thanks</a></li>
