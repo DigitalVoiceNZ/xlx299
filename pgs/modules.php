@@ -1,3 +1,8 @@
+<?php
+
+require_once("reflectorlist.php");
+$Reflectors = GetReflectorList();
+?>
 <div class="container">
 <div class="row">
   <div class="col">
@@ -57,12 +62,24 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
             $tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://brandmeister.network/?page=lh&DestinationID=$1">$0</a>', $data[1]);
         }
         $m17 = (stripos($data[2], "m") === 0) ? '<a href="https://m17.dvnz.nz/">' . $data[2] . '</a>' : '';
+        $links = explode('<br>', $data[4]);
+        for ($i = 0; $i < count($links); $i++) {
+            $l = trim($links[$i]);
+            if (substr($l, 0, 3) == 'XLX') {
+                $xlx = substr($l, 0, 6);
+                $links[$i] = print_r($reflectors[$xlx], true);
+                if (array_key_exists($xlx, $Reflectors)) {
+                    $links[$i] = '<a href="' . $Reflectors[$xlx]['dashboardurl'] . '">' . $l . '</a>';
+                }
+            }
+        }
+        $links = implode('<br>', $links);
         echo "<tr id='mod-${modname[0]}'>";
         echo '  <th style="white-space: nowrap;">XLX299-' . $modname . "</th>";
         echo "  <td>" . $tg . "</td>";
         echo "  <td>" . $m17 . "</td>";
         echo "  <td>" . $data[3] . "</td>";
-        echo "  <td>" . $data[4] . "</td>";
+        echo "  <td>" . $links . "</td>";
         echo "  <td>" . $data[5] . "</td>";
         echo "  <td><ul class='act-calls' id='act-${modname[0]}'></ul></td>";
         echo "</tr>";
