@@ -67,7 +67,6 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
             $l = trim($links[$i]);
             if (substr($l, 0, 3) == 'XLX') {
                 $xlx = substr($l, 0, 6);
-                $links[$i] = print_r($reflectors[$xlx], true);
                 if (array_key_exists($xlx, $Reflectors)) {
                     $links[$i] = '<a href="' . $Reflectors[$xlx]['dashboardurl'] . '">' . $l . '</a>';
                 }
