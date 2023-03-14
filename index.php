@@ -138,6 +138,7 @@ if (isset($_POST['motd'])) {
     ?>
 </head>
 <body>
+<div class="d-flex flex-column min-vh-100">
 <?php if (file_exists("./tracking.php")) {
     include_once("tracking.php");
 } ?>
@@ -182,7 +183,7 @@ if (isset($_POST['motd'])) {
     </div>
 </nav>
 
-<div id="mainbox" class="container-fluid mainbox">
+<div id="mainbox" class="container-fluid mainbox flex-grow-1">
     <div class="row">
         <div class="col main">
 
@@ -265,6 +266,7 @@ if (isset($_POST['motd'])) {
         </div>
     </div>
 </footer>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
