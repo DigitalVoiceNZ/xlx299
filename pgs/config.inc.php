@@ -59,7 +59,7 @@ $PageOptions['ModuleNames']['T']                     = 'Oceania FD953';
 $PageOptions['ModuleNames']['U']                     = 'D-Star UK';
 $PageOptions['ModuleNames']['V']                     = 'VK Calling FD505';
 $PageOptions['ModuleNames']['W']                     = 'VK FD5050';
-$PageOptions['ModuleNames']['X']                     = 'FreeSTAR Module X';
+$PageOptions['ModuleNames']['X']                     = 'X-Vacant';
 $PageOptions['ModuleNames']['Y']                     = 'YOTA';
 $PageOptions['ModuleNames']['Z']                     = 'YCS530 DG88';
 
@@ -90,12 +90,12 @@ $PageOptions['ModuleIcons']['T']                     = './img/FreeDMRNZ-130.webp
 $PageOptions['ModuleIcons']['U']                     = './img/uk.png';
 $PageOptions['ModuleIcons']['V']                     = './img/FreeDMRNZ-130.webp';
 $PageOptions['ModuleIcons']['W']                     = './img/FreeDMRNZ-130.webp';
-$PageOptions['ModuleIcons']['X']                     = './img/FreeSTAR-130.webp';
+$PageOptions['ModuleIcons']['X']                     = './img/kiwi_radio.webp';
 $PageOptions['ModuleIcons']['Y']                     = './img/globe-65.webp';
 $PageOptions['ModuleIcons']['Z']                     = './img/kiwi_radio.webp';
 
 
-$PageOptions['MetaDescription']                      = 'XLX is a D-Star Reflector System for Ham Radio Operators.';  // Meta Tag Values, usefull for Search Engine
+$PageOptions['MetaDescription']                      = 'XLX299 is a NZ-based Multimode Reflector System for Ham Radio Operators.';  // Meta Tag Values, usefull for Search Engine
 $PageOptions['MetaKeywords']                         = 'Ham Radio, D-Star, XReflector, XLX, XRF, DCS, REF, ';        // Meta Tag Values, usefull forSearch Engine
 $PageOptions['MetaAuthor']                           = 'LX1IQ';                                                      // Meta Tag Values, usefull for Search Engine
 $PageOptions['MetaRevisit']                          = 'After 30 Days';                                              // Meta Tag Values, usefull for Search Engine
@@ -136,6 +136,7 @@ $pnutrooms = [
     "K" => "XRF299K",
     "R" => "XRF299R",
     "S" => "XRF299S",
+    "V" => "XRF299V",
 ];
 
 
