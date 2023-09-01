@@ -5,7 +5,7 @@
 # anything of the form XLX??? if a dashboard URL is available
 # in the reflector list
 A,              ,           ,        , XLX060-A<br>XLX076-A<br>XLX165-A<br>XLX246-A<br>XLX268-A<br>XLX508-A<br>XLX511-A<br>XLX519-A<br>XLX600-A<br>XLX699-A<br>XLX842-A<br>XLX861-A<br>XLX875-A, XLX Worldwide
-B*, FreeDMR530  , M17-NZD-B , XRF299B, Allstar<br>511781<br><a href="http://ycs530.xreflector.net/ycs/">YCS530-88</a>, ZL National <a href="https://freedmr.dvnz.nz/">FreeDMR</a> 530
+B*, FreeDMR530  , M17-NZD-B , XRF299B, Allstar<br>511781<br><a href="http://ycs530.xreflector.net/ycs/">YCS530-53</a>, ZL National <a href="https://freedmr.dvnz.nz/">FreeDMR</a> 530
 C*,             ,           , XLX315 , XLX315-C, USA
 D,  BM530       ,           , XLX530 ,         , ZL National BrandMeister
 E,              , M17-NZD-E ,        ,         , M17 Bridge

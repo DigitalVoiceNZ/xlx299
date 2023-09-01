@@ -231,7 +231,7 @@ $Modules = $Reflector->GetModules();
 sort($Modules, SORT_STRING);
 for ($i=0;$i<count($Modules);$i++) {
    
-   echo '<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 py-5">';
+   echo '<div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 py-2">';
    echo '  <div style="height: 150px;">';
    if (isset($PageOptions['ModuleIcons'][$Modules[$i]]))
    {
@@ -240,7 +240,7 @@ for ($i=0;$i<count($Modules);$i++) {
         $desc = $PageOptions['ModuleNames'][$Modules[$i]];
         $iconfile = $PageOptions['ModuleIcons'][$Modules[$i]];
         $iconclass = (strpos($iconfile, '-130') !== false) ? 'ModuleIconW' : 'ModuleIcon';
-      echo '<b>'.$Modules[$i].'</b><br><img class="'.$iconclass.'" alt="icon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"><br><b>'.$desc.'</b>';
+      echo '<b>'.$PageOptions['ReflectorName'].'-'.$Modules[$i].'</b><br><img class="'.$iconclass.'" alt="icon" src="'.$PageOptions['ModuleIcons'][$Modules[$i]].'"><br><b>'.$desc.'</b>';
    }
    else if (isset($PageOptions['ModuleNames'][$Modules[$i]])) 
    {
@@ -251,7 +251,7 @@ for ($i=0;$i<count($Modules);$i++) {
    }
    echo '  </div>'; 
    $Users = $Reflector->GetNodesInModulesByID($Modules[$i]);
-   echo '<table class="table table-hover">';
+   echo '<table class="table table-sm table-hover">';
 
    $UserCheckedArray = array();
    

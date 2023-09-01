@@ -35,8 +35,9 @@ $PageOptions['PeerPage']['MasqueradeCharacter']      = '*';           			// Char
 
 $PageOptions['LastHeardPage']['LimitTo']             = 29;                      // Number of stations to show-1
 
+$PageOptions['ReflectorName']                        = 'XLX299';
 $PageOptions['ModuleNames'] = array();                                			// Module nomination
-$PageOptions['ModuleNames']['A']                     = 'World-W';
+$PageOptions['ModuleNames']['A']                     = 'XLX Worldwide';
 $PageOptions['ModuleNames']['B']                     = 'FreeDMR-530 Peanut M17-NZD-B';
 $PageOptions['ModuleNames']['C']                     = 'USA XLX315';
 $PageOptions['ModuleNames']['D']                     = 'BM-TG530';
@@ -61,7 +62,7 @@ $PageOptions['ModuleNames']['V']                     = 'VK Calling FD505';
 $PageOptions['ModuleNames']['W']                     = 'VK FD5050';
 $PageOptions['ModuleNames']['X']                     = 'X-Vacant';
 $PageOptions['ModuleNames']['Y']                     = 'YOTA';
-$PageOptions['ModuleNames']['Z']                     = 'YCS530 DG88';
+$PageOptions['ModuleNames']['Z']                     = 'YCS530 DG53';
 
 // Icons are expected to be 65x65 square
 // if the filename contains -130, the 130x65 rectangle
