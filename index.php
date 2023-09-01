@@ -156,10 +156,12 @@ if (isset($_POST['motd'])) {
                             href="./index.php">Users</a></li>
 		<li class="nav-item">
                     <a class="nav-link <?php echo ($_GET['show'] == "repeaters") ? ' active' : ''; ?>"
-                            href="./index.php?show=repeaters">Nodes (<?php echo $Reflector->NodeCount(); ?>)</a></li>
+                            href="./index.php?show=lastheard">Last Heard</a></li>
 		<li class="nav-item">
-                    <a class="nav-link <?php echo ($_GET['show'] == "peers") ? ' active' : ''; ?>" href="./index.php?show=peers">Peers
-                        (<?php echo $Reflector->PeerCount(); ?>)</a></li>
+                    <a class="nav-link <?php echo ($_GET['show'] == "repeaters") ? ' active' : ''; ?>"
+                            href="./index.php?show=repeaters">Nodes</a></li>
+		<li class="nav-item">
+                    <a class="nav-link <?php echo ($_GET['show'] == "peers") ? ' active' : ''; ?>" href="./index.php?show=peers">Peers</a></li>
 		<li class="nav-item">
                     <a class="nav-link <?php echo ($_GET['show'] == "reflectors") ? 'active' : ''; ?>"
                             href="./index.php?show=reflectors">Reflectorlist</a></li>
@@ -215,6 +217,9 @@ if (isset($_POST['motd'])) {
             switch ($_GET['show']) {
                 case 'users'      :
                     require_once("./pgs/users.php");
+                    break;
+                case 'lastheard'  :
+                    require_once("./pgs/lastheard.php");
                     break;
                 case 'repeaters'  :
                     require_once("./pgs/repeaters.php");
