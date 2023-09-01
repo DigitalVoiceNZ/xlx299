@@ -1,4 +1,6 @@
 <?php
+require_once("reflectorlist.php");
+$Reflectors = GetReflectorList();
 
 /**
  * array_filter predicate to filter PNUT users in our rooms
@@ -228,6 +230,12 @@ if (isset($_GET['do'])) {
 EOD;
 
 $Modules = $Reflector->GetModules();
+// make sure XLX connections are represented
+for ($j=0;$j<$Reflector->PeerCount();$j++) {
+   if (!in_array($Reflector->Peers[$j]->GetLinkedModule(), $Modules)) {
+      array_push($Modules, $Reflector->Peers[$j]->GetLinkedModule());
+   }
+}
 sort($Modules, SORT_STRING);
 for ($i=0;$i<count($Modules);$i++) {
    
@@ -252,6 +260,24 @@ for ($i=0;$i<count($Modules);$i++) {
    echo '  </div>'; 
    $Users = $Reflector->GetNodesInModulesByID($Modules[$i]);
    echo '<table class="table table-sm table-hover">';
+
+   for ($j=0;$j<$Reflector->PeerCount();$j++) {
+       if ($Reflector->Peers[$j]->GetLinkedModule() == $Modules[$i]) {
+           echo '<tr><td>';
+           $Name = $Reflector->Peers[$j]->GetCallsign();
+           if (isset($Reflectors[$Name])) {
+               echo '<a href="'.$Reflectors[$Name]['dashboardurl'].'" ';
+               echo 'data-toggle="tooltip" title="LH:  ';
+               echo date("Y-m-d H:i", $Reflector->Peers[$j]->GetLastHeardTime()).'&#013;';
+               echo 'Con: '.date("Y-m-d H:i", $Reflector->Peers[$j]->GetConnectTime()).'">';
+           }
+           echo $Name.'-'.$Modules[$i];
+           if (isset($Reflectors[$Name])) {
+               echo '</a>';
+           }
+           echo ' <sup>XLX</sup></td></tr>';
+       }
+   }
 
    $UserCheckedArray = array();
    
