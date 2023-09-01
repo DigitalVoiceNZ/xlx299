@@ -130,6 +130,23 @@ nav.bg-dark {
   background-image: linear-gradient(to right, #002189, #000);
 }
 
+.recentactivity {
+  min-height: 30ex;
+}
+.recentactivity .card {
+  width: 8rem;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+}
+.recentactivity li {
+  padding-left: 0.5em;
+}
+.card-title h5 {
+  margin-bottom: 0.2ex;
+}
+.shortname {
+  font-size: smaller;
+}
 @media (max-width: 481px) {
     .navbar-brand { margin-right: 0px; }
     .navbar-brand>img {width: 250px; height: 44px;}

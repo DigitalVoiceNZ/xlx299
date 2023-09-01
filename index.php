@@ -116,9 +116,15 @@ if (isset($_POST['motd'])) {
           }
           echo '";';
         } else {
+          if ($_GET['show'] == 'users') {
+            echo '
+         $( "#connections" ).load( document.location.href + " #connections");
+            ';
+          } else {
           echo '
          $( "#mainbox" ).load( document.location.href + " #mainbox");
          ';
+          }
         }
         echo '
       }';
