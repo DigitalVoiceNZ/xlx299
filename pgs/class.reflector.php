@@ -258,6 +258,17 @@ class xReflector {
       return 'N/A';
    }
    
+   public function GetLastHeardAndConnectionTimes($RandomId) {
+      $i        = 0;
+      while ($i < $this->NodeCount()) {
+         if ($this->Nodes[$i]->GetRandomID() == $RandomId) {
+		 return [$this->Nodes[$i]->GetLastHeardTime(),
+			 $this->Nodes[$i]->GetConnectTime()];
+         }
+         $i++;
+      }
+      return ['N/A', 'N/A'];
+   }
    public function StationCount() {
       return count($this->Stations);
    }

@@ -163,15 +163,15 @@ for ($i=0;$i<count($Modules);$i++) {
            $Name = $Reflector->Peers[$j]->GetCallsign();
            if (isset($Reflectors[$Name])) {
                echo '<a href="'.$Reflectors[$Name]['dashboardurl'].'" ';
-               echo 'data-toggle="tooltip" title="LH:  ';
+               echo 'data-toggle="tooltip" title="XLX&#013;LH: ';
                echo date("Y-m-d H:i", $Reflector->Peers[$j]->GetLastHeardTime()).'&#013;';
-               echo 'Con: '.date("Y-m-d H:i", $Reflector->Peers[$j]->GetConnectTime()).'">';
+               echo 'Cx: '.date("Y-m-d H:i", $Reflector->Peers[$j]->GetConnectTime()).'">';
            }
            echo $Name.'-'.$Modules[$i];
            if (isset($Reflectors[$Name])) {
                echo '</a>';
            }
-           echo ' <sup>XLX</sup></td></tr>';
+           echo '</td></tr>';
        }
    }
 
@@ -180,9 +180,11 @@ for ($i=0;$i<count($Modules);$i++) {
    for ($j=0;$j<count($Users);$j++) {
        [$Displayname, $protocol] = $Reflector->GetCallsignSuffixAndProtocolByID($Users[$j]);
        $protocol = str_replace('DMRMmdvm', 'DMR', $protocol);
+       [$lh, $cx] = $Reflector->GetLastHeardAndConnectionTimes($Users[$j]);
       echo '
             <tr>
-               <td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank">'.$Displayname.'</a> <sup>'.$protocol.'</sup> </td>
+               <td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank" data-toggle="tooltip" title="'
+               .$protocol.'&#013;LH: '.date("Y-m-d H:i", $lh).'&#013;Cx: '.date("Y-m-d H:i", $cx).'">'.$Displayname.'</a></td>
             </tr>';
       $UserCheckedArray[] = $Users[$j];
    }
@@ -203,7 +205,7 @@ for ($i=0;$i<count($Modules);$i++) {
           }
           echo '
                 <tr>
-                   <td><a href="https://aprs.fi/'.$call.'" class="pl" target="_blank">'.$Displayname.'</a> </td>
+                   <td><a href="https://aprs.fi/'.$call.'" class="pl" target="_blank" data-toggle="tooltip" title="Peanut">'.$Displayname.'</a> </td>
                 </tr>';
       }
    }
