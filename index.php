@@ -116,7 +116,7 @@ if (isset($_POST['motd'])) {
           }
           echo '";';
         } else {
-          if ($_GET['show'] == 'users') {
+          if (!isset($_GET['show']) || $_GET['show'] == 'users') {
             echo '
          $( "#connections" ).load( document.location.href + " #connections");
             ';
@@ -161,7 +161,7 @@ if (isset($_POST['motd'])) {
                     <a class="nav-link <?php echo (($_GET['show'] == "users") || ($_GET['show'] == "")) ? ' active' : ''; ?>"
                             href="./index.php">Users</a></li>
 		<li class="nav-item">
-                    <a class="nav-link <?php echo ($_GET['show'] == "repeaters") ? ' active' : ''; ?>"
+                    <a class="nav-link <?php echo ($_GET['show'] == "lastheard") ? ' active' : ''; ?>"
                             href="./index.php?show=lastheard">Last Heard</a></li>
 		<li class="nav-item">
                     <a class="nav-link <?php echo ($_GET['show'] == "repeaters") ? ' active' : ''; ?>"
