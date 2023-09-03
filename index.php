@@ -162,15 +162,15 @@ if (isset($_POST['motd'])) {
                             href="./index.php">Users</a></li>
 		<li class="nav-item">
                     <a class="nav-link <?php echo ($_GET['show'] == "lastheard") ? ' active' : ''; ?>"
-                            href="./index.php?show=lastheard">Last Heard</a></li>
+                            href="./lastheard">Last Heard</a></li>
 		<li class="nav-item">
                     <a class="nav-link <?php echo ($_GET['show'] == "repeaters") ? ' active' : ''; ?>"
-                            href="./index.php?show=repeaters">Nodes</a></li>
+                            href="./repeaters">Nodes</a></li>
 		<li class="nav-item">
-                    <a class="nav-link <?php echo ($_GET['show'] == "peers") ? ' active' : ''; ?>" href="./index.php?show=peers">Peers</a></li>
+                    <a class="nav-link <?php echo ($_GET['show'] == "peers") ? ' active' : ''; ?>" href="./peers">Peers</a></li>
 		<li class="nav-item">
                     <a class="nav-link <?php echo ($_GET['show'] == "reflectors") ? 'active' : ''; ?>"
-                            href="./index.php?show=reflectors">Reflectorlist</a></li>
+                            href="./reflectors">Reflectorlist</a></li>
 		<!--<li class="nav-item">
                     <a class="nav-link <?php echo ($_GET['show'] == "liveircddb") ? ' active"' : ''; ?>"
                             href="./index.php?show=liveircddb">D-Star live</a></li>-->
@@ -179,13 +179,13 @@ if (isset($_POST['motd'])) {
                             href="./index.php?show=traffic">Traffic</a></li>-->
 		<li class="nav-item">
                     <a class="nav-link<?php echo ($_GET['show'] == "modules") ? ' active' : ''; ?>"
-                            href="./index.php?show=modules">Modules</a></li>
+                            href="./modules">Modules</a></li>
 		<li class="nav-item">
                     <a class="nav-link<?php echo ($_GET['show'] == "info") ? ' active' : ''; ?>"
-                            href="./index.php?show=info">Info</a></li>
+                            href="./info">Info</a></li>
 		<li class="nav-item">
                     <a class="nav-link<?php echo ($_GET['show'] == "thanks") ? ' active' : ''; ?>"
-                            href="./index.php?show=thanks">Thanks</a></li>
+                            href="./thanks">Thanks</a></li>
             </ul>
         </div>
     </div>
