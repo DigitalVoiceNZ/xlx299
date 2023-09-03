@@ -109,7 +109,10 @@ if (isset($_GET['do'])) {
             echo '<div id="mod-'.$m.'" class="card" style="display:none;">';
             echo '<div class="card-body" style="padding: 0.5rem;">';
             echo '<div class="card-title"><h5>XLX299-'.$m.'</h5><p class="shortname">';
-            echo $PageOptions['ShortNames'][$m].'</p></div>';
+            if (array_key_exists($m, $PageOptions['ShortNames'])) {
+                echo $PageOptions['ShortNames'][$m];
+            }
+            echo '</p></div>';
             echo '<ul class="act-calls" id="act-'.$m.'"></ul>';
             echo '</div>';
             echo '</div>';
