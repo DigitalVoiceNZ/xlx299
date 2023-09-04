@@ -1,3 +1,53 @@
+<?php
+/**
+ * array_filter predicate to filter PNUT users in our rooms
+ *
+ * @param object $v PNUT whois object.
+ *
+ * @return boolean if in our room and not a transcoder
+ */
+function inThisXRF($v) {
+    global $pnutrooms;
+    return in_array($v->room, $pnutrooms) && ($v->device != 'TRANSCODER');
+}
+
+/**
+ * Check PNUT cache for call $c in room $room
+ *
+ * @param string $c call.
+ * @param string $room PNUT room name.
+ *
+ * @return boolean
+ */
+function inCache($c, $room) {
+    $cache = apcu_fetch('PNUTCACHE');
+    foreach ($cache as $ce) {
+        if (($ce->Call == $c) && ($ce->room == $room)) {
+            return True;
+        }
+    }
+    return False;
+}
+
+$pnut = apcu_fetch('PNUTCACHE', $fetched);
+if (!$fetched) {
+    $pnut = [];
+}
+if (!$fetched || !apcu_exists('PNUTCACHEVALID')) {
+    if (apcu_add('PNUTAPILOCK', time(), PNUTLIMIT)) {
+        // we have the right to update the cache
+        $json = file_get_contents(PEANUTAPI . "whois.json");
+        if (!$json) {
+            // API read error, don't hit API for a while
+            apcu_store('PNUTAPILOCK', time(), 15*60);
+        } else {
+            $pnut = array_filter(json_decode($json), "inThisXRF");
+            apcu_store('PNUTCACHE', $pnut, 60*60);
+            apcu_store('PNUTCACHEVALID', time(), PNUTREFRESH);
+        }
+    }
+}
+?>
 <div class="container xusers">
   <div class="row">
      <div class="table-responsive">
