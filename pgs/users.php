@@ -108,7 +108,7 @@ if (isset($_GET['do'])) {
             $m = chr(ord('A')+$i);
             echo '<div id="mod-'.$m.'" class="card" style="display:none;">';
             echo '<div class="card-body" style="padding: 0.5rem;">';
-            echo '<div class="card-title"><h5>XLX299-'.$m.'</h5><p class="shortname">';
+            echo '<div class="card-title"><h5>'.$PageOptions['ReflectorName'].'-'.$m.'</h5><p class="shortname">';
             if (array_key_exists($m, $PageOptions['ShortNames'])) {
                 echo $PageOptions['ShortNames'][$m];
             }

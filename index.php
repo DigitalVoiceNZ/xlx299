@@ -150,8 +150,8 @@ if (isset($_POST['motd'])) {
 } ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/xlx299logot.svg" alt="XLX299 Multiprotocol Gateway" class="d-inline-block align-top me-5" height="54" width="310"></a>
-	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <a class="navbar-brand" href="#"><img src="<?php echo $PageOptions['ReflectorLogo']['src'].'" alt="'.$PageOptions['ReflectorLogo']['alt'];?>" class="d-inline-block align-top me-5" height="54" width="310"></a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-expanded="false" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -266,13 +266,13 @@ if (isset($_POST['motd'])) {
     <div class="container">
         <div class="row">
             <div class="col-sm">
-        <span class="text-muted">Hosted by DVNZ Group
+	    <span class="text-muted"><?php echo $PageOptions['Host'];?>
         <a href="mailto:<?php echo $PageOptions['ContactEmail']; ?>"><?php echo $PageOptions['ContactEmail']; ?></a>
 <br><?php echo $Reflector->GetReflectorName(); ?>&nbsp;v<?php echo $Reflector->GetVersion(); ?><!--&nbsp;&nbsp;&nbsp;Service Uptime: <span id="suptime"><?php echo FormatSeconds($Reflector->GetServiceUptime()); ?></span>-->
         </span>
             </div>
             <div class="col-sm">
-                <a href="https://t.me/+H8KgiQPdncUyMDgz" target="_blank"><span class="material-icons">telegram</span>&nbsp;Join DVNZ on Telegram</a>
+		<?php echo $PageOptions['Social']; ?>
             </div>
         </div>
     </div>
