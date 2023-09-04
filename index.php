@@ -93,6 +93,16 @@ if (isset($_POST['motd'])) {
     <meta name="robots" content="<?php echo $PageOptions['MetaAuthor']; ?>">
 
     <title><?php echo $Reflector->GetReflectorName(); ?> Reflector Dashboard</title>
+    <?php
+    // if MetaImage is defined, include four required OpenGraph metadata
+    if (isset($PageOptions['MetaImage'])) {
+        echo '<meta property="og:title" content="'.$Reflector->GetReflectorName().'"/>';
+        echo '<meta property="og:type" content="website"/>';
+        echo '<meta property="og:url" content="'.$CallingHome['MyDashBoardURL'].'"/>';
+        echo '<meta property="og:image" content="'.$PageOptions["MetaImage"].'"/>';
+    }
+    ?>
+
     <link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">

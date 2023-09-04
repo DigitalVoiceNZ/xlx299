@@ -127,11 +127,13 @@ $PageOptions['ModuleIcons']['Y']                     = './img/globe-65.webp';
 $PageOptions['ModuleIcons']['Z']                     = './img/kiwi_radio.webp';
 
 
-$PageOptions['MetaDescription']                      = 'XLX299 is a NZ-based Multimode Reflector System for Ham Radio Operators.';  // Meta Tag Values, usefull for Search Engine
-$PageOptions['MetaKeywords']                         = 'Ham Radio, D-Star, XReflector, XLX, XRF, DCS, REF, ';        // Meta Tag Values, usefull forSearch Engine
-$PageOptions['MetaAuthor']                           = 'LX1IQ';                                                      // Meta Tag Values, usefull for Search Engine
-$PageOptions['MetaRevisit']                          = 'After 30 Days';                                              // Meta Tag Values, usefull for Search Engine
-$PageOptions['MetaRobots']                           = 'index,follow';                                               // Meta Tag Values, usefull for Search Engine
+$PageOptions['MetaDescription']                      = 'XLX299 is a NZ-based Multimode Reflector System for Ham Radio Operators.';  // Meta Tag Values, useful for Search Engine
+$PageOptions['MetaKeywords']                         = 'Ham Radio, D-Star, XReflector, XLX, XRF, DCS, REF, ';        // Meta Tag Values, useful forSearch Engine
+$PageOptions['MetaAuthor']                           = 'LX1IQ';                                                      // Meta Tag Values, useful for Search Engine
+$PageOptions['MetaRevisit']                          = 'After 30 Days';                                              // Meta Tag Values, useful for Search Engine
+$PageOptions['MetaRobots']                           = 'index,follow';                                               // Meta Tag Values, useful for Search Engine
+                                     // OpenGraph image og:img in header
+$PageOptions['MetaImage']                            = '/img/xlx299logot.png';
 
 $PageOptions['UserPage']['ShowFilter']               = false;                                                         // Show Filter on Users page
 $PageOptions['Traffic']['Show']                      = true;  
