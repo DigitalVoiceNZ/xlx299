@@ -3,11 +3,11 @@ clearTimeout(PageRefresh);
 const pb = new PocketBase("https://api.xlx299.nz");
 const coll = "activity";
 const topic = "*";
-const staleSecs = 900;
+const stalemSecs = 900 * 1000;
 var colors = {};
 
 function removeStale() {
-  let old = Date.now() - staleSecs * 1000;
+  let old = Date.now() - stalemSecs;
   let removed = false;
   $('li').each(function (i) {
     let ts = $(this).attr('data-ts');
@@ -24,10 +24,11 @@ function removeStale() {
   });
 }
 
-function activity(call, module, ts, duration) {
+function activity(call, module, ts, tsoff, duration) {
   duration = duration || 0;
-  $('#mod-' + module).css('background-color', call ? 'salmon' : colors[module]);
-  if (call) {
+  let onair = call && (tsoff == 0);
+  $('#mod-' + module).css('background-color', onair ? 'salmon' : colors[module]);
+  if (onair) {
     let $ul = $('#act-' + module);
     // if first li is the same call, all that is really
     // required is cancel animation and update ts
@@ -49,12 +50,11 @@ function activity(call, module, ts, duration) {
 }
 
 async function doRecent() {
-  console.log('Recent');
   let result = await pb.collection(coll).getFullList(400,
-    { filter: `system = "299" && ts >= ${Date.now() - staleSecs * 1000}` });
+    { filter: `system = "299" && ts >= ${Date.now() - stalemSecs}` });
   for (let row of result) {
-    console.log(row.call, row.module, row.ts);
-    activity(row.call, row.module, row.ts, 0);
+    activity(row.call, row.module, row.ts, 0,         0);
+    activity(row.call, row.module, row.ts, row.tsoff, 0);
   }
 }
 
@@ -68,9 +68,10 @@ function saveColors() {
 function subscribe() {
   console.log(`Subscribing to ${topic} on ${coll}`);
   pb.collection(coll).subscribe(topic, function (e) {
-    console.log(e.record.module, e.record.call, e);
-    if (e.record.system == "299") {
-      activity(e.record.call, e.record.module, e.record.ts, 400);
+    let old = Date.now() - stalemSecs;
+    if ((e.record.system == "299") && (e.record.ts > old)) {
+      activity(e.record.call, e.record.module, e.record.ts, 
+        e.record.tsoff, 400);
     }
   });
   /*.catch((error) => {

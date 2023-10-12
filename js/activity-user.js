@@ -1,13 +1,11 @@
-clearTimeout(PageRefresh);
-
 const pb = new PocketBase("https://api.xlx299.nz");
 const coll = "activity";
 const topic = "*";
-const staleSecs = 900;
+const stalemSecs = 900 * 1000;
 var colors = {};
 
 function removeStale() {
-  let old = Date.now() - staleSecs * 1000;
+  let old = Date.now() - stalemSecs;
   let removed = false;
   $('li').each(function (i) {
     let ts = $(this).attr('data-ts');
@@ -16,17 +14,22 @@ function removeStale() {
       $(this).remove();
       // failsafe: if removed last li, nobody is transmitting
       if ($ul.find('li').length == 0) {
-        $ul.parent().parent().fade("fast").hide("slow");
+        $ul.parent().parent().hide("slow");
       }
     }
   });
+  pb.health.check().then(function (result) {
+    console.log('healthy');
+  }).catch(function (err) {
+    console.log('ill', err);
+  });
 }
 
-function activity(call, module, ts, duration) {
+function activity(call, module, ts, tsoff, duration) {
   duration = duration || 0;
   $('#mod-' + module).show("slow");
   //$('#mod-' + module).css('background-color', call ? 'salmon' : colors[module]);
-  if (call) {
+  if (call && (tsoff == 0)) {
     let $ul = $('#act-' + module);
     // if first li is the same call, all that is really
     // required is cancel animation and update ts
@@ -49,9 +52,10 @@ function activity(call, module, ts, duration) {
 
 async function doRecent() {
   let result = await pb.collection(coll).getFullList(400,
-    { filter: `system = "299" && ts >= ${Date.now() - staleSecs * 1000}` });
+    { filter: `system = "299" && ts >= ${Date.now() - stalemSecs}` });
   for (let row of result) {
-    activity(row.call, row.module, row.ts, 0);
+    activity(row.call, row.module, row.ts, 0,         0);
+    activity(row.call, row.module, row.ts, row.tsoff, 0);
   }
 }
 
@@ -64,13 +68,15 @@ function saveColors() {
 
 function subscribe() {
   pb.collection(coll).subscribe(topic, function (e) {
-    if (e.record.system == "299") {
-      activity(e.record.call, e.record.module, e.record.ts, 400);
+    let old = Date.now() - stalemSecs;
+    if ((e.record.system == "299") && (e.record.ts > old)) {
+      activity(e.record.call, e.record.module, e.record.ts, 
+        e.record.tsoff, 400);
     }
-  });
-  /*.catch((error) => {
+  }).catch((error) => {
+    console.log('subscription error');
     console.error(error);
-}); */
+  });
 }
 
 var waitForJQuery = setInterval(function () {
