@@ -64,7 +64,7 @@ $PageOptions['ModuleNames']['T']                     = 'Oceania FD953';
 $PageOptions['ModuleNames']['U']                     = 'D-Star UK';
 $PageOptions['ModuleNames']['V']                     = 'VK Calling FD505';
 $PageOptions['ModuleNames']['W']                     = 'VK FD5050';
-$PageOptions['ModuleNames']['X']                     = 'X-Vacant';
+$PageOptions['ModuleNames']['X']                     = 'eXperimental';
 $PageOptions['ModuleNames']['Y']                     = 'YOTA';
 $PageOptions['ModuleNames']['Z']                     = 'YCS530 DG53';
 $PageOptions['ShortNames'] = array();                                			// Module nomination
@@ -91,7 +91,7 @@ $PageOptions['ShortNames']['T']                     = 'Oceania FD953';
 $PageOptions['ShortNames']['U']                     = 'D-Star UK';
 $PageOptions['ShortNames']['V']                     = 'VK Calling 505';
 $PageOptions['ShortNames']['W']                     = 'VK FD5050';
-$PageOptions['ShortNames']['X']                     = 'X-Vacant';
+$PageOptions['ShortNames']['X']                     = 'eXperimental';
 $PageOptions['ShortNames']['Y']                     = 'YOTA';
 $PageOptions['ShortNames']['Z']                     = 'YCS530 DG53';
 
