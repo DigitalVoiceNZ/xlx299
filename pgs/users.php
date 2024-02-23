@@ -3,6 +3,15 @@ require_once("reflectorlist.php");
 $Reflectors = GetReflectorList();
 
 /**
+ * polyfill str_contins for old php
+ */
+if (!function_exists('str_contains')) {
+    function str_contains($haystack, $needle) {
+        return $needle !== '' && strpos($haystack, $needle) !== false;
+    }
+}
+
+/**
  * array_filter predicate to filter PNUT users in our rooms
  *
  * @param object $v PNUT whois object.
@@ -131,8 +140,10 @@ EOD;
 $Modules = $Reflector->GetModules();
 // make sure XLX connections are represented
 for ($j=0;$j<$Reflector->PeerCount();$j++) {
-   if (!in_array($Reflector->Peers[$j]->GetLinkedModule(), $Modules)) {
-      array_push($Modules, $Reflector->Peers[$j]->GetLinkedModule());
+   foreach (str_split($Reflector->Peers[$j]->GetLinkedModule()) as $m) {
+      if (!in_array($m, $Modules)) {
+         array_push($Modules, $m);
+      }
    }
 }
 sort($Modules, SORT_STRING);
@@ -160,8 +171,9 @@ for ($i=0;$i<count($Modules);$i++) {
    $Users = $Reflector->GetNodesInModulesByID($Modules[$i]);
    echo '<table class="table table-sm table-hover">';
 
+   // insert the XLX reflectors
    for ($j=0;$j<$Reflector->PeerCount();$j++) {
-       if ($Reflector->Peers[$j]->GetLinkedModule() == $Modules[$i]) {
+       if (str_contains($Reflector->Peers[$j]->GetLinkedModule(), $Modules[$i])) {
            echo '<tr><td>';
            $Name = $Reflector->Peers[$j]->GetCallsign();
            if (isset($Reflectors[$Name])) {
