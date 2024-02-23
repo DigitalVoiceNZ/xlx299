@@ -53,7 +53,7 @@ $PageOptions['ModuleNames']['I']                     = 'FM RepeaterLink VK/ZL FD
 $PageOptions['ModuleNames']['J']                     = 'D-Star only';
 $PageOptions['ModuleNames']['K']                     = 'Chit-chat FD53029 M17-NZD-K';
 //$PageOptions['ModuleNames']['L']                     = '';
-//$PageOptions['ModuleNames']['M']                     = '';
+$PageOptions['ModuleNames']['M']                     = 'GetOnAir';
 $PageOptions['ModuleNames']['N']                     = 'DV-Tech Talk';
 $PageOptions['ModuleNames']['O']                     = 'ZL-TRBO';
 //$PageOptions['ModuleNames']['P']                     = 'TRBO-1World-w';
@@ -80,7 +80,7 @@ $PageOptions['ShortNames']['I']                     = 'FM Rptlnk VK/ZL';
 $PageOptions['ShortNames']['J']                     = 'D-Star only';
 $PageOptions['ShortNames']['K']                     = 'Chit-chat';
 //$PageOptions['ShortNames']['L']                     = '';
-//$PageOptions['ShortNames']['M']                     = '';
+$PageOptions['ShortNames']['M']                     = '<a href="https://www.getonair.uk/">G6GOA</a>';
 $PageOptions['ShortNames']['N']                     = 'DV-Tech Talk';
 $PageOptions['ShortNames']['O']                     = 'ZL-TRBO';
 //$PageOptions['ShortNames']['P']                     = 'TRBO-1World-w';
@@ -150,8 +150,6 @@ $CallingHome['Comment']                              = "DVNZ Group"; 				       
 $CallingHome['HashFile']                             = "/callinghome/callinghome.php";                 // Make sure the apache user has read and write permissions in this folder.
 $CallingHome['OverrideIPAddress']                    = "202.36.45.107";                                     // Insert your IP address here. Leave blank for autodetection. No need to enter a fake address.
 $CallingHome['InterlinkFile']                        = "/xlxd/xlxd.interlink";                 // Path to interlink file
-
-
 
 $VNStat['Interfaces']                                = array();
 $VNStat['Interfaces'][0]['Name']                     = 'Network';
