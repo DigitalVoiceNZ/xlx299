@@ -80,7 +80,7 @@ $PageOptions['ShortNames']['I']                     = 'FM Rptlnk VK/ZL';
 $PageOptions['ShortNames']['J']                     = 'D-Star only';
 $PageOptions['ShortNames']['K']                     = 'Chit-chat';
 //$PageOptions['ShortNames']['L']                     = '';
-$PageOptions['ShortNames']['M']                     = '<a href="https://www.getonair.uk/">G6GOA</a>';
+$PageOptions['ShortNames']['M']                     = 'GetOnAir';
 $PageOptions['ShortNames']['N']                     = 'DV-Tech Talk';
 $PageOptions['ShortNames']['O']                     = 'ZL-TRBO';
 //$PageOptions['ShortNames']['P']                     = 'TRBO-1World-w';
