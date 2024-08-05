@@ -38,7 +38,7 @@ $PageOptions['LastHeardPage']['LimitTo']             = 29;                      
 $PageOptions['ReflectorLogo']['src']                 = './img/xlx299logot.svg';
 $PageOptions['ReflectorLogo']['alt']                 = 'XLX299 Multiprotocol Gateway';
 $PageOptions['Host']				     = 'Hosted by <a href="https://dvnz.nz/">Digital Voice NZ</a>';
-$PageOptions['Social']				     = '<a href="https://t.me/+H8KgiQPdncUyMDgz" target="_blank"><span class="material-icons">telegram</span>&nbsp;Join DVNZ on Telegram</a>';
+$PageOptions['Social']				     = '<a href="https://t.me/+H8KgiQPdncUyMDgz" target="_blank"><span class="material-icons">telegram</span>&nbsp;Join DVNZ on Telegram</a><br><a href="https://discord.gg/qXs5rYFmDJ" target="_blank"><span class="material-icons">discord</span>&nbsp;Join DVNZ on Discord</a>';
 $PageOptions['ReflectorName']                        = 'XLX299';
 $PageOptions['ModuleNames'] = array();                                			// Module nomination
 $PageOptions['ModuleNames']['A']                     = 'XLX Worldwide';
@@ -64,7 +64,7 @@ $PageOptions['ModuleNames']['T']                     = 'Oceania FD953';
 $PageOptions['ModuleNames']['U']                     = 'D-Star UK';
 $PageOptions['ModuleNames']['V']                     = 'VK Calling FD505';
 $PageOptions['ModuleNames']['W']                     = 'VK FD5050';
-$PageOptions['ModuleNames']['X']                     = 'eXperimental';
+$PageOptions['ModuleNames']['X']                     = 'eXperimental AI';
 $PageOptions['ModuleNames']['Y']                     = 'YOTA';
 $PageOptions['ModuleNames']['Z']                     = 'YCS530 DG53';
 $PageOptions['ShortNames'] = array();                                			// Module nomination
