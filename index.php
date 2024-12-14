@@ -191,6 +191,9 @@ if (isset($_POST['motd'])) {
                     <a class="nav-link<?php echo ($_GET['show'] == "modules") ? ' active' : ''; ?>"
                             href="./modules">Modules</a></li>
 		<li class="nav-item">
+                    <a class="nav-link<?php echo ($_GET['show'] == "stats") ? ' active' : ''; ?>"
+                            href="./stats">Stats</a></li>
+		<li class="nav-item">
                     <a class="nav-link<?php echo ($_GET['show'] == "info") ? ' active' : ''; ?>"
                             href="./info">Info</a></li>
 		<li class="nav-item">
@@ -249,18 +252,21 @@ if (isset($_POST['motd'])) {
                 case 'reflectors' :
                     require_once("./pgs/reflectors.php");
                     break;
-		case 'traffic'    : 
-			require_once("./pgs/traffic.php");
-			 break;
-		case 'info'    :
-                        require_once("./pgs/info.php");
-                         break;
-		case 'thanks'    :
-                        require_once("./pgs/thanks.php");
-                         break;
-		case 'modules'    :
-                        require_once("./pgs/modules.php");
-                         break;
+                case 'traffic'    : 
+                    require_once("./pgs/traffic.php");
+                    break;
+                case 'info'    :
+                    require_once("./pgs/info.php");
+                    break;
+                case 'thanks'    :
+                    require_once("./pgs/thanks.php");
+                    break;
+                case 'modules'    :
+                    require_once("./pgs/modules.php");
+                    break;
+                case 'stats':
+                    require_once("./pgs/stats.php");
+                    break;
                 default           :
                     require_once("./pgs/users.php");
 
