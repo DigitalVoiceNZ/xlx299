@@ -65,7 +65,7 @@ $PageOptions['ModuleNames']['U']                     = 'D-Star UK';
 $PageOptions['ModuleNames']['V']                     = 'VK Calling FD505';
 $PageOptions['ModuleNames']['W']                     = 'VK FD5050';
 $PageOptions['ModuleNames']['X']                     = 'eXperimental AI';
-$PageOptions['ModuleNames']['Y']                     = 'YOTA';
+$PageOptions['ModuleNames']['Y']                     = 'Waikato AREC';
 $PageOptions['ModuleNames']['Z']                     = 'YCS530 DG53';
 $PageOptions['ShortNames'] = array();                                			// Module nomination
 $PageOptions['ShortNames']['A']                     = 'XLX Worldwide';
@@ -92,7 +92,7 @@ $PageOptions['ShortNames']['U']                     = 'D-Star UK';
 $PageOptions['ShortNames']['V']                     = 'VK Calling 505';
 $PageOptions['ShortNames']['W']                     = 'VK FD5050';
 $PageOptions['ShortNames']['X']                     = 'eXperimental';
-$PageOptions['ShortNames']['Y']                     = 'YOTA';
+$PageOptions['ShortNames']['Y']                     = 'Waikato AREC';
 $PageOptions['ShortNames']['Z']                     = 'YCS530 DG53';
 
 // Icons are expected to be 65x65 square
@@ -123,7 +123,7 @@ $PageOptions['ModuleIcons']['U']                     = './img/uk.png';
 $PageOptions['ModuleIcons']['V']                     = './img/FreeDMRNZ-130.webp';
 $PageOptions['ModuleIcons']['W']                     = './img/FreeDMRNZ-130.webp';
 $PageOptions['ModuleIcons']['X']                     = './img/kiwi_radio.webp';
-$PageOptions['ModuleIcons']['Y']                     = './img/globe-65.webp';
+$PageOptions['ModuleIcons']['Y']                     = './img/AREC-130.png';
 $PageOptions['ModuleIcons']['Z']                     = './img/kiwi_radio.webp';
 
 
