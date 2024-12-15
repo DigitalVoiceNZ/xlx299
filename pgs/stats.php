@@ -1,34 +1,3 @@
-<?php
-function QRZ($c) {
-	return preg_replace('/((\d[A-Z]\d{1,3}[A-Z]{1,4})|([A-Z]{1,2}\d{1,3}[A-Z]{1,4}))/',
-		"<a target=\"_blank\" rel=\"noreferrer\" href=\"https://qrz.com/db/$1\">$1</a>",
-                 $c);
-}
-
-function fetchdata($period, $module) {
-    $dbPath = "/usr/local/src/activity/pb_data/data.db";
-    $db = new PDO("sqlite:$dbPath");
-
-    $sql = "SELECT call, sum(tsoff-ts) AS use FROM activity
-            WHERE created > '2023-08-05'
-              AND tsoff > 0
-            GROUP BY module
-            ORDER BY use DESC
-            LIMIT 20;";
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-
-    $results = $stmt->fetchALL(PDO::FETCH_ASSOC);
-    $r = "";
-    foreach ($results as $row) {
-        print_r($row);
-        $r += "<tr><td>" . QRZ($row['call']) . "</td><td>" . $row['use'] . "</td></tr>";
-    }
-    //print_r($r);
-    return $r;
-}
-?>
-
 <div class="container">
 <div class="row">
   <h2>Statistics</h2>
@@ -47,7 +16,6 @@ function fetchdata($period, $module) {
                     <option value="90">90 Days</option>
                     <option value="180">180 Days</option>
                     <option value="365">1 Year</option>
-                    <option value="730">2 Years</option>
                 </select>
             </div>
         </div>
@@ -62,22 +30,21 @@ function fetchdata($period, $module) {
                     <?php
                     for ($i = ord('A'); $i <= ord('Z'); $i++) {
                         $letter = chr($i);
-                        echo "<option value=\"$letter\">Module $letter</option>";
+                        echo "<option value=\"$letter\">$letter: {$PageOptions['ShortNames'][$letter]}</option>";
                     }
                     ?>
                     </select>
             </div>
         </div>
     </div>
-<div class="row">
   <div id="data-container">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <?php
 $_GET['timescale'] = 30;
 $_GET['module'] = '*';
 require 'stats-data.php';
   ?>
   </div>
-</div>
   <table>
   </table>
 </div>

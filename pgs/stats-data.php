@@ -11,6 +11,30 @@ function fetchAll($result) {
     return $rows;
 }
 
+function humanDuration($seconds): string {
+    if (is_null($seconds) || $seconds <= 0) {
+        return '0 sec';
+    }
+
+    $hours = floor($seconds / 3600);
+    $minutes = floor(($seconds % 3600) / 60);
+    $remainingSeconds = $seconds % 60;
+
+    $parts = [];
+
+    if ($hours > 0) {
+        $parts[] = $hours . ' hr';
+    }
+
+    if ($hours + $minutes > 0) {
+        $parts[] = $minutes . ' min';
+    }
+
+    $parts[] = $remainingSeconds . ' sec';
+
+    return implode(' ', $parts);
+}
+
 // function getData(key) - display data based on key
 function getData($key) {
     $timescale = $_GET['timescale'];
@@ -38,15 +62,16 @@ function getData($key) {
                         activity 
                     WHERE 
                         tsoff > 0 AND
-                        ts > :cutoff
-                ');
+                        ts > :cutoff '
+                        . $moduleClause
+                );
                 $query->bindValue(':cutoff', $tscutoff, SQLITE3_FLOAT);
                 $result = $query->execute();
                 $rows = fetchAll($result);
                 apcu_store($apcuKey, $rows, 3600);
             }
             $row = $rows[0];
-            echo "<p>Total transmission time: " . $row[0] . " seconds<br>";
+            echo "<p>Total transmission time: " . humanDuration($row[0]) . "<br>";
             echo "Different callsigns heard: " . $row[1] . "</p>";
             return;
 
@@ -124,7 +149,10 @@ function getData($key) {
         apcu_store($apcuKey, $rows, 3600);
     }
     // Fetch and process results
+    echo '<div class="row">';
     echo "<h4>$section</h4>\n";
+    echo '</div>';
+    echo '<div class="row"><div class="col-md-4">';
     echo '<table class="table table-striped table-sm">';
     echo '<thead>';
     foreach ($head as $item) {
@@ -137,6 +165,13 @@ function getData($key) {
     }
     echo "</tbody></table>";
     echo "<p></p>";
+    echo "</div>";
+    if ($key == 'modules') {
+        echo '<div class="col-md-6">';
+        echo '<canvas id="mgraph"></canvas>';
+        echo '</div>';
+    }
+    echo "</div>";
     $db->close();
 }
 
@@ -146,5 +181,6 @@ if ($_GET['module'] == "*") {
     getData('modules');
 }
 getData('kerchunks');
+
 
 ?>
