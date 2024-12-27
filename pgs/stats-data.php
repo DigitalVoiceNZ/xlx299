@@ -153,7 +153,7 @@ function getData($key) {
     echo "<h4>$section</h4>\n";
     echo '</div>';
     echo '<div class="row"><div class="col-md-4">';
-    echo '<table class="table table-striped table-sm">';
+    echo '<table id="' . $key . '" class="table table-striped table-sm">';
     echo '<thead>';
     foreach ($head as $item) {
         echo "<th>" . $item . "</th>";
@@ -179,8 +179,37 @@ getData('totals');
 getData('activity');
 if ($_GET['module'] == "*") {
     getData('modules');
+?>
+    <script>
+    const canvas = document.getElementById('mgraph');
+    let labels = [];
+    let data = [];
+    const tbody = document.getElementById('modules').querySelector('tbody');
+    for (let i = 0; i < tbody.rows.length; i++) { 
+        labels.push(tbody.rows[i].cells[0].textContent);
+        data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
+    }
+
+    new Chart(canvas, {
+        type: 'bar',
+        data: {
+            label: 'Seconds',
+            labels: labels,
+            datasets: [{
+                data: data
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+<?php
 }
 getData('kerchunks');
-
 
 ?>
