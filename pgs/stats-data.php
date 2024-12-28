@@ -2,6 +2,7 @@
 
 define("CACHETTL", 3600);
 define("DBFILE", "/usr/local/src/activity/pb_data/data.db");
+require_once "./pgs/config.inc.php";
 
 function fetchAll($result) {
     $rows = array();
@@ -160,8 +161,8 @@ function getData($key) {
     }
     echo '</thead><tbody>';
     foreach ($rows as $row) {
-        echo "<tr><td>" . htmlspecialchars($row[0]) .
-            "</td><td>" . $row[1] . "</td></tr>\n";
+        $k = htmlspecialchars(trim($row[0]));
+        echo "<tr><td>$k</td><td>" . $row[1] . "</td></tr>\n";
     }
     echo "</tbody></table>";
     echo "<p></p>";
@@ -193,9 +194,9 @@ if ($_GET['module'] == "*") {
     new Chart(canvas, {
         type: 'bar',
         data: {
-            label: 'Seconds',
             labels: labels,
             datasets: [{
+                label: 'Seconds',
                 data: data
             }]
         },
@@ -204,7 +205,8 @@ if ($_GET['module'] == "*") {
                 y: {
                     beginAtZero: true
                 }
-            }
+            },
+            indexAxis: 'y'
         }
     });
     </script>
