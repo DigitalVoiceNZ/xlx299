@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-  <div id="data-container">
+  <div id="data-container" style="transition: opacity 0.5s ease-in-out;">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <?php
 $_GET['timescale'] = 30;
@@ -49,10 +49,16 @@ require 'stats-data.php';
   </table>
 </div>
 </div>
-<script>
-  clearTimeout(PageRefresh);
-</script>
 <script src="https://unpkg.com/htmx.org@1.9.11/dist/htmx.js"
         integrity="sha384-l9bYT9SL4CAW0Hl7pAOpfRc18mys1b0wK4U8UtGnWOxPVbVMgrOdB+jyz/WY8Jue"
         crossorigin="anonymous"></script>
+<script>
+  clearTimeout(PageRefresh);
+  htmx.on('htmx:beforeRequest', function(event) {
+    document.getElementById(event.detail.target.id).style.opacity = 0; 
+  });
 
+  htmx.on('htmx:afterSwap', function(event) {
+    document.getElementById(event.detail.target.id).style.opacity = 1;
+  });
+</script>
