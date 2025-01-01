@@ -2,7 +2,6 @@
 
 define("CACHETTL", 3600);
 define("DBFILE", "/usr/local/src/activity/pb_data/data.db");
-require_once "./pgs/config.inc.php";
 
 function fetchAll($result) {
     $rows = array();
@@ -180,37 +179,6 @@ getData('totals');
 getData('activity');
 if ($_GET['module'] == "*") {
     getData('modules');
-?>
-    <script>
-    const canvas = document.getElementById('mgraph');
-    let labels = [];
-    let data = [];
-    const tbody = document.getElementById('modules').querySelector('tbody');
-    for (let i = 0; i < tbody.rows.length; i++) { 
-        labels.push(tbody.rows[i].cells[0].textContent);
-        data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
-    }
-
-    new Chart(canvas, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Seconds',
-                data: data
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            indexAxis: 'y'
-        }
-    });
-    </script>
-<?php
 }
 getData('kerchunks');
 

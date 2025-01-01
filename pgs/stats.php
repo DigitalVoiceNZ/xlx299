@@ -54,11 +54,44 @@ require 'stats-data.php';
         crossorigin="anonymous"></script>
 <script>
   clearTimeout(PageRefresh);
+  graphModules();
+
+  function graphModules() {
+
+    let canvas = document.getElementById('mgraph');
+    let labels = [];
+    let data = [];
+    let tbody = document.getElementById('modules').querySelector('tbody');
+    for (let i = 0; i < tbody.rows.length; i++) { 
+        labels.push(tbody.rows[i].cells[0].textContent);
+        data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
+    }
+    new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Seconds',
+                data: data
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            indexAxis: 'x'
+        }
+    });
+  }
+
   htmx.on('htmx:beforeRequest', function(event) {
     document.getElementById(event.detail.target.id).style.opacity = 0; 
   });
 
   htmx.on('htmx:afterSwap', function(event) {
     document.getElementById(event.detail.target.id).style.opacity = 1;
+    graphModules();
   });
 </script>
