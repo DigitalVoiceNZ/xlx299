@@ -49,21 +49,31 @@ require 'stats-data.php';
   </table>
 </div>
 </div>
-<script src="https://unpkg.com/htmx.org@1.9.11/dist/htmx.js"
-        integrity="sha384-l9bYT9SL4CAW0Hl7pAOpfRc18mys1b0wK4U8UtGnWOxPVbVMgrOdB+jyz/WY8Jue"
+<script src="https://unpkg.com/htmx.org@1.9.12"
+        integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
         crossorigin="anonymous"></script>
 <script>
+<?php
+  echo "  let mNames = " . json_encode($PageOptions['ShortNames']) . ";\n";
+?>
   clearTimeout(PageRefresh);
   graphModules();
 
   function graphModules() {
-
     let canvas = document.getElementById('mgraph');
+    if (!canvas) {
+        return;
+    }
     let labels = [];
     let data = [];
     let tbody = document.getElementById('modules').querySelector('tbody');
     for (let i = 0; i < tbody.rows.length; i++) { 
-        labels.push(tbody.rows[i].cells[0].textContent);
+        let m = tbody.rows[i].cells[0].textContent;
+        let n = mNames[m].trim();
+        if (n) {
+            tbody.rows[i].cells[0].textContent = `${m}: ${n}`;
+        }
+        labels.push(m);
         data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
     }
     new Chart(canvas, {
