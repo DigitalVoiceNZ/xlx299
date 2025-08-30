@@ -128,7 +128,7 @@ if (isset($_POST['motd'])) {
         } else {
           if (!isset($_GET['show']) || $_GET['show'] == 'users') {
             echo '
-         $( "#connections" ).load( document.location.href + " #connections");
+         $( "#connections" ).load( document.location.href + " #connections > *");
             ';
           } else {
           echo '
