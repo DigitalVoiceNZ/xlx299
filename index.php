@@ -96,10 +96,10 @@ if (isset($_POST['motd'])) {
     <?php
     // if MetaImage is defined, include four required OpenGraph metadata
     if (isset($PageOptions['MetaImage'])) {
-        echo '<meta property="og:title" content="'.$Reflector->GetReflectorName().'"/>';
-        echo '<meta property="og:type" content="website"/>';
-        echo '<meta property="og:url" content="'.$CallingHome['MyDashBoardURL'].'"/>';
-        echo '<meta property="og:image" content="'.$PageOptions["MetaImage"].'"/>';
+        echo '<meta property="og:title" content="'.$Reflector->GetReflectorName().'">';
+        echo '<meta property="og:type" content="website">';
+        echo '<meta property="og:url" content="'.$CallingHome['MyDashBoardURL'].'">';
+        echo '<meta property="og:image" content="'.$PageOptions["MetaImage"].'">';
     }
     ?>
 

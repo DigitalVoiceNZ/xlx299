@@ -174,19 +174,21 @@ for ($i=0;$i<count($Modules);$i++) {
    // insert the XLX reflectors
    for ($j=0;$j<$Reflector->PeerCount();$j++) {
        if (str_contains($Reflector->Peers[$j]->GetLinkedModule(), $Modules[$i])) {
-           echo '<tr><td>';
            $Name = $Reflector->Peers[$j]->GetCallsign();
-           if (isset($Reflectors[$Name])) {
-               echo '<a href="'.$Reflectors[$Name]['dashboardurl'].'" ';
-               echo 'data-toggle="tooltip" title="XLX&#013;LH: ';
-               echo date("Y-m-d H:i", $Reflector->Peers[$j]->GetLastHeardTime()).'&#013;';
-               echo 'Cx: '.date("Y-m-d H:i", $Reflector->Peers[$j]->GetConnectTime()).'">';
+           if ($Name != "XLXREC") {
+               echo '<tr><td>';
+               if (isset($Reflectors[$Name])) {
+                   echo '<a href="'.$Reflectors[$Name]['dashboardurl'].'" ';
+                   echo 'data-toggle="tooltip" title="XLX'."\nLH: ";
+                   echo date("Y-m-d H:i", $Reflector->Peers[$j]->GetLastHeardTime())."\n";
+                   echo 'Cx: '.date("Y-m-d H:i", $Reflector->Peers[$j]->GetConnectTime()).'">';
+               }
+               echo $Name.'-'.$Modules[$i];
+               if (isset($Reflectors[$Name])) {
+                   echo '</a>';
+               }
+               echo '</td></tr>';
            }
-           echo $Name.'-'.$Modules[$i];
-           if (isset($Reflectors[$Name])) {
-               echo '</a>';
-           }
-           echo '</td></tr>';
        }
    }
 
@@ -199,7 +201,7 @@ for ($i=0;$i<count($Modules);$i++) {
       echo '
             <tr>
                <td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank" data-toggle="tooltip" title="'
-               .$protocol.'&#013;LH: '.date("Y-m-d H:i", $lh).'&#013;Cx: '.date("Y-m-d H:i", $cx).'">'.$Displayname.'</a></td>
+               .$protocol."\nLH: ".date("Y-m-d H:i", $lh)."\nCx: ".date("Y-m-d H:i", $cx).'">'.$Displayname.'</a></td>
             </tr>';
       $UserCheckedArray[] = $Users[$j];
    }
