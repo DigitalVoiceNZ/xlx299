@@ -160,6 +160,9 @@ function getData($key) {
     }
     echo '</thead><tbody>';
     foreach ($rows as $row) {
+        if (round($row[1]) == 0) {
+            continue;
+        }
         $k = htmlspecialchars(trim($row[0]));
         echo "<tr><td>$k</td><td>" . $row[1] . "</td></tr>\n";
     }
