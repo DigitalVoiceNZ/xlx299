@@ -127,7 +127,7 @@ ul.act-calls li {
 
 nav.bg-dark {
   background-color: #000!important;
-  background-image: linear-gradient(to right, #002189, #000);
+  background-image: linear-gradient(to right, #000, #002189);
 }
 
 .recentactivity {
@@ -151,4 +151,3 @@ nav.bg-dark {
     .navbar-brand { margin-right: 0px; }
     .navbar-brand>img {width: 250px; height: 44px;}
 }
-

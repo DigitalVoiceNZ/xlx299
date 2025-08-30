@@ -131,7 +131,7 @@ if (isset($_GET['do'])) {
 
 <?php
 	echo <<<EOD
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 </nav>
 <div class="container">
   <div id="connections" class="row">
