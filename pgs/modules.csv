@@ -16,15 +16,15 @@ I,  FD50510     ,           ,        ,         , FM RepeaterLink VK/ZL
 J,              ,           ,        ,         , D-Star only
 K*, FreeDMR53029, M17-NZD-K , XRF299K, XLX626-K, Kiwi chit-chat rag chews
 M,              ,           ,        , XLX247-M, Get On The Air
-N,              ,           ,        ,         , DV-Tech Talk
+N,              ,           ,        ,         , News&WX
 O,  ZL-TRBO     ,           ,        ,         , ZL-TRBO
 Q,              ,           ,        ,         , CQ UK
 R*, FreeDMR5308 ,           , XRF299R,         , ROAR YSFRefelector
 S*, BM53085     ,           , XRF299S, Allstar<br>56870 , Active-Elements
 T,  FreeDMR953  ,           ,        ,         , Oceania
-U,              ,           ,        , XLX994-U, UK D-Star
+U,  FreeDMR53085,           ,        ,         , DVNZ-UK
 V*, FreeDMR505  ,           , XRF299V,         , VK Calling FreeDMR 505
-W,  FreeDMR5050 ,           ,        ,         , VK FreeDMR 5050
+W,  FreeDMR5050O,           ,        ,         , VK FreeDMR 50500
 X,              ,           ,        ,         , eXperimental
 Y,              ,           ,        ,         , Waikato AREC
 
