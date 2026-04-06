@@ -234,5 +234,4 @@ echo <<<EOD
 </div>
 EOD;
 ?>
-<script src="./js/pocketbase.umd.js"></script>
 <script src="./js/activity-user.js"></script>

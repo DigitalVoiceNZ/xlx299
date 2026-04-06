@@ -1,7 +1,7 @@
 <?php
 
 define("CACHETTL", 3600);
-define("DBFILE", "/usr/local/src/activity/pb_data/data.db");
+define("DBFILE", "/usr/local/src/activity/activity.db");
 
 function fetchAll($result) {
     $rows = array();

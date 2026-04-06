@@ -90,6 +90,5 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
   </div>
 </div>
 </div>
-<script src="./js/pocketbase.umd.js"></script>
 <script src="./js/activity.js"></script>
 

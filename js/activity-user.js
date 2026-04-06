@@ -1,12 +1,9 @@
-const pb = new PocketBase("https://api.xlx299.nz");
-const coll = "activity";
-const topic = "*";
+const apiBase = "https://api.xlx299.nz";
 const stalemSecs = 900 * 1000;
 var colors = {};
 
 function removeStale() {
   let old = Date.now() - stalemSecs;
-  let removed = false;
   $('li').each(function (i) {
     let ts = $(this).attr('data-ts');
     if (ts && ts < old) {
@@ -18,17 +15,14 @@ function removeStale() {
       }
     }
   });
-  pb.health.check().then(function (result) {
-    console.log('healthy');
-  }).catch(function (err) {
-    console.log('ill', err);
-  });
+  fetch(`${apiBase}/health`)
+    .then(() => console.log('healthy'))
+    .catch(err => console.log('ill', err));
 }
 
 function activity(call, module, ts, tsoff, duration) {
   duration = duration || 0;
   $('#mod-' + module).show("slow");
-  //$('#mod-' + module).css('background-color', call ? 'salmon' : colors[module]);
   if (call && (tsoff == 0)) {
     let $ul = $('#act-' + module);
     // if first li is the same call, all that is really
@@ -51,8 +45,7 @@ function activity(call, module, ts, tsoff, duration) {
 }
 
 async function doRecent() {
-  let result = await pb.collection(coll).getFullList(400,
-    { filter: `system = "299" && ts >= ${Date.now() - stalemSecs}` });
+  const result = await fetch(`${apiBase}/api/activity/recent`).then(r => r.json());
   for (let row of result) {
     activity(row.call, row.module, row.ts, 0,         0);
     activity(row.call, row.module, row.ts, row.tsoff, 0);
@@ -67,16 +60,18 @@ function saveColors() {
 }
 
 function subscribe() {
-  pb.collection(coll).subscribe(topic, function (e) {
+  const es = new EventSource(`${apiBase}/api/activity/events`);
+  es.onmessage = function (e) {
+    const evt = JSON.parse(e.data);
     let old = Date.now() - stalemSecs;
-    if ((e.record.system == "299") && (e.record.ts > old)) {
-      activity(e.record.call, e.record.module, e.record.ts, 
-        e.record.tsoff, 400);
+    if ((evt.record.system == "299") && (evt.record.ts > old)) {
+      activity(evt.record.call, evt.record.module, evt.record.ts,
+        evt.record.tsoff, 400);
     }
-  }).catch((error) => {
-    console.log('subscription error');
-    console.error(error);
-  });
+  };
+  es.onerror = function (err) {
+    console.log('SSE error', err);
+  };
 }
 
 var waitForJQuery = setInterval(function () {
@@ -87,6 +82,5 @@ var waitForJQuery = setInterval(function () {
     doRecent();     // set the initial state
     subscribe();    // subscribe to changes
     setInterval(removeStale, 60 * 1000);
-  } else {
   }
 }, 10);
