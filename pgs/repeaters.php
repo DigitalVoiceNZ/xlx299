@@ -12,7 +12,7 @@
 
 if ($PageOptions['RepeatersPage']['IPModus'] != 'HideIP') {
    echo '
-   <th class="col-md-1">IP</th>';
+   <th class="w-md-8">IP</th>';
 }
 
 ?>

@@ -180,7 +180,7 @@ for ($i=0;$i<count($Modules);$i++) {
                $cell = '<td>';
                if (isset($Reflectors[$Name])) {
                    $cell .= '<a href="'.$Reflectors[$Name]['dashboardurl'].'" '
-                         . 'data-toggle="tooltip" title="XLX'."\nLH: "
+                         . 'data-bs-toggle="tooltip" title="XLX'."\nLH: "
                          . date("Y-m-d H:i", $Reflector->Peers[$j]->GetLastHeardTime())."\n"
                          . 'Cx: '.date("Y-m-d H:i", $Reflector->Peers[$j]->GetConnectTime()).'">';
                }
@@ -198,7 +198,7 @@ for ($i=0;$i<count($Modules);$i++) {
        [$Displayname, $protocol] = $Reflector->GetCallsignSuffixAndProtocolByID($Users[$j]);
        $protocol = str_replace('DMRMmdvm', 'DMR', $protocol);
        [$lh, $cx] = $Reflector->GetLastHeardAndConnectionTimes($Users[$j]);
-       $cells[] = '<td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank" data-toggle="tooltip" title="'
+       $cells[] = '<td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank" data-bs-toggle="tooltip" title="'
                 . $protocol."\nLH: ".date("Y-m-d H:i", $lh)."\nCx: ".date("Y-m-d H:i", $cx).'">'
                 . $Displayname.'</a></td>';
    }
@@ -218,7 +218,7 @@ for ($i=0;$i<count($Modules);$i++) {
 	      default:
                   $Displayname .= '-P';
           }
-          $cells[] = '<td><a href="https://aprs.fi/'.$call.'" class="pl" target="_blank" data-toggle="tooltip" title="Peanut">'.$Displayname.'</a> </td>';
+          $cells[] = '<td><a href="https://aprs.fi/'.$call.'" class="pl" target="_blank" data-bs-toggle="tooltip" title="Peanut">'.$Displayname.'</a> </td>';
       }
    }
 

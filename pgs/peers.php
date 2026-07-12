@@ -16,7 +16,7 @@ $Reflectors = GetReflectorList();
 
 if ($PageOptions['PeerPage']['IPModus'] != 'HideIP') {
    echo '
-   <th class="col-md-2">IP</th>';
+   <th class="w-md-16">IP</th>';
 }
 
 ?>

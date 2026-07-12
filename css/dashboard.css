@@ -61,6 +61,14 @@ a.tip:hover span {
   hyphens: none;
 }
 
+table a {
+  text-decoration: none;
+}
+
+table a:hover {
+  text-decoration: underline;
+}
+
 /*
  * Main content
  */
@@ -151,3 +159,15 @@ nav.bg-dark {
     .navbar-brand { margin-right: 0px; }
     .navbar-brand>img {width: 250px; height: 44px;}
 }
+
+/* Responsive column widths for table headers
+ * (active on md screens/768px and up) */
+ @media (min-width: 768px) {
+   .w-md-16 {
+     width: 16.666667% !important;
+   }
+   .w-md-8 {
+     width: 8.333333% !important;
+   }
+ }
+

@@ -4,7 +4,7 @@
 </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="timescale">Timescale:</label>
                 <select id="timescale" class="form-select"
                         hx-get="/pgs/stats-data.php" hx-target="#data-container"
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="module">Module:</label>
                 <select id="module" class="form-select"
                         hx-get="/pgs/stats-data.php" hx-target="#data-container"
