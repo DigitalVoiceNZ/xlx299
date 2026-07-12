@@ -168,43 +168,41 @@ for ($i=0;$i<count($Modules);$i++) {
       echo $Modules[$i];
    }
    echo '  </div>'; 
+
    $Users = $Reflector->GetNodesInModulesByID($Modules[$i]);
-   echo '<table class="table table-sm table-hover">';
+   $cells = array();
 
    // insert the XLX reflectors
    for ($j=0;$j<$Reflector->PeerCount();$j++) {
        if (str_contains($Reflector->Peers[$j]->GetLinkedModule(), $Modules[$i])) {
            $Name = $Reflector->Peers[$j]->GetCallsign();
            if ($Name != "XLXREC") {
-               echo '<tr><td>';
+               $cell = '<td>';
                if (isset($Reflectors[$Name])) {
-                   echo '<a href="'.$Reflectors[$Name]['dashboardurl'].'" ';
-                   echo 'data-toggle="tooltip" title="XLX'."\nLH: ";
-                   echo date("Y-m-d H:i", $Reflector->Peers[$j]->GetLastHeardTime())."\n";
-                   echo 'Cx: '.date("Y-m-d H:i", $Reflector->Peers[$j]->GetConnectTime()).'">';
+                   $cell .= '<a href="'.$Reflectors[$Name]['dashboardurl'].'" '
+                         . 'data-toggle="tooltip" title="XLX'."\nLH: "
+                         . date("Y-m-d H:i", $Reflector->Peers[$j]->GetLastHeardTime())."\n"
+                         . 'Cx: '.date("Y-m-d H:i", $Reflector->Peers[$j]->GetConnectTime()).'">';
                }
-               echo $Name.'-'.$Modules[$i];
+               $cell .= $Name.'-'.$Modules[$i];
                if (isset($Reflectors[$Name])) {
-                   echo '</a>';
+                   $cell .= '</a>';
                }
-               echo '</td></tr>';
+               $cell .= '</td>';
+               $cells[] = $cell;
            }
        }
    }
 
-   $UserCheckedArray = array();
-   
    for ($j=0;$j<count($Users);$j++) {
        [$Displayname, $protocol] = $Reflector->GetCallsignSuffixAndProtocolByID($Users[$j]);
        $protocol = str_replace('DMRMmdvm', 'DMR', $protocol);
        [$lh, $cx] = $Reflector->GetLastHeardAndConnectionTimes($Users[$j]);
-      echo '
-            <tr>
-               <td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank" data-toggle="tooltip" title="'
-               .$protocol."\nLH: ".date("Y-m-d H:i", $lh)."\nCx: ".date("Y-m-d H:i", $cx).'">'.$Displayname.'</a></td>
-            </tr>';
-      $UserCheckedArray[] = $Users[$j];
+       $cells[] = '<td><a href="http://www.aprs.fi/'.$Displayname.'" class="pl" target="_blank" data-toggle="tooltip" title="'
+                . $protocol."\nLH: ".date("Y-m-d H:i", $lh)."\nCx: ".date("Y-m-d H:i", $cx).'">'
+                . $Displayname.'</a></td>';
    }
+   
    // add Peanut users on this module
    $thismodule = array_key_exists($Modules[$i], $pnutrooms) ? $pnutrooms[$Modules[$i]] : '---';
    foreach ($pnut as $pu) {
@@ -220,11 +218,18 @@ for ($i=0;$i<count($Modules);$i++) {
 	      default:
                   $Displayname .= '-P';
           }
-          echo '
-                <tr>
-                   <td><a href="https://aprs.fi/'.$call.'" class="pl" target="_blank" data-toggle="tooltip" title="Peanut">'.$Displayname.'</a> </td>
-                </tr>';
+          $cells[] = '<td><a href="https://aprs.fi/'.$call.'" class="pl" target="_blank" data-toggle="tooltip" title="Peanut">'.$Displayname.'</a> </td>';
       }
+   }
+
+   // now render the table for this module
+   echo '<table class="table table-sm table-hover small text-nowrap">';
+   foreach (array_chunk($cells, 2) as $row) {
+       echo '<tr>'.implode('', $row);
+       if (count($row) < 2) {
+           echo '<td></td>';   // pad the last row if odd count
+       }
+       echo '</tr>';
    }
    echo '</table></div>';
 }
