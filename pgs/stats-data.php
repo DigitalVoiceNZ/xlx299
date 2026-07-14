@@ -37,23 +37,26 @@ function humanDuration($seconds): string {
 
 // function getData(key) - display data based on key
 function getData($key) {
-    $timescale = $_GET['timescale'];
-    $module = $_GET['module'];
-    $moduleClause = "";
-    if (preg_match('/^[A-Z]$/', $module)) {
-        $moduleClause = " AND module = '$module'";
-    }
-    
-    $now = round(microtime(true) * 1000);
-    $tscutoff = $now - $timescale * 24 * 60 * 60 * 1000;
-    
-    $db = new SQLite3(DBFILE);
+    // enforce default values
+    $timescale = isset($_GET['timescale']) ? (int)$_GET['timescale'] : 30;
+    $module = $_GET['module'] ?? '*';
 
-    switch ($key) {
-        case 'totals':
-            $apcuKey = "totals-$timescale-$module";
-            $rows = apcu_fetch($apcuKey);
-            if ($rows === false) {
+    $apcuKey = "{$key}-{$timescale}-{$module}";
+    $rows = apcu_fetch($apcuKey);
+
+    if ($rows === false) {
+        $now = round(microtime(true) * 1000);
+        $tscutoff = $now - ($timescale * 86400 * 1000);
+            
+        $moduleClause = "";
+        if (preg_match('/^[A-Z]$/', $module)) {
+            $moduleClause = " AND module = :module ";
+        }
+        
+        $db = new SQLite3(DBFILE);
+
+        switch ($key) {
+            case 'totals':
                 $query = $db->prepare('
                     SELECT 
                         COALESCE(ROUND(SUM((tsoff - ts) / 1000.0)), 0) AS total_activity_seconds,
@@ -65,88 +68,89 @@ function getData($key) {
                         ts > :cutoff '
                         . $moduleClause
                 );
-                $query->bindValue(':cutoff', $tscutoff, SQLITE3_FLOAT);
-                $result = $query->execute();
-                $rows = fetchAll($result);
-                apcu_store($apcuKey, $rows, 3600);
-            }
-            $row = $rows[0];
-            echo "<p>Total transmission time: " . humanDuration($row[0]) . "<br>";
-            echo "Different callsigns heard: " . $row[1] . "</p>";
-            return;
+                break;
 
-        case 'activity':
-            $apcuKey = "activity-$timescale-$module";
-            $section = "Activity (by call)";
-            $head = array('Call', 'Tx (sec)');
-            $query = $db->prepare('
-                SELECT
-                    call,
-                    ROUND(SUM(tsoff - ts)/1000) AS total_activity_time
-                FROM
-                    activity
-                WHERE
-                    ts > :cutoff
-                    AND tsoff > 0 '
-                . $moduleClause .
-                'GROUP BY
-                    +call
-                ORDER BY
-                    total_activity_time DESC
-                LIMIT
-                    15
-            ');
-            break;
-        case 'modules':
-            $apcuKey = "modules-$timescale-$module";
-            $section = "Activity (by module)";
-            $head = array('Module', 'Tx (sec)');
-            $query = $db->prepare('
-                SELECT
-                    module,
-                    ROUND(SUM(tsoff - ts)/1000) AS total_activity_time
-                FROM
-                    activity
-                WHERE
-                    ts > :cutoff
-                    AND tsoff > 0 '
-                . $moduleClause .
-                'GROUP BY
-                    module
-                ORDER BY
-                    total_activity_time DESC
-            ');
-            break;
-        case 'kerchunks':
-            $apcuKey = "kerchunks-$timescale-$module";
-            $section = "Kerchunks";
-            $head = array('Call', 'Kerchunks');
-            $query = $db->prepare('
-                SELECT
-                    call,
-                    COUNT(*) AS kerchunk_count
-                FROM
-                    activity
-                WHERE
-                    ts > :cutoff
-                    AND tsoff > ts
-                    AND (tsoff - ts) < 1500 '
-                . $moduleClause .
-                'GROUP BY
-                    +call
-                ORDER BY
-                    kerchunk_count DESC
-                LIMIT
-                    15
-            ');
-            break;
-    }
-    $query->bindValue(':cutoff', $tscutoff, SQLITE3_FLOAT);
-    $rows = apcu_fetch($apcuKey);
-    if ($rows == false) {
+            case 'activity':
+                $apcuKey = "activity-$timescale-$module";
+                $section = "Activity (by call)";
+                $head = array('Call', 'Tx (sec)');
+                $query = $db->prepare('
+                    SELECT
+                        call,
+                        ROUND(SUM(tsoff - ts)/1000) AS total_activity_time
+                    FROM
+                        activity
+                    WHERE
+                        ts > :cutoff
+                        AND tsoff > 0 '
+                    . $moduleClause .
+                    'GROUP BY
+                        +call
+                    ORDER BY
+                        total_activity_time DESC
+                    LIMIT
+                        15
+                ');
+                break;
+            case 'modules':
+                $apcuKey = "modules-$timescale-$module";
+                $section = "Activity (by module)";
+                $head = array('Module', 'Tx (sec)');
+                $query = $db->prepare('
+                    SELECT
+                        module,
+                        ROUND(SUM(tsoff - ts)/1000) AS total_activity_time
+                    FROM
+                        activity
+                    WHERE
+                        ts > :cutoff
+                        AND tsoff > 0 '
+                    . $moduleClause .
+                    'GROUP BY
+                        module
+                    ORDER BY
+                        total_activity_time DESC
+                ');
+                break;
+            case 'kerchunks':
+                $apcuKey = "kerchunks-$timescale-$module";
+                $section = "Kerchunks";
+                $head = array('Call', 'Kerchunks');
+                $query = $db->prepare('
+                    SELECT
+                        call,
+                        COUNT(*) AS kerchunk_count
+                    FROM
+                        activity
+                    WHERE
+                        ts > :cutoff
+                        AND tsoff > ts
+                        AND (tsoff - ts) < 1500 '
+                    . $moduleClause .
+                    'GROUP BY
+                        +call
+                    ORDER BY
+                        kerchunk_count DESC
+                    LIMIT
+                        15
+                ');
+                break;
+        }
+        $query->bindValue(':cutoff', $tscutoff, SQLITE3_FLOAT);
+        if ($moduleClause !== "") {
+            $query->bindValue(':module', $module, SQLITE3_TEXT);
+        }
+
         $result = $query->execute();
         $rows = fetchAll($result);
         apcu_store($apcuKey, $rows, 3600);
+        $db->close();
+    }
+    if ($key === 'totals') {
+        $row = $rows[0] ?? [0, 0];
+        echo "<p>Total transmission time: " . humanDuration($row[0]) . "<br>";
+        echo "Different callsigns heard: " . $row[1] . "</p>";
+        return;
     }
     // Fetch and process results
     echo '<div class="row">';
@@ -175,7 +179,6 @@ function getData($key) {
         echo '</div>';
     }
     echo "</div>";
-    $db->close();
 }
 
 getData('totals');
