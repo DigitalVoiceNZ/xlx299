@@ -56,7 +56,7 @@ function getData($key) {
             if ($rows === false) {
                 $query = $db->prepare('
                     SELECT 
-                        ROUND(SUM((tsoff - ts) / 1000.0)) AS total_activity_seconds,
+                        COALESCE(ROUND(SUM((tsoff - ts) / 1000.0)), 0) AS total_activity_seconds,
                         COUNT(DISTINCT call) AS unique_call_count
                     FROM 
                         activity 
@@ -86,11 +86,11 @@ function getData($key) {
                 FROM
                     activity
                 WHERE
-                    tsoff > 0
-                    AND ts > :cutoff '
+                    ts > :cutoff
+                    AND tsoff > 0 '
                 . $moduleClause .
                 'GROUP BY
-                    call
+                    +call
                 ORDER BY
                     total_activity_time DESC
                 LIMIT
@@ -129,11 +129,11 @@ function getData($key) {
                     activity
                 WHERE
                     ts > :cutoff
-                    AND tsoff > 0
+                    AND tsoff > ts
                     AND (tsoff - ts) < 1500 '
                 . $moduleClause .
                 'GROUP BY
-                    call
+                    +call
                 ORDER BY
                     kerchunk_count DESC
                 LIMIT
