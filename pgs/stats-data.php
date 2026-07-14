@@ -3,15 +3,15 @@
 define("CACHETTL", 3600);
 define("DBFILE", "/usr/local/src/activity/pb_data/data.db");
 
-function fetchAll($result) {
-    $rows = array();
+function fetchAll(SQLite3Result $result): array {
+    $rows = [];
     while ($row = $result->fetchArray(SQLITE3_NUM)) {
         $rows[] = $row;
     }
     return $rows;
 }
 
-function humanDuration($seconds): string {
+function humanDuration(int|float|null $seconds): string {
     if (is_null($seconds) || $seconds <= 0) {
         return '0 sec';
     }
@@ -36,10 +36,11 @@ function humanDuration($seconds): string {
 }
 
 // function getData(key) - display data based on key
-function getData($key) {
+function getData(string $key): void {
     // enforce default values
     $timescale = isset($_GET['timescale']) ? (int)$_GET['timescale'] : 30;
     $module = $_GET['module'] ?? '*';
+
 
     $apcuKey = "{$key}-{$timescale}-{$module}";
     $rows = apcu_fetch($apcuKey);
@@ -71,9 +72,6 @@ function getData($key) {
                 break;
 
             case 'activity':
-                $apcuKey = "activity-$timescale-$module";
-                $section = "Activity (by call)";
-                $head = array('Call', 'Tx (sec)');
                 $query = $db->prepare('
                     SELECT
                         call,
@@ -93,9 +91,6 @@ function getData($key) {
                 ');
                 break;
             case 'modules':
-                $apcuKey = "modules-$timescale-$module";
-                $section = "Activity (by module)";
-                $head = array('Module', 'Tx (sec)');
                 $query = $db->prepare('
                     SELECT
                         module,
@@ -113,9 +108,6 @@ function getData($key) {
                 ');
                 break;
             case 'kerchunks':
-                $apcuKey = "kerchunks-$timescale-$module";
-                $section = "Kerchunks";
-                $head = array('Call', 'Kerchunks');
                 $query = $db->prepare('
                     SELECT
                         call,
@@ -152,7 +144,22 @@ function getData($key) {
         echo "Different callsigns heard: " . $row[1] . "</p>";
         return;
     }
-    // Fetch and process results
+
+    $section = match ($key) {
+        'activity' => 'Activity (by call)',
+        'modules' => 'Activity (by module)',
+        'kerchunks' => 'Kerchunks',
+        default => ''
+    };
+
+    $head = match ($key) {
+        'activity' => ['Call', 'Tx (sec)'],
+        'modules' => ['Module', 'Tx (sec)'],
+        'kerchunks' => ['Call', 'Kerchunks'],
+        default => []
+    };
+
+    // fetch and process results
     echo '<div class="row">';
     echo "<h4>$section</h4>\n";
     echo '</div>';
@@ -174,7 +181,7 @@ function getData($key) {
     echo "<p></p>";
     echo "</div>";
     if ($key == 'modules') {
-        echo '<div class="col-md-6">';
+        echo '<div class="col-md-6" style="position: relative;">';
         echo '<canvas id="mgraph"></canvas>';
         echo '</div>';
     }

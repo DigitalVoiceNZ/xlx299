@@ -30,15 +30,18 @@
                     <?php
                     for ($i = ord('A'); $i <= ord('Z'); $i++) {
                         $letter = chr($i);
-                        echo "<option value=\"$letter\">$letter: {$PageOptions['ShortNames'][$letter]}</option>";
+                        $shortName = $PageOptions['ShortNames'][$letter] ?? '';
+                        if ($shortName !== '') {
+                            echo "<option value=\"$letter\">$letter: $shortName</option>";
+                        }
                     }
                     ?>
                     </select>
             </div>
         </div>
     </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <div id="data-container" style="transition: opacity 0.5s ease-in-out;">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <?php
 $_GET['timescale'] = 30;
 $_GET['module'] = '*';
@@ -60,23 +63,65 @@ require 'stats-data.php';
   graphModules();
 
   function graphModules() {
+    if (typeof Chart === 'undefined') {
+        if (!window.chartRetryCount) {
+            window.chartRetryCount = 0;
+        }
+        if (window.chartRetryCount < 50) {
+            window.chartRetryCount++;
+            // retry drawing after a short delay if chart.js is still loading
+            setTimeout(graphModules, 100);
+        } else {
+            console.error('Chart.js failed to load.');
+        }
+        return;
+    }
+    window.chartRetryCount = 0;
+
     let canvas = document.getElementById('mgraph');
     if (!canvas) {
         return;
     }
+
+    // if the canvas has no width yet, wait for browser layout to finalize
+    if (canvas.offsetWidth === 0) {
+        if (!window.canvasRetryCount) {
+            window.canvasRetryCount = 0;
+        }
+        if (window.canvasRetryCount < 10) {
+            window.canvasRetryCount++;
+            setTimeout(graphModules, 50);
+            return;
+        }
+    }
+    window.canvasRetryCount = 0;
+
+    let table = document.getElementById('modules');
+    if (!table) {
+        return;
+    }
+    let tbody = table.querySelector('tbody');
+    if (!tbody) {
+        return;
+    }
+
     let labels = [];
     let data = [];
-    let tbody = document.getElementById('modules').querySelector('tbody');
     for (let i = 0; i < tbody.rows.length; i++) { 
-        let m = tbody.rows[i].cells[0].textContent;
-        let n = mNames[m].trim();
-        if (n) {
+        let cellText = tbody.rows[i].cells[0].textContent.trim();
+        let m = cellText.split(':')[0].trim();
+        let n = (mNames[m] && typeof mNames[m] === 'string') ? mNames[m].trim() : '';
+        if (n && !cellText.includes(':')) {
             tbody.rows[i].cells[0].textContent = `${m}: ${n}`;
         }
         labels.push(m);
         data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
     }
-    new Chart(canvas, {
+    // destroy previous instance to clean up resize observers and event listeners
+    if (window.myModuleChart) {
+        window.myModuleChart.destroy();
+    }
+    window.myModuleChart = new Chart(canvas, {
         type: 'bar',
         data: {
             labels: labels,
@@ -97,11 +142,18 @@ require 'stats-data.php';
   }
 
   htmx.on('htmx:beforeRequest', function(event) {
-    document.getElementById(event.detail.target.id).style.opacity = 0; 
+    let target = event.detail.target;
+    if (target) {
+        target.style.opacity = 0;
+    }
   });
 
   htmx.on('htmx:afterSwap', function(event) {
-    document.getElementById(event.detail.target.id).style.opacity = 1;
-    graphModules();
+    let target = event.detail.target;
+    if (target) {
+        target.style.opacity = 1;
+    }
+    // defer execution to the next event loop tick to allow layout calculations
+    setTimeout(graphModules, 0);
   });
 </script>
