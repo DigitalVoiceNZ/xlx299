@@ -151,6 +151,7 @@ nav.bg-dark {
 }
 .card-title h5 {
   margin-bottom: 0.2ex;
+  white-space: nowrap;
 }
 .shortname {
   font-size: smaller;
