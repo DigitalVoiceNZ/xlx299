@@ -60,17 +60,16 @@ require 'stats-data.php';
   echo "  let mNames = " . json_encode($PageOptions['ShortNames']) . ";\n";
 ?>
   clearTimeout(PageRefresh);
-  graphModules();
+  drawCharts();
 
-  function graphModules() {
+  function drawCharts() {
     if (typeof Chart === 'undefined') {
         if (!window.chartRetryCount) {
             window.chartRetryCount = 0;
         }
         if (window.chartRetryCount < 50) {
             window.chartRetryCount++;
-            // retry drawing after a short delay if chart.js is still loading
-            setTimeout(graphModules, 100);
+            setTimeout(drawCharts, 100);
         } else {
             console.error('Chart.js failed to load.');
         }
@@ -78,24 +77,33 @@ require 'stats-data.php';
     }
     window.chartRetryCount = 0;
 
-    let canvas = document.getElementById('mgraph');
-    if (!canvas) {
-        return;
-    }
-
-    // if the canvas has no width yet, wait for browser layout to finalize
-    if (canvas.offsetWidth === 0) {
+    let canvases = ['mgraph', 'dwgraph', 'hgraph'].map(id => document.getElementById(id)).filter(el => el !== null);
+    if (canvases.length > 0 && canvases[0].offsetWidth === 0) {
         if (!window.canvasRetryCount) {
             window.canvasRetryCount = 0;
         }
         if (window.canvasRetryCount < 10) {
             window.canvasRetryCount++;
-            setTimeout(graphModules, 50);
+            setTimeout(drawCharts, 50);
             return;
         }
     }
     window.canvasRetryCount = 0;
 
+    graphModules();
+    graphDayOfWeek();
+    graphHour();
+  }
+
+  function graphModules() {
+    let canvas = document.getElementById('mgraph');
+    if (!canvas) {
+        if (window.myModuleChart) {
+            window.myModuleChart.destroy();
+            window.myModuleChart = null;
+        }
+        return;
+    }
     let table = document.getElementById('modules');
     if (!table) {
         return;
@@ -117,7 +125,6 @@ require 'stats-data.php';
         labels.push(m);
         data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
     }
-    // destroy previous instance to clean up resize observers and event listeners
     if (window.myModuleChart) {
         window.myModuleChart.destroy();
     }
@@ -141,6 +148,104 @@ require 'stats-data.php';
     });
   }
 
+  function graphDayOfWeek() {
+    let canvas = document.getElementById('dwgraph');
+    if (!canvas) {
+        if (window.myDayOfWeekChart) {
+            window.myDayOfWeekChart.destroy();
+            window.myDayOfWeekChart = null;
+        }
+        return;
+    }
+    let table = document.getElementById('dayofweek');
+    if (!table) {
+        return;
+    }
+    let tbody = table.querySelector('tbody');
+    if (!tbody) {
+        return;
+    }
+
+    let labels = [];
+    let data = [];
+    for (let i = 0; i < tbody.rows.length; i++) {
+        labels.push(tbody.rows[i].cells[0].textContent.trim());
+        data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
+    }
+    if (window.myDayOfWeekChart) {
+        window.myDayOfWeekChart.destroy();
+    }
+    window.myDayOfWeekChart = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Seconds',
+                data: data,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+  }
+
+  function graphHour() {
+    let canvas = document.getElementById('hgraph');
+    if (!canvas) {
+        if (window.myHourChart) {
+            window.myHourChart.destroy();
+            window.myHourChart = null;
+        }
+        return;
+    }
+    let table = document.getElementById('hour');
+    if (!table) {
+        return;
+    }
+    let tbody = table.querySelector('tbody');
+    if (!tbody) {
+        return;
+    }
+
+    let labels = [];
+    let data = [];
+    for (let i = 0; i < tbody.rows.length; i++) {
+        labels.push(tbody.rows[i].cells[0].textContent.trim());
+        data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
+    }
+    if (window.myHourChart) {
+        window.myHourChart.destroy();
+    }
+    window.myHourChart = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Seconds',
+                data: data,
+                backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+  }
+
   htmx.on('htmx:beforeRequest', function(event) {
     let target = event.detail.target;
     if (target) {
@@ -153,7 +258,6 @@ require 'stats-data.php';
     if (target) {
         target.style.opacity = 1;
     }
-    // defer execution to the next event loop tick to allow layout calculations
-    setTimeout(graphModules, 0);
+    setTimeout(drawCharts, 0);
   });
 </script>
