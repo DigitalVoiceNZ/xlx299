@@ -77,7 +77,9 @@ require 'stats-data.php';
     }
     window.chartRetryCount = 0;
 
-    let canvases = ['mgraph', 'dwgraph', 'hgraph'].map(id => document.getElementById(id)).filter(el => el !== null);
+    let canvases = ['mgraph', 'dwgraph', 'hgraph', 'viagraph', 'hmapgraph', 'txlengraph', 'userdivgraph']
+        .map(id => document.getElementById(id))
+        .filter(el => el !== null);
     if (canvases.length > 0 && canvases[0].offsetWidth === 0) {
         if (!window.canvasRetryCount) {
             window.canvasRetryCount = 0;
@@ -93,6 +95,10 @@ require 'stats-data.php';
     graphModules();
     graphDayOfWeek();
     graphHour();
+    graphVia();
+    graphHeatmap();
+    graphTxLen();
+    graphUserDiv();
   }
 
   function graphModules() {
@@ -240,6 +246,245 @@ require 'stats-data.php';
             scales: {
                 y: {
                     beginAtZero: true
+                }
+            }
+        }
+    });
+  }
+
+  function graphVia() {
+    let canvas = document.getElementById('viagraph');
+    if (!canvas) {
+        if (window.myViaChart) {
+            window.myViaChart.destroy();
+            window.myViaChart = null;
+        }
+        return;
+    }
+    let table = document.getElementById('via');
+    if (!table) {
+        return;
+    }
+    let tbody = table.querySelector('tbody');
+    if (!tbody) {
+        return;
+    }
+
+    let labels = [];
+    let data = [];
+    for (let i = 0; i < tbody.rows.length; i++) {
+        labels.push(tbody.rows[i].cells[0].textContent.trim());
+        data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
+    }
+    if (window.myViaChart) {
+        window.myViaChart.destroy();
+    }
+    window.myViaChart = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Seconds',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+  }
+
+  function graphHeatmap() {
+    let canvas = document.getElementById('hmapgraph');
+    if (!canvas) {
+        if (window.myHeatmapChart) {
+            window.myHeatmapChart.destroy();
+            window.myHeatmapChart = null;
+        }
+        return;
+    }
+    
+    let rawData = [];
+    try {
+        rawData = JSON.parse(canvas.dataset.chart || '[]');
+    } catch (e) {
+        console.error(e);
+        return;
+    }
+
+    let maxVal = Math.max(...rawData.map(d => d.v), 1);
+    let bubbleData = rawData.map(item => ({
+        x: item.x,
+        y: item.y,
+        r: maxVal > 0 ? (item.v / maxVal) * 20 + 3 : 3
+    }));
+
+    if (window.myHeatmapChart) {
+        window.myHeatmapChart.destroy();
+    }
+    
+    let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    window.myHeatmapChart = new Chart(canvas, {
+        type: 'bubble',
+        data: {
+            datasets: [{
+                label: 'Activity level',
+                data: bubbleData,
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let rawPoint = rawData[context.dataIndex];
+                            let dName = days[rawPoint.x];
+                            let hourStr = String(rawPoint.y).padStart(2, '0') + ':00';
+                            let secs = rawPoint.v;
+                            return `${dName} at ${hourStr}: ${secs} sec`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    min: -1,
+                    max: 7,
+                    ticks: {
+                        stepSize: 1,
+                        callback: function(value) {
+                            return days[value] || '';
+                        }
+                    }
+                },
+                y: {
+                    type: 'linear',
+                    min: -2,
+                    max: 25,
+                    ticks: {
+                        stepSize: 2,
+                        callback: function(value) {
+                            if (value >= 0 && value <= 23 && Number.isInteger(value)) {
+                                return String(value).padStart(2, '0') + ':00';
+                            }
+                            return '';
+                        }
+                    }
+                }
+            }
+        }
+    });
+  }
+
+  function graphTxLen() {
+    let canvas = document.getElementById('txlengraph');
+    if (!canvas) {
+        if (window.myTxLenChart) {
+            window.myTxLenChart.destroy();
+            window.myTxLenChart = null;
+        }
+        return;
+    }
+    let table = document.getElementById('txlen');
+    if (!table) {
+        return;
+    }
+    let tbody = table.querySelector('tbody');
+    if (!tbody) {
+        return;
+    }
+
+    let labels = [];
+    let data = [];
+    for (let i = 0; i < tbody.rows.length; i++) {
+        labels.push(tbody.rows[i].cells[0].textContent.trim());
+        data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
+    }
+    if (window.myTxLenChart) {
+        window.myTxLenChart.destroy();
+    }
+    window.myTxLenChart = new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Transmissions',
+                data: data,
+                backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+  }
+
+  function graphUserDiv() {
+    let canvas = document.getElementById('userdivgraph');
+    if (!canvas) {
+        if (window.myUserDivChart) {
+            window.myUserDivChart.destroy();
+            window.myUserDivChart = null;
+        }
+        return;
+    }
+    let table = document.getElementById('userdiv');
+    if (!table) {
+        return;
+    }
+    let tbody = table.querySelector('tbody');
+    if (!tbody) {
+        return;
+    }
+
+    let labels = [];
+    let data = [];
+    for (let i = 0; i < tbody.rows.length; i++) {
+        labels.push(tbody.rows[i].cells[0].textContent.trim());
+        data.push(parseInt(tbody.rows[i].cells[1].textContent, 10));
+    }
+    if (window.myUserDivChart) {
+        window.myUserDivChart.destroy();
+    }
+    window.myUserDivChart = new Chart(canvas, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Unique Callsigns',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0
+                    }
                 }
             }
         }
