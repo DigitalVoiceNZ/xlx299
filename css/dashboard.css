@@ -167,6 +167,35 @@ nav.bg-dark {
     .navbar-brand>img {width: 250px; height: 44px;}
 }
 
+/* Expand top navbar only at >= 1090px (collapse into hamburger at < 1090px) */
+@media (min-width: 1090px) {
+  .navbar-expand-custom {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .navbar-expand-custom .navbar-nav {
+    flex-direction: row;
+    margin-bottom: 0 !important;
+  }
+  .navbar-expand-custom .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-expand-custom .navbar-nav .nav-link {
+    padding-right: var(--bs-navbar-nav-link-padding-x);
+    padding-left: var(--bs-navbar-nav-link-padding-x);
+  }
+  .navbar-expand-custom .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-custom .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-custom .navbar-toggler {
+    display: none;
+  }
+}
+
 /* Responsive column widths for table headers
  * (active on md screens/768px and up) */
  @media (min-width: 768px) {
@@ -177,4 +206,12 @@ nav.bg-dark {
      width: 8.333333% !important;
    }
  }
+
+[data-bs-theme="dark"] img[src*="FreeDMRNZ"],
+[data-bs-theme="dark"] img[src*="brandmeister"],
+[data-bs-theme="dark"] img[src*="AREC"] {
+  background-color: rgba(255, 255, 255, 0.88);
+  border-radius: 6px;
+  padding: 2px 4px;
+}
 

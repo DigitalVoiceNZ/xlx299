@@ -112,7 +112,7 @@ $theme = (isset($_COOKIE[THEMECOOKIE]) && $_COOKIE[THEMECOOKIE] === 'dark') ? 'd
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/dashboard.css?v=4" rel="stylesheet">
+    <link href="css/dashboard.css?v=5" rel="stylesheet">
     <?php
     if ($PageOptions['PageRefreshActive']) {
         echo '
@@ -160,7 +160,7 @@ $theme = (isset($_COOKIE[THEMECOOKIE]) && $_COOKIE[THEMECOOKIE] === 'dark') ? 'd
 <?php if (file_exists("./tracking.php")) {
     include_once("tracking.php");
 } ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-custom navbar-dark bg-dark">
     <div class="container-fluid">
     <a class="navbar-brand" href="#"><img src="<?php echo $PageOptions['ReflectorLogo']['src'].'" alt="'.$PageOptions['ReflectorLogo']['alt'];?>" class="d-inline-block align-top me-5" height="54" width="310"></a>
     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -168,7 +168,7 @@ $theme = (isset($_COOKIE[THEMECOOKIE]) && $_COOKIE[THEMECOOKIE] === 'dark') ? 'd
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2">
 		<li class="nav-item">
                     <a class="nav-link <?php echo (($_GET['show'] == "users") || ($_GET['show'] == "")) ? ' active' : ''; ?>"
                             href="./index.php">Users</a></li>
