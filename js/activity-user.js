@@ -43,10 +43,10 @@ function activity(call, module, ts, tsoff, duration) {
       }
     });
     // add it to the top of the list
-    $ul.prepend('<li style="display: none; background-color: salmon;" data-ts="' + ts + '">' + call + '</li>');
+    $ul.prepend('<li style="display: none; background-color: salmon; color: #000;" data-ts="' + ts + '">' + call + '</li>');
     $ul.find('li:first').slideDown(duration);
   } else {
-    $('#act-' + module + ' >li').css('background-color', 'white')
+    $('#act-' + module + ' >li').css({'background-color': '', 'color': ''});
   }
 }
 

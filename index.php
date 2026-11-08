@@ -1,5 +1,6 @@
 <?php
 define("MOTDCOOKIE", "motdseen");
+define("THEMECOOKIE", "theme");
 define("MOTDFILE", dirname(__FILE__) . "/pgs/motd.txt");
 
 /*
@@ -80,9 +81,10 @@ if (isset($_POST['motd'])) {
     $cookieset = TRUE;
     setcookie(MOTDCOOKIE, strval(filemtime(MOTDFILE)), time() + 60*60*24*30);
 }
+$theme = (isset($_COOKIE[THEMECOOKIE]) && $_COOKIE[THEMECOOKIE] === 'dark') ? 'dark' : 'light';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="<?php echo $theme; ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -200,6 +202,13 @@ if (isset($_POST['motd'])) {
                     <a class="nav-link<?php echo ($_GET['show'] == "thanks") ? ' active' : ''; ?>"
                             href="./thanks">Thanks</a></li>
             </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button type="button" id="theme-toggle" class="btn btn-link nav-link d-flex align-items-center" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+                        <span class="material-icons" id="theme-icon"><?php echo ($theme === 'dark') ? 'light_mode' : 'dark_mode'; ?></span>
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -276,7 +285,7 @@ if (isset($_POST['motd'])) {
     </div>
 </div>
 
-<footer class="footer mt-auto py-3 bg-light">
+<footer class="footer mt-auto py-3 bg-body-tertiary">
     <div class="container">
         <div class="row">
             <div class="col-sm">
@@ -335,6 +344,18 @@ document.addEventListener("DOMContentLoaded", initTooltips);
 
 // Execute when htmx swaps content (since stats/users update dynamically)
 document.body.addEventListener('htmx:afterSwap', initTooltips);
+
+// Dark mode toggle with cookie persistence
+document.getElementById('theme-toggle')?.addEventListener('click', function () {
+    const htmlEl = document.documentElement;
+    const iconEl = document.getElementById('theme-icon');
+    const nextTheme = htmlEl.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+    htmlEl.setAttribute('data-bs-theme', nextTheme);
+    if (iconEl) {
+        iconEl.textContent = nextTheme === 'dark' ? 'light_mode' : 'dark_mode';
+    }
+    document.cookie = "<?php echo THEMECOOKIE; ?>=" + nextTheme + "; path=/; max-age=" + (60 * 60 * 24 * 365) + "; SameSite=Lax";
+});
 </script>
 </body>
 </html>

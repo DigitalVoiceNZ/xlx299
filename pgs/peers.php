@@ -38,7 +38,7 @@ for ($i=0;$i<$Reflector->PeerCount();$i++) {
     }
 
     if (trim($URL) != "") {
-        echo '<td><a href="'.$URL.'" target="_blank" class="listinglink" title="Visit the Dashboard of&nbsp;'.$Name.'" style="text-decoration:none;color:#000000;">'.$Name.'</a></td>';
+        echo '<td><a href="'.$URL.'" target="_blank" class="listinglink" title="Visit the Dashboard of&nbsp;'.$Name.'">'.$Name.'</a></td>';
     } else {
         echo '<td>'.$Name.'</td>';
     }
@@ -55,7 +55,7 @@ for ($i=0;$i<$Reflector->PeerCount();$i++) {
             case 'ShowLast1ByteOfIP'      : echo $PageOptions['PeerPage']['MasqueradeCharacter'].'.'.$PageOptions['PeerPage']['MasqueradeCharacter'].'.'.$PageOptions['PeerPage']['MasqueradeCharacter'].'.'.$Bytes[3]; break;
             case 'ShowLast2ByteOfIP'      : echo $PageOptions['PeerPage']['MasqueradeCharacter'].'.'.$PageOptions['PeerPage']['MasqueradeCharacter'].'.'.$Bytes[2].'.'.$Bytes[3]; break;
             case 'ShowLast3ByteOfIP'      : echo $PageOptions['PeerPage']['MasqueradeCharacter'].'.'.$Bytes[1].'.'.$Bytes[2].'.'.$Bytes[3]; break;
-            default                       : echo '<a href="http://'.$Reflector->Peers[$i]->GetIP().'" target="_blank" style="text-decoration:none;color:#000000;">'.$Reflector->Peers[$i]->GetIP().'</a>';
+            default                       : echo '<a href="http://'.$Reflector->Peers[$i]->GetIP().'" target="_blank">'.$Reflector->Peers[$i]->GetIP().'</a>';
          }
       }
       echo '</td>';
