@@ -118,7 +118,7 @@ table a:hover {
 }
 
 .material-icons {
-  font-size: 24px;
+  vertical-align: -0.25em;
 }
 
 ul.act-calls {
@@ -131,6 +131,7 @@ ul.act-calls li {
   position: relative;
   top: 0;
   left: 0;
+  font-size: 0.9rem;
 }
 
 nav.bg-dark {
@@ -150,6 +151,7 @@ nav.bg-dark {
   padding-left: 0.5em;
 }
 .card-title h5 {
+  font-size: 1.0rem;
   margin-bottom: 0.2ex;
   white-space: nowrap;
 }

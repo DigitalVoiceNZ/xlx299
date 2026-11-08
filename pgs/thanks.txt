@@ -53,3 +53,9 @@ Donation
 
 John ZL2TWS
 Donation <a href="http://www.pa7lim.nl/peanut/">Peanut</a> Module B
+
+Sean ZL1SXG
+Repeater site and Support
+
+AJ ZL1AJ
+Repeater Support
