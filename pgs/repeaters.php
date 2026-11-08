@@ -1,5 +1,5 @@
 <div class="container">
-<table class="table table-striped-custom table-hover">
+<table class="table table-striped table-hover">
    <tr class="table-center">
       <th>#</th>
       <th>Flag</th>

@@ -132,7 +132,7 @@ if (isset($_POST['motd'])) {
             ';
           } else {
           echo '
-         $( "#mainbox" ).load( document.location.href + " #mainbox");
+         $( "#mainbox > *" ).load( document.location.href + " #mainbox");
          ';
           }
         }
@@ -146,7 +146,7 @@ if (isset($_POST['motd'])) {
         echo '
 
       function SuspendPageRefresh() {
-        cancelInterval(PageRefresh);
+        clearInterval(PageRefresh);
       }
    </script>';
     }
