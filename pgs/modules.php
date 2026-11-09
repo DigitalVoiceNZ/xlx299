@@ -14,7 +14,6 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
       <tr>
         <th style="white-space: nowrap;">Module<br><span style="font-size:smaller">D-Star, DMR, YSF</span></th>
         <th style="white-space: nowrap;">DMR</th>
-        <th style="white-space: nowrap;">M17</th>
         <th style="white-space: nowrap;">Peanut<br>Room</th>
         <th style="white-space: nowrap;">Links</th>
         <th style="white-space: nowrap;">Details</th>
@@ -23,31 +22,16 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
 <?php
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         $data = array_map('trim', $data);
-        switch(count($data)) {
-        case 0:
-            continue 2;
-        case 1:
-            if (strlen($data[0]) == 0) {
-                continue 2;
-            }
-            $data[1] = '';
-        case 2:
-            $data[2] = '';
-        case 3:
-            $data[3] = '';
-            break;
-        case 4:
-            $data[4] = '';
-            break;
-        case 5:
-            $data[5] = '';
-            break;
-        case 6:
-            break;
-        default:
-            $data[5] = implode(', ', array_slice($data, 5));
-            break;
+        // skip blank lines
+        if (count($data) == 0 || strlen($data[0] ?? '') == 0) {
+            continue;
         }
+        // five fields: module, talkgroup, peanut room, links, description
+        // (extra commas belong to the description)
+        if (count($data) > 5) {
+            $data[4] = implode(', ', array_slice($data, 4));
+        }
+        $data = array_pad(array_slice($data, 0, 5), 5, '');
         if ((substr($data[0], 0, 1) == '#') || (substr($data[0], 0, 1) == ';')) {
             continue;
         }
@@ -61,8 +45,7 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
         } else {
             $tg = preg_replace('/[ a-z]*(\d+)/i', '<a href="https://brandmeister.network/?page=lh&DestinationID=$1">$0</a>', $data[1]);
         }
-        $m17 = (stripos($data[2], "m") === 0) ? '<a href="https://m17.dvnz.nz/">' . $data[2] . '</a>' : '';
-        $links = explode('<br>', $data[4]);
+        $links = explode('<br>', $data[3]);
         for ($i = 0; $i < count($links); $i++) {
             $l = trim($links[$i]);
             if (substr($l, 0, 3) == 'XLX') {
@@ -76,10 +59,9 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
         echo "<tr id='mod-{$modname[0]}'>";
         echo '  <th style="white-space: nowrap;">XLX299-' . $modname . "</th>";
         echo "  <td>" . $tg . "</td>";
-        echo "  <td>" . $m17 . "</td>";
-        echo "  <td>" . $data[3] . "</td>";
+        echo "  <td>" . $data[2] . "</td>";
         echo "  <td>" . $links . "</td>";
-        echo "  <td>" . $data[5] . "</td>";
+        echo "  <td>" . $data[4] . "</td>";
         echo "  <td><ul class='act-calls' id='act-{$modname[0]}'></ul></td>";
         echo "</tr>";
     }
