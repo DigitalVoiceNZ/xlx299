@@ -81,12 +81,31 @@ if (isset($_POST['motd'])) {
     $cookieset = TRUE;
     setcookie(MOTDCOOKIE, strval(filemtime(MOTDFILE)), time() + 60*60*24*30);
 }
-$theme = (isset($_COOKIE[THEMECOOKIE]) && $_COOKIE[THEMECOOKIE] === 'dark') ? 'dark' : 'light';
+// Explicit user choice from cookie; NULL means "follow the OS preference"
+$theme = (isset($_COOKIE[THEMECOOKIE]) && in_array($_COOKIE[THEMECOOKIE], array('dark', 'light'), TRUE))
+    ? $_COOKIE[THEMECOOKIE] : NULL;
 ?>
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="<?php echo $theme; ?>">
+<html lang="en"<?php if ($theme) echo ' data-bs-theme="' . $theme . '"'; ?>>
 <head>
     <meta charset="utf-8">
+    <script>
+    // No saved choice: follow the OS light/dark setting (runs before render to avoid a flash)
+    (function () {
+        if (document.documentElement.hasAttribute('data-bs-theme')) return;
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        var apply = function () {
+            document.documentElement.setAttribute('data-bs-theme', mq.matches ? 'dark' : 'light');
+            var icon = document.getElementById('theme-icon');
+            if (icon) icon.textContent = mq.matches ? 'light_mode' : 'dark_mode';
+        };
+        apply();
+        // Track live OS changes until the user makes an explicit choice
+        mq.addEventListener('change', function () {
+            if (document.cookie.indexOf('<?php echo THEMECOOKIE; ?>=') === -1) apply();
+        });
+    })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="<?php echo $PageOptions['MetaDescription']; ?>">
     <meta name="keywords" content="<?php echo $PageOptions['MetaKeywords']; ?>">
@@ -112,7 +131,7 @@ $theme = (isset($_COOKIE[THEMECOOKIE]) && $_COOKIE[THEMECOOKIE] === 'dark') ? 'd
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/dashboard.css?v=5" rel="stylesheet">
+    <link href="css/dashboard.css?v=6" rel="stylesheet">
     <?php
     if ($PageOptions['PageRefreshActive']) {
         echo '
@@ -346,6 +365,13 @@ document.addEventListener("DOMContentLoaded", initTooltips);
 document.body.addEventListener('htmx:afterSwap', initTooltips);
 
 // Dark mode toggle with cookie persistence
+(function () {
+    // Sync icon with the theme chosen in <head> (may have come from the OS preference)
+    const iconEl = document.getElementById('theme-icon');
+    if (iconEl) {
+        iconEl.textContent = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light_mode' : 'dark_mode';
+    }
+})();
 document.getElementById('theme-toggle')?.addEventListener('click', function () {
     const htmlEl = document.documentElement;
     const iconEl = document.getElementById('theme-icon');

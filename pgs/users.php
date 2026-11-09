@@ -240,4 +240,4 @@ echo <<<EOD
 EOD;
 ?>
 <script src="./js/pocketbase.umd.js"></script>
-<script src="./js/activity-user.js"></script>
+<script src="./js/activity-user.js?v=2"></script>

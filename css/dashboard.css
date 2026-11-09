@@ -215,3 +215,8 @@ nav.bg-dark {
   padding: 2px 4px;
 }
 
+
+/* Higher-contrast Recent Activity cards in dark mode */
+[data-bs-theme="dark"] .recentactivity .card {
+  color: #fff;
+}
