@@ -47,7 +47,7 @@ if ($CallingHome['Active']) {
             @fwrite($Ressource, "\n" . '$Hash     = "' . $Hash . '";');
             @fwrite($Ressource, "\n\n" . '?>');
             @fclose($Ressource);
-            @exec("chmod 777 " . $CallingHome['HashFile']);
+            @exec("chmod 0660 " . $CallingHome['HashFile']);
             $CallHomeNow = true;
         }
     } else {
@@ -75,6 +75,14 @@ if ($CallingHome['Active']) {
 } else {
     $Hash = "";
 }
+// Only accept known page names for ?show= (it is echoed into HTML/JS below).
+// Unknown or missing values fall back to "" (the Users page).
+$ValidPages = array('users', 'lastheard', 'repeaters', 'liveircddb', 'peers',
+                    'reflectors', 'traffic', 'info', 'thanks', 'modules', 'stats');
+if (!isset($_GET['show']) || !in_array($_GET['show'], $ValidPages, TRUE)) {
+    $_GET['show'] = "";
+}
+
 // check if we want to set the motd cookie
 $cookieset = FALSE;
 if (isset($_POST['motd'])) {
@@ -111,7 +119,7 @@ $theme = (isset($_COOKIE[THEMECOOKIE]) && in_array($_COOKIE[THEMECOOKIE], array(
     <meta name="keywords" content="<?php echo $PageOptions['MetaKeywords']; ?>">
     <meta name="author" content="<?php echo $PageOptions['MetaAuthor']; ?>">
     <meta name="revisit" content="<?php echo $PageOptions['MetaRevisit']; ?>">
-    <meta name="robots" content="<?php echo $PageOptions['MetaAuthor']; ?>">
+    <meta name="robots" content="<?php echo $PageOptions['MetaRobots']; ?>">
 
     <title><?php echo $Reflector->GetReflectorName(); ?> Reflector Dashboard</title>
     <?php
@@ -142,18 +150,18 @@ $theme = (isset($_COOKIE[THEMECOOKIE]) && in_array($_COOKIE[THEMECOOKIE], array(
         if (($_SERVER['REQUEST_METHOD'] === 'POST') || isset($_GET['do'])) {
           echo '
          document.location.href = "./index.php';
-          if (isset($_GET['show'])) {
+          if ($_GET['show'] != '') {
             echo '?show=' . $_GET['show'];
           }
           echo '";';
         } else {
-          if (!isset($_GET['show']) || $_GET['show'] == 'users') {
+          if ($_GET['show'] == '' || $_GET['show'] == 'users') {
             echo '
          $( "#connections" ).load( document.location.href + " #connections > *");
             ';
           } else {
           echo '
-         $( "#mainbox > *" ).load( document.location.href + " #mainbox");
+         $( "#mainbox" ).load( document.location.href + " #mainbox > *");
          ';
           }
         }
@@ -171,7 +179,6 @@ $theme = (isset($_COOKIE[THEMECOOKIE]) && in_array($_COOKIE[THEMECOOKIE], array(
       }
    </script>';
     }
-    if (!isset($_GET['show'])) $_GET['show'] = "";
     ?>
 </head>
 <body>
@@ -336,7 +343,7 @@ $theme = (isset($_COOKIE[THEMECOOKIE]) && in_array($_COOKIE[THEMECOOKIE], array(
         form.method = 'POST';
 <?php
         $formaction = '/index.php';
-        if (isset($_GET['show'])) {
+        if ($_GET['show'] != '') {
             $formaction .= '?show=' . $_GET['show'];
         }
         echo "form.action = '$formaction';";

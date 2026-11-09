@@ -73,14 +73,14 @@ if (($handle = fopen(dirname(__FILE__) . "/modules.csv", "r")) !== FALSE) {
             }
         }
         $links = implode('<br>', $links);
-        echo "<tr id='mod-${modname[0]}'>";
+        echo "<tr id='mod-{$modname[0]}'>";
         echo '  <th style="white-space: nowrap;">XLX299-' . $modname . "</th>";
         echo "  <td>" . $tg . "</td>";
         echo "  <td>" . $m17 . "</td>";
         echo "  <td>" . $data[3] . "</td>";
         echo "  <td>" . $links . "</td>";
         echo "  <td>" . $data[5] . "</td>";
-        echo "  <td><ul class='act-calls' id='act-${modname[0]}'></ul></td>";
+        echo "  <td><ul class='act-calls' id='act-{$modname[0]}'></ul></td>";
         echo "</tr>";
     }
     fclose($handle);
