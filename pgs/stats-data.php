@@ -2,6 +2,20 @@
 
 define("CACHETTL", 3600);
 define("DBFILE", "/usr/local/src/activity/pb_data/data.db");
+define("MAXTIMESCALE", 720);    // days
+
+// Validate request parameters: timescale 1..MAXTIMESCALE days, module A-Z or *
+$_GET['timescale'] = $_GET['timescale'] ?? '30';
+$_GET['module'] = $_GET['module'] ?? '*';
+$validTimescale = filter_var($_GET['timescale'], FILTER_VALIDATE_INT,
+    ['options' => ['min_range' => 1, 'max_range' => MAXTIMESCALE]]);
+if ($validTimescale === false
+    || !is_string($_GET['module'])
+    || !preg_match('/^([A-Z]|\*)$/', $_GET['module'])) {
+    http_response_code(400);
+    exit('Invalid timescale or module');
+}
+$_GET['timescale'] = $validTimescale;
 
 function fetchAll(SQLite3Result $result): array {
     $rows = [];
@@ -54,7 +68,7 @@ function getData(string $key): void {
             $moduleClause = " AND module = :module ";
         }
         
-        $db = new SQLite3(DBFILE);
+        $db = new SQLite3(DBFILE, SQLITE3_OPEN_READONLY);
 
         switch ($key) {
             case 'totals':
