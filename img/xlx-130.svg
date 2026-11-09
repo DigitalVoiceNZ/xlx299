@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 65" width="130" height="65">
+  <defs>
+    <!-- Globe Ocean Gradient -->
+    <radialGradient id="globeGrad" cx="38%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#1e6091"/>
+      <stop offset="55%" stop-color="#0b315a"/>
+      <stop offset="100%" stop-color="#051933"/>
+    </radialGradient>
+
+    <!-- XLX Red Vertical Gradient (matching xlx299logot.svg) -->
+    <linearGradient id="xlxRed" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#550000"/>
+      <stop offset="45%" stop-color="#b80000"/>
+      <stop offset="100%" stop-color="#ff1a1a"/>
+    </linearGradient>
+
+    <!-- Standard SVG 1.1 Drop Shadow -->
+    <filter id="dropShadow" x="-15%" y="-15%" width="135%" height="135%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.1" result="blur"/>
+      <feOffset in="blur" dx="0.8" dy="1.2" result="offsetBlur"/>
+      <feComponentTransfer in="offsetBlur" result="shadowAlpha">
+        <feFuncA type="linear" slope="0.75"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadowAlpha"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Left & Right RF Transmission Arcs -->
+  <g fill="none" stroke-linecap="round">
+    <!-- Inner Arcs -->
+    <path d="M 33,15 A 26,26 0 0 0 33,50" stroke="#0284c7" stroke-width="2.4" stroke-opacity="0.85"/>
+    <path d="M 97,15 A 26,26 0 0 1 97,50" stroke="#0284c7" stroke-width="2.4" stroke-opacity="0.85"/>
+    <!-- Middle Arcs -->
+    <path d="M 24,10 A 33,33 0 0 0 24,55" stroke="#0ea5e9" stroke-width="2.0" stroke-opacity="0.65"/>
+    <path d="M 106,10 A 33,33 0 0 1 106,55" stroke="#0ea5e9" stroke-width="2.0" stroke-opacity="0.65"/>
+    <!-- Outer Arcs -->
+    <path d="M 15,5 A 40,40 0 0 0 15,60" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.45"/>
+    <path d="M 115,5 A 40,40 0 0 1 115,60" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.45"/>
+  </g>
+
+  <!-- Center Wireframe Globe -->
+  <g filter="url(#dropShadow)">
+    <circle cx="65" cy="32.5" r="27" fill="url(#globeGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+    <!-- Meridians & Parallels -->
+    <g fill="none" stroke="#7dd3fc" stroke-width="0.9" stroke-opacity="0.55">
+      <!-- Equator & Tropics -->
+      <line x1="38" y1="32.5" x2="92" y2="32.5"/>
+      <path d="M 41.5,19.5 Q 65,24.5 88.5,19.5"/>
+      <path d="M 41.5,45.5 Q 65,40.5 88.5,45.5"/>
+      <!-- Longitude Ellipses & Prime Meridian -->
+      <line x1="65" y1="5.5" x2="65" y2="59.5"/>
+      <ellipse cx="65" cy="32.5" rx="11" ry="27"/>
+      <ellipse cx="65" cy="32.5" rx="20.5" ry="27"/>
+    </g>
+  </g>
+
+  <!-- Exact "XLX" Emblem from xlx299logot.svg -->
+  <g filter="url(#dropShadow)"
+     transform="translate(65, 32.5) scale(1.06) translate(-169.27, -284.02)"
+     fill="url(#xlxRed)"
+     stroke="#ffffff"
+     stroke-width="2.4"
+     stroke-linejoin="miter"
+     stroke-miterlimit="4"
+     paint-order="stroke fill">
+    <!-- X -->
+    <path d="m 154.89714,297.83648 -8.44,0 -7.56,-7.56 -7.56,7.56 -8.48,0 11.8,-11.76 -11.8,-11.84 8.48,0 7.56,7.6 7.56,-7.6 8.44,0 -11.8,11.84 11.8,11.76 z"/>
+    <!-- L -->
+    <path d="m 186.42808,292.59648 -5.28,5.28 -22.08,0 0,-23.6 7.12,-4.12 0,22.44 7.38335,0 z"/>
+    <!-- X -->
+    <path d="m 215.67839,297.83648 -8.44,0 -7.56,-7.56 -7.56,7.56 -8.48,0 11.8,-11.76 -11.8,-11.84 8.48,0 7.56,7.6 7.56,-7.6 8.44,0 -11.8,11.84 11.8,11.76 z"/>
+  </g>
+</svg>

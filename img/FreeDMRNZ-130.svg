@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 65" width="130" height="65">
+  <defs>
+    <filter id="shadow" x="-15%" y="-15%" width="135%" height="135%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.8" result="blur"/>
+      <feOffset in="blur" dx="1" dy="1" result="offsetBlur"/>
+      <feComponentTransfer in="offsetBlur" result="shadowAlpha">
+        <feFuncA type="linear" slope="0.65"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode in="shadowAlpha"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Three Diagonal Bars (NZ Black, White, Red) -->
+  <g filter="url(#shadow)" stroke-linejoin="round" paint-order="stroke fill">
+    <!-- Black Bar -->
+    <polygon points="9,31 39,3 39,19 9,47"
+             fill="#01212e" stroke="#ffffff" stroke-width="1.8"/>
+    <!-- White Bar -->
+    <polygon points="29.5,31 59.5,3 59.5,19 29.5,47"
+             fill="#ffffff" stroke="#01212e" stroke-width="1.2"/>
+    <!-- Red Bar -->
+    <polygon points="50,31 80,3 80,19 50,47"
+             fill="#c80f2e" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+
+  <!-- "FREE" Custom Segmented Letterforms -->
+  <g filter="url(#shadow)" fill="#01212e" stroke="#ffffff" stroke-width="2.2" stroke-linejoin="round" paint-order="stroke fill">
+    <!-- F -->
+    <path d="M 2,52.6 C 2,50.2 3.8,49 6.2,49 H 16.5 V 52.4 H 2 Z
+             M 2,54.2 H 16.5 V 57.4 H 6.2 V 62 H 2 Z"/>
+    <!-- R -->
+    <path fill-rule="evenodd"
+          d="M 18,49 H 29.2 C 31.4,49 32.8,50.3 32.8,52.3 V 54.4 C 32.8,56.1 31.7,57.2 29.8,57.5 L 33,62 H 28.4 L 25.6,57.6 H 22.2 V 62 H 18 Z
+             M 22.2,52.1 V 54.7 H 28.2 C 28.8,54.7 29.1,54.3 29.1,53.4 C 29.1,52.5 28.8,52.1 28.2,52.1 Z"/>
+    <!-- E (1) -->
+    <path d="M 34.5,52.6 C 34.5,50.2 36.3,49 38.7,49 H 48.5 V 52.4 H 34.5 Z
+             M 34.5,54.2 H 48.5 V 57.3 H 38.7 V 58.8 H 48.5 V 62 H 38.7 C 36.2,62 34.5,60.5 34.5,58.1 Z"/>
+    <!-- E (2) -->
+    <path d="M 50,52.6 C 50,50.2 51.8,49 54.2,49 H 64 V 52.4 H 50 Z
+             M 50,54.2 H 64 V 57.3 H 54.2 V 58.8 H 64 V 62 H 54.2 C 51.7,62 50,60.5 50,58.1 Z"/>
+  </g>
+
+  <!-- "DMR" Bold Letterforms -->
+  <g filter="url(#shadow)" fill="#c80f2e" stroke="#ffffff" stroke-width="1.4" stroke-linejoin="round" paint-order="stroke fill">
+    <!-- D -->
+    <path fill-rule="evenodd"
+          d="M 65.5,39 H 75.5 C 81.2,39 84.5,42.8 84.5,50.5 C 84.5,58.2 81.2,62 75.5,62 H 65.5 Z
+             M 70.5,43.2 V 57.8 H 74.8 C 78.0,57.8 79.5,55.5 79.5,50.5 C 79.5,45.5 78.0,43.2 74.8,43.2 Z"/>
+    <!-- M -->
+    <path d="M 86.2,39 H 93.2 L 96.8,54.2 L 100.4,39 H 107.4 V 62 H 103.0 V 45.2 L 98.8,62 H 94.8 L 90.6,45.2 V 62 H 86.2 Z"/>
+    <!-- R -->
+    <path fill-rule="evenodd"
+          d="M 109.5,39 H 120.8 C 124.8,39 127.2,41.2 127.2,45.2 C 127.2,48.3 125.6,50.5 122.8,51.3 L 127.8,62 H 122.4 L 118.0,52.0 H 114.5 V 62 H 109.5 Z
+             M 114.5,43.0 V 48.2 H 119.8 C 121.6,48.2 122.5,47.2 122.5,45.6 C 122.5,44.0 121.6,43.0 119.8,43.0 Z"/>
+  </g>
+</svg>
